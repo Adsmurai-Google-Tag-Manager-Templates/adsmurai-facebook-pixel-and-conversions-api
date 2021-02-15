@@ -15,5 +15,5 @@
 homepage: "https://www.adsmurai.com"
 documentation: "https://www.example.com/documentation"
 versions:
-  - sha: dummy-sha
-    changeNotes: Initial Version
+  - sha: f5cd07167f0c70ccb4b0912dc149c386c6cea7b0
+    changeNotes: Initial release (0.2)
