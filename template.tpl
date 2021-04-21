@@ -279,6 +279,26 @@ ___TEMPLATE_PARAMETERS___
           {
             "value": "product_group",
             "displayValue": "product_group"
+          },
+          {
+            "value": "home_listing",
+            "displayValue": "home_listing"
+          },
+          {
+            "value": "hotel",
+            "displayValue": "hotel"
+          },
+          {
+            "value": "flight",
+            "displayValue": "flight"
+          },
+          {
+            "value": "destination",
+            "displayValue": "destination"
+          },
+          {
+            "value": "vehicle",
+            "displayValue": "vehicle"
           }
         ],
         "simpleValueType": true,
@@ -475,7 +495,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "hashData",
         "checkboxText": "Hash user data (read tooltip before checking this)",
         "simpleValueType": true,
-        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself.",
+        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself.\n\u003cbr\u003e\n\u003cbr\u003e\nOn the other hand, there\u0027s also the possibility to send the data unhashed to the server and hash it there, which would avoid the need to inject a third-party script on the browsera.",
         "subParams": [
           {
             "type": "CHECKBOX",
@@ -553,6 +573,14 @@ ___TEMPLATE_PARAMETERS___
                 "errorMessage": "Please, enter an event ID"
               }
             ]
+          }
+        ],
+        "defaultValue": "autogenerate",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
           }
         ]
       },
@@ -792,6 +820,11 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
+if (!data.event_name) {
+    data.gtmOnSuccess();
+    return;
+}
+
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
 const injectScript = require('injectScript');
@@ -804,6 +837,11 @@ if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
 }
 
 if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
+    if (!data.serverGtmUrl) {
+        data.gtmOnSuccess();
+        return;
+    }
+
     if (data.hashData) {
         injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
     } else {
@@ -979,7 +1017,7 @@ function fireCapiEvent() {
             if (data.hashData && propsToHash.some(propToHash => prop === propToHash)) {
                 // avoid hashing external_id if user didn't ask to
                 if (prop !== 'external_id' || data.hashExternalId) {
-                    value = hash(data[prop]);                
+                    value = hash(data[prop]);
                 }
             }
 
@@ -996,16 +1034,22 @@ function fireCapiEvent() {
 
             switch (prop) {
                 case 'fbc':
-                    if (getCookieValues('_fbc').length > 0) {
+                    if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc', false)[0] !== '') {
+                        // if there's an _fbc cookie and is not an empty string
                         value = getCookieValues('_fbc', false)[0];
                     } else if (getQueryParameters('fbclid', false)) {
-                        value = getQueryParameters('fbclid', false)[0];
+                        // see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
+                        value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid', false)[0];
                     } else {
-                        return;
+                        return undefined;
                     }
                     break;
                 case 'fbp':
-                    value = getCookieValues('_fbp', false)[0];
+                    if (getCookieValues('_fbp').length > 0) {
+                        value = getCookieValues('_fbp', false)[0];
+                    } else {
+                        value = generateFbpCookie();
+                    }
                     break;
                 case 'event_source_url':
                     value = getUrl();
@@ -1040,9 +1084,21 @@ function fireCapiEvent() {
                 return sha256(makeString(valueToHash));
             case 'array':
                 return valueToHash.map(value => hash(value));
+            default:
+                return sha256(valueToHash);
         }
+    }
 
-        return sha256(valueToHash);
+    function generateFbpCookie() {
+        // if there's no fbp cookie, we build it
+        // see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
+        const setCookie = require('setCookie');
+        const generateRandom = require('generateRandom');
+        const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
+
+        setCookie('_fbp', cookieValue, {domain: 'auto'}); // sets the cookie so we have the same value in the future
+
+        return cookieValue;
     }
 
     function encodeProperty(prop) {
@@ -1474,6 +1530,75 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "set_cookies",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "allowedCookies",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_fbp"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
   }
 ]
 
@@ -1485,6 +1610,6 @@ scenarios: []
 
 ___NOTES___
 
-Version 0.2
+Version 0.3
 
 
