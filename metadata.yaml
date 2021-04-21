@@ -13,7 +13,19 @@
 # limitations under the License.
 
 homepage: "https://www.adsmurai.com"
-documentation: "https://www.example.com/documentation"
+documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
+  # Latest version
+  - sha: 3d80c2379fdae1ca323dd62f726137370ac2bf08
+    changeNotes: v0.3
+      Add more options on content_type
+      Improve tooltip about hashing user data
+      Make autogenerating the event_id the default option when firing events through both methods
+      Avoid firing the event if event_name is undefined
+      Avoid firing the event through CAPI if the server's URL is undefined
+      Improve _fbc cookie retrieval
+      Fix generation of the fbc parameter when retrieving fbclid from query parameters
+      Add generation of fbp when _fbp cookie is not set
+  # Older versions
   - sha: f5cd07167f0c70ccb4b0912dc149c386c6cea7b0
     changeNotes: Initial release (0.2)
