@@ -50,7 +50,7 @@ ___TEMPLATE_PARAMETERS___
             "displayValue": "AddToCart"
           },
           {
-            "value": "AddToWishList",
+            "value": "AddToWishlist",
             "displayValue": "AddToWishlist"
           },
           {
@@ -1611,5 +1611,3 @@ scenarios: []
 ___NOTES___
 
 Version 0.3
-
-
