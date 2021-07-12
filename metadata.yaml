@@ -16,6 +16,12 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 8ab8ac63d3641e53e3125461499ed3205a866404
+    changeNotes: v0.4
+      Fix typo on AddToWishlist standard event that made it to be sent as a custom event (thanks to @Zsavajji)
+      Fixed / improved fields' tooltips
+      Fixed template logo's background
+      Some code cleaning without impact
   - sha: 3d80c2379fdae1ca323dd62f726137370ac2bf08
     changeNotes: v0.3
       Add more options on content_type
