@@ -18,7 +18,7 @@ ___INFO___
   "brand": {
     "id": "brand_dummy",
     "displayName": "Adsmurai",
-    "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAFhklEQVR4nO2cWYgdRRSGP7cHNxBF8cEoChJ9csddI4mK0aC44BZIEJcxjEbGiDiaF4kLuGFEzCgSRYyakKjJxCWOYkQUYhT1QVGjoAPig4LLiw+iUngayuZWb7e66/RwPghc7pxOV/ff/VV336rGMAzDMAzDMAzDMAzDMAzDMIwZz07DbuA3B56ZYh8dClwFnCPb8BHwPPBJ1w05/KetQy2/a7SWdMciYHXu4DkdGAPuBe7s08bsrKANdVgMPFNw5o4Dd+ts+mD6FMBCOfLLWN6ns6AvAVwHPFejfgXwQIvtiUYfAnDaebLBcsv6oCPtAVTVTgj1OtIcQF3thFCtI60BNNVOCLU60hjAsNoJoVJH2gKIpZ0Q6nSkKYDY2gmhSkdaAmhLOyHU6EhDAEta1k4IFTpKHcANwOMJ159cRykDcDt/VcL1Zzgd3Z9q5akCWKJk52fcDjyWYsUpAliYWDshRlN0zF0HsChRh1uVFV33CV0GMCI/pmjH9QkPddXGrgJw2nmio3XFYKwrHXURQF3t/A5sqFj7PvBqxdrNwNc12tGJjtoOoIl2zgYuAVaW1H0vP8ZfBLxdUvs6cAFwCvBLjba0rqM2A2iinXnANvm8tCCEHcDxueVCIUwC8+Wz2/knAr/WaFOrOmorgCZXO4N24tIBl6xuIM4JwM8ly/8FvAgsyNV9CxwtqqtKazpqI4Cm2gkdwaO5m6SHC45gP4Q/gSsDdU5fx2nQUewAmmhnDjBVUnOzp6NBR7VPFsJewHbggEDdDg06ihlAE+2cJUqpQqaj3YGNMiwxRBaCO8o/BPYJ1GU6yuusiKg6ihXANQ20465g3q25jK+jN4HzCmpdCO8AhwGfA3sE6pyOjq0ZwvJYj7JjBHAQ8HTNZebINfwg9pNAQ/g6eg24vKB2rpwJs4CPC3Q0LWdLnRCWyWXtUMQI4Jaa9WXa2SyBjhTU+FdHrk84t6A209ERJTr6ocGZcE+N2oHECGBejdoy7XwgHSPSmd9RUOvr6A3gspI2+jraM1A3XTMEFWfAbhVqfhQdhLTjeAU4OfedG25+fcEyTkcPyue1wPkFtXMlqFkyn2DvQN203OR9WfB/ZVTZ9kJiBFBlUsRqOQJDuB1zYeBvE8C1BcveBnwnnydlR4dwnfZvwJESQuhMcB3zXRW266sKNYXECODRCjU3ApcG/ra1xOGOp4CbAn+bkBkzGVMF9wnrvSN/tnTMg0JwZ8AjJW0ixuVojAC2V/iFa19gnTw4y9hFOtwzKq5n5QAdrZPv8hM2Ng7QkQvm4tw2z5YzYX/vu2PkedTBJe3ZArxQse1BYt0HjFY8Yl72bqBcZzy/pD7PhHcmrS84qxAdHSWfpwrUlOkI6R+2VZg7t6nCWVuJmHPExuT5S9GVC/L83m3waQ3Xs1aulk6tUPse8AVwUkndIcCncp9Qtk/WyCOXKLQxS3KVDDmZibyVfwQy7CzJtp6GVtFR39hU8vypEW39HuB0dF+vd/f/WVNwmTwUbf4iNi6dZt9x2rka+KdvATADdNSKdny6GBXRVx21ph2frsYF9U1HrWrHp+uRcX3QUeva8el6bKh2HXWiHZ8Uo6O16qgz7fikmh+gTUeTXWrHJ+UMGacjDfMENnStHZ/Uc8TcU9RnE65/Ssah/p2qARpmSS5O1DG/JCPykqJlnvC4DDnsCqedK9Ju8n9omil/a0dXR5l2VKDtXREjLetIhXZ8NL4tpS0dqdGOj9b3BcXWkSrt+Gh+Y1YsHanTjo/2d8YNqyOV2vHpw1sTm+pIrXZ8+vLe0Lo6Uq0dnz69ObeqjtRrx6dv744u09GWPmjHp28BIDpaIEMb/5B/n8msmijDBQ3DMAzDMAzDMAzDMAzDMAzDMKIB/AuwEAqJC3MwPwAAAABJRU5ErkJggg\u003d\u003d"
+    "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
   },
   "description": "This tag helps you to send event data to Facebook via conventional pixel and via Conversions API.",
   "containerContexts": [
@@ -411,14 +411,14 @@ ___TEMPLATE_PARAMETERS___
         "name": "fn",
         "displayName": "First name",
         "simpleValueType": true,
-        "help": "A first name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: joe.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the email.\u003c/i\u003e"
+        "help": "A first name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: joe.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the first name.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
         "name": "ln",
         "displayName": "Last name",
         "simpleValueType": true,
-        "help": "A last name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: smith.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the email.\u003c/i\u003e"
+        "help": "A last name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: smith.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the last name.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
@@ -472,7 +472,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "country",
         "displayName": "Country",
         "simpleValueType": true,
-        "help": "A two-letter country code in lowercase.\u003cbr\u003e\u003cbr\u003eExample: us.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the email.\u003c/i\u003e"
+        "help": "A two-letter country code in lowercase.\u003cbr\u003e\u003cbr\u003eExample: us.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the country.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
@@ -495,7 +495,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "hashData",
         "checkboxText": "Hash user data (read tooltip before checking this)",
         "simpleValueType": true,
-        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself.\n\u003cbr\u003e\n\u003cbr\u003e\nOn the other hand, there\u0027s also the possibility to send the data unhashed to the server and hash it there, which would avoid the need to inject a third-party script on the browsera.",
+        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed or if you plan to hash the data on the server.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself.",
         "subParams": [
           {
             "type": "CHECKBOX",
@@ -983,7 +983,7 @@ function fireCapiEvent() {
     sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
 
     function getRequestQueryParameters() {
-        const manuallyFilledProps = ['event_name', 'event_time', 'em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp',
+        const manuallyFilledProps = ['event_name', 'em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp',
             'country', 'external_id', 'subscription_id', 'lead_id', 'fb_login_id', 'value', 'currency', 'content_name',
             'content_category', 'content_ids', 'contents', 'content_type', 'order_id', 'customProperties', 'num_items',
             'predicted_ltv', 'search_string', 'status', 'delivery_category', 'opt_out', 'event_id', 'action_source',
@@ -1034,9 +1034,9 @@ function fireCapiEvent() {
 
             switch (prop) {
                 case 'fbc':
-                    if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc', false)[0] !== '') {
+                    if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
                         // if there's an _fbc cookie and is not an empty string
-                        value = getCookieValues('_fbc', false)[0];
+                        value = getCookieValues('_fbc')[0];
                     } else if (getQueryParameters('fbclid', false)) {
                         // see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
                         value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid', false)[0];
@@ -1046,7 +1046,7 @@ function fireCapiEvent() {
                     break;
                 case 'fbp':
                     if (getCookieValues('_fbp').length > 0) {
-                        value = getCookieValues('_fbp', false)[0];
+                        value = getCookieValues('_fbp')[0];
                     } else {
                         value = generateFbpCookie();
                     }
@@ -1610,4 +1610,6 @@ scenarios: []
 
 ___NOTES___
 
-Version 0.3
+Version 0.4
+
+
