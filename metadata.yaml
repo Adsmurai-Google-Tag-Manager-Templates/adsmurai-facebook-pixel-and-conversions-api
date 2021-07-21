@@ -16,6 +16,12 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: c8742b33dad1b947176beba7fdb936c0d0f8e20d
+    changeNotes: v0.5
+      Add saving of _fbc cookie when there's no pixel basecode
+      Add max-age to set cookies to imitate Facebook cookies' expiration
+      Add reset of expiration on every event when there's no pixel basecode to imitate Facebook's basecode behavior
+      Improve comment and code for readability
   - sha: 8ab8ac63d3641e53e3125461499ed3205a866404
     changeNotes: v0.4
       Fix typo on AddToWishlist standard event that made it to be sent as a custom event (thanks to @Zsavajji)
