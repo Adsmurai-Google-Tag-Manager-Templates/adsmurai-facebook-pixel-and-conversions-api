@@ -828,6 +828,8 @@ if (!data.event_name) {
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
 const injectScript = require('injectScript');
+const getCookieValues = require('getCookieValues');
+const setCookie = require('setCookie');
 const getTimestampMillis = require('getTimestampMillis');
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
@@ -872,8 +874,8 @@ function firePixelEvent() {
 
     const initIds = copyFromWindow('_fbq_gtm_ids') || [];
 
-    // Handle multiple, comma-separated pixel IDs, and initialize each ID if not done already.
     data.pixels.forEach(pixel => {
+        // Initialize each ID if not done already
         if (initIds.indexOf(pixel.pixelId) === -1) {
             // Handle automatic configuration
             if (data.disableAutomaticConfiguration) {
@@ -909,7 +911,7 @@ function firePixelEvent() {
 
         if (fbq) return fbq;
 
-        // Initialize the 'fbq' global method to either use fbq.callMethod or fbq.queue)
+        // Initialize the 'fbq' global method to either use fbq.callMethod or fbq.queue
         setInWindow('fbq', function () {
             const callMethod = copyFromWindow('fbq.callMethod.apply');
             if (callMethod) {
@@ -949,14 +951,10 @@ function firePixelEvent() {
         fieldsToAdd.forEach(field => {
             if (!data[field]) return;
 
-            switch (field) {
-                case 'customProperties':
-                    data[field].forEach(property => {
-                        eventParameters[property.propertyName] = property.propertyValue;
-                    });
-                    break;
-                default:
-                    eventParameters[field] = data[field];
+            if (field === 'customProperties') {
+                data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
+            } else {
+                eventParameters[field] = data[field];
             }
         });
 
@@ -980,9 +978,11 @@ function fireCapiEvent() {
     const sendPixel = require('sendPixel');
 
     const url = data.serverGtmUrl + '?' + getRequestQueryParameters();
-    sendPixel(url, data.gtmOnSuccess, data.gtmOnFailure);
+    sendPixel(url, handleCapiSuccessfullyFired, handleCapiUnsuccessfullyFired);
 
     function getRequestQueryParameters() {
+        let url = '';
+
         const manuallyFilledProps = ['event_name', 'em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp',
             'country', 'external_id', 'subscription_id', 'lead_id', 'fb_login_id', 'value', 'currency', 'content_name',
             'content_category', 'content_ids', 'contents', 'content_type', 'order_id', 'customProperties', 'num_items',
@@ -992,8 +992,6 @@ function fireCapiEvent() {
         const automaticallyFilledProps = ['fbp', 'fbc', 'event_source_url', 'event_time'];
 
         const propsToHash = ['em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp', 'country', 'external_id'];
-
-        let url = '';
 
         manuallyFilledProps.forEach(prop => {
             if (!data[prop] || getType(data[prop]) === 'function') return;
@@ -1015,7 +1013,7 @@ function fireCapiEvent() {
             }
 
             if (data.hashData && propsToHash.some(propToHash => prop === propToHash)) {
-                // avoid hashing external_id if user didn't ask to
+                // Avoid hashing external_id if user didn't ask to
                 if (prop !== 'external_id' || data.hashExternalId) {
                     value = hash(data[prop]);
                 }
@@ -1025,7 +1023,6 @@ function fireCapiEvent() {
         });
 
         automaticallyFilledProps.forEach(prop => {
-            const getCookieValues = require('getCookieValues');
             const getQueryParameters = require('getQueryParameters');
             const getUrl = require('getUrl');
             const Math = require('Math');
@@ -1034,12 +1031,16 @@ function fireCapiEvent() {
 
             switch (prop) {
                 case 'fbc':
-                    if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
-                        // if there's an _fbc cookie and is not an empty string
+                    // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
+                    if (getQueryParameters('fbclid', false)) {
+                        value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid');
+                        // If there's no Facebook pixel on the page that will
+                        // create or update the _fbc cookie automatically, do it manually
+                        let fbq = copyFromWindow('fbq');
+                        if (!fbq) setCookie('_fbc', value, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
+                    } else if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
+                        // If there's an _fbc cookie and is not an empty string
                         value = getCookieValues('_fbc')[0];
-                    } else if (getQueryParameters('fbclid', false)) {
-                        // see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
-                        value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid', false)[0];
                     } else {
                         return undefined;
                     }
@@ -1090,13 +1091,12 @@ function fireCapiEvent() {
     }
 
     function generateFbpCookie() {
-        // if there's no fbp cookie, we build it
-        // see https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
-        const setCookie = require('setCookie');
+        // If there's no fbp cookie, we build it
+        // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
         const generateRandom = require('generateRandom');
         const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
 
-        setCookie('_fbp', cookieValue, {domain: 'auto'}); // sets the cookie so we have the same value in the future
+        setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
 
         return cookieValue;
     }
@@ -1112,6 +1112,31 @@ function fireCapiEvent() {
                 return null;
             default:
                 return encodeUriComponent(JSON.stringify(prop));
+        }
+    }
+
+    function handleCapiSuccessfullyFired() {
+        if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
+        data.gtmOnSuccess();
+    }
+
+    function handleCapiUnsuccessfullyFired() {
+        if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
+        data.gtmOnFailure();
+    }
+
+    function resetCookiesExpiration() {
+        // Facebook pixel's code resets expiration date of _fbc and _fbp cookies to 90 days on every event
+        // If user is sending only through CAPI, thus not sending event through pixel,
+        // we update the expiration date manually here
+        if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
+            const fbcValue = getCookieValues('_fbc')[0];
+            setCookie('_fbc', fbcValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
+        }
+
+        if (getCookieValues('_fbp').length > 0 && getCookieValues('_fbp')[0] !== '') {
+            const fbpValue = getCookieValues('_fbp')[0];
+            setCookie('_fbp', fbpValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
         }
     }
 }
@@ -1589,6 +1614,53 @@ ___WEB_PERMISSIONS___
                     "string": "any"
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_fbc"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
               }
             ]
           }
@@ -1610,6 +1682,6 @@ scenarios: []
 
 ___NOTES___
 
-Version 0.4
+Version 0.5
 
 
