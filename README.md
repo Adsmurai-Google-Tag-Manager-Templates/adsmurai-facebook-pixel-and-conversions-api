@@ -1,6 +1,6 @@
 # Adsmurai Facebook Pixel & Conversions API
 
-Google Tag Manager template for web containers that helps with firing Facebook events via regular pixel and Conversions API.
+This Google Tag Manager custom template for web containers helps with firing Facebook events via regular pixel and Conversions API.
 
 ## Installation
 
