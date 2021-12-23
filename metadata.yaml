@@ -16,6 +16,10 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 909ba8f81f735d3c642f515cf80c1f2ef8a06663
+    changeNotes: v0.6
+      Fix server events discarding falsy values (fixes geolocation LDU not being sent when set to 0)
+  # Older versions
   - sha: c8742b33dad1b947176beba7fdb936c0d0f8e20d
     changeNotes: v0.5
       Add saving of _fbc cookie when there's no pixel basecode
@@ -38,6 +42,5 @@ versions:
       Improve _fbc cookie retrieval
       Fix generation of the fbc parameter when retrieving fbclid from query parameters
       Add generation of fbp when _fbp cookie is not set
-  # Older versions
   - sha: f5cd07167f0c70ccb4b0912dc149c386c6cea7b0
     changeNotes: Initial release (0.2)
