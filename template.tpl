@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Adsmurai Facebook Pixel \u0026 Conversions API",
+  "displayName": "Adsmurai Facebook Pixel \u0026 Conversions API (CAPI)",
   "categories": [
     "ADVERTISING",
     "CONVERSIONS",
@@ -21,7 +21,7 @@ ___INFO___
   ],
   "brand": {
     "id": "github.com_Adsmurai-Google-Tag-Manager-Templates",
-    "displayName": "Adsmurai",
+    "displayName": "Adsmurai Google Tag Manager Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
   },
   "description": "This tag helps you to send event data to Facebook via conventional pixel and via Conversions API.",
@@ -173,7 +173,7 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "alwaysInSummary": true,
         "subParams": [],
-        "help": "Choose if you want to send this event only through Facebook pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up your server if you plan to use Conversions API. Google Tag Manager has a server option that may be helpful.",
+        "help": "Choose if you want to send this event only through Facebook pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up a server if you plan to use Conversions API. If you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
         "defaultValue": "both"
       },
       {
@@ -219,13 +219,25 @@ ___TEMPLATE_PARAMETERS___
             "errorMessage": "Please, add at least one pixel ID"
           }
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field only applies for the pixel (web) events. The pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
-        "type": "TEXT",
-        "name": "serverGtmUrl",
-        "displayName": "Tag management server\u0027s URL",
+        "type": "RADIO",
+        "name": "serverSetup",
+        "displayName": "Server setup for Conversions API",
+        "radioItems": [
+          {
+            "value": "serverlessTracking",
+            "displayValue": "I have an API key from Adsmurai Serverless Tracking"
+          },
+          {
+            "value": "ownServer",
+            "displayValue": "I have my own server"
+          }
+        ],
         "simpleValueType": true,
+        "defaultValue": "serverlessTracking",
+        "help": "- \u003cb\u003e(Recommended) I have an API key from Adsmurai Serverless Tracking\u003c/b\u003e: You can avoid setting up your own tracking server and its related costs by using a Serverless Tracking subscription. It will provide you an API key that you\u0027ll need to enter in the field below when choosing this option. Nothing else required! Learn more or purchase a subscription at \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehttps://www.adsmurai.com/en/product/serverless-tracking\u003c/a\u003e.\u003cbr\u003e\u003cbr\u003e- \u003cb\u003eI have my own server\u003c/b\u003e: Choose this if you already set up your own tracking server and enter its URL in the field below. Facebook events are going to be sent there, so make sure your server processes the events accordingly. Consider the option above if you want to save time on setting up and maintaining your server, and potentially save money on server costs.",
         "enablingConditions": [
           {
             "paramName": "fireMethod",
@@ -238,7 +250,21 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "help": "The URL of the tag management server you are using for Conversions API. Your server is responsible for adding the pixel ID and the access token required for this event.",
+        "subParams": []
+      },
+      {
+        "type": "TEXT",
+        "name": "serverGtmUrl",
+        "displayName": "Your server\u0027s URL",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "ownServer",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "The URL of the tag management server you are using for Conversions API. Your server is responsible for adding the pixel ID and the access token required for this event.\u003cbr\u003e\u003cbr\u003eIf you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
         "valueValidators": [
           {
             "type": "NON_EMPTY",
@@ -247,6 +273,22 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueHint": "https://gtm.yourwebsite.com",
         "alwaysInSummary": true
+      },
+      {
+        "type": "TEXT",
+        "name": "stApiKey",
+        "displayName": "Adsmurai Serverless Tracking API key",
+        "simpleValueType": true,
+        "notSetText": "Please, fill this value",
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Learn \u003ca href\u003d\"https://www.youtube.com/watch?v\u003dmwgh3Z_PUsc\"\u003ehere\u003c/a\u003e how to retrieve your Serverless Tracking API key. Requires a Serverless Tracking subscription (learn more \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehere\u003c/a\u003e)",
+        "valueHint": "Your Adsmurai Serverless Tracking API Key"
       }
     ]
   },
@@ -259,21 +301,21 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "content_name",
-        "displayName": "content_name",
+        "displayName": "Content name (content_name)",
         "simpleValueType": true,
         "help": "The name of the page or product associated with the event.\u003cbr\u003e\u003cbr\u003eExample: \u0027lettuce\u0027."
       },
       {
         "type": "TEXT",
         "name": "content_category",
-        "displayName": "content_category",
+        "displayName": "Content category (content_category)",
         "simpleValueType": true,
         "help": "The category of the content associated with the event.\u003cbr\u003e\u003cbr\u003eExample: \u0027grocery\u0027."
       },
       {
         "type": "SELECT",
         "name": "content_type",
-        "displayName": "content_type",
+        "displayName": "Content type (content_type)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -312,7 +354,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "content_ids",
-        "displayName": "content_ids",
+        "displayName": "Content IDs (content_ids)",
         "simpleValueType": true,
         "help": "The content IDs associated with the event, such as product SKUs for items in an AddToCart event: [\u0027ABC123\u0027, \u0027XYZ789\u0027].\u003cbr\u003e\u003cbr\u003eIf content_type is a product, then your content IDs must be an array with a single string value. Otherwise, this array can contain any number of string values.",
         "valueValidators": []
@@ -320,49 +362,49 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "contents",
-        "displayName": "contents",
+        "displayName": "Contents (contents)",
         "simpleValueType": true,
         "help": "A list of JSON objects that contain the product IDs associated with the event plus information about the products. id, quantity, and item_price are available fields.\u003cbr\u003e\u003cbr\u003eExample: [{\u0027id\u0027:\u0027ABC123\u0027,\u0027quantity\u0027 :2,\u0027item_price\u0027:5.99}, {\u0027id\u0027:\u0027XYZ789\u0027,\u0027quantity\u0027:2, \u0027item_price\u0027:9.99, \u0027delivery_category\u0027: \u0027in_store\u0027}]\u003cbr\u003e\u003cbr\u003eYou can choose to fill either this field or content_ids. If you fill both, this tag will use this field and discard content_ids."
       },
       {
         "type": "TEXT",
         "name": "value",
-        "displayName": "value",
+        "displayName": "Value (value)",
         "simpleValueType": true,
         "help": "\u003cb\u003eRequired for Purchase events.\u003c/b\u003e\u003cbr\u003eA numeric value associated with this event. This could be a monetary value or a value in some other metric.\u003cbr\u003e\u003cbr\u003eExample: 142.54."
       },
       {
         "type": "TEXT",
         "name": "currency",
-        "displayName": "currency",
+        "displayName": "Currency (currency)",
         "simpleValueType": true,
         "help": "\u003cb\u003eRequired for Purchase events.\u003c/b\u003e\u003cbr\u003eCurrency must be a valid \u003ca href\u003d\"https://en.wikipedia.org/wiki/ISO_4217?fbclid\u003dIwAR1WMqA7X8FtKGZY3A1DDBvf972gpNQ3oKzGg8tBhSCSbt_xc3HdLIxyW0A\"\u003eISO 4217 three digit currency code\u003c/a\u003e.\u003cbr\u003e\u003cbr\u003eExample: \u0027USD\u0027."
       },
       {
         "type": "TEXT",
         "name": "num_items",
-        "displayName": "num_items",
+        "displayName": "No of items (num_items)",
         "simpleValueType": true,
         "help": "Use only with InitiateCheckout events. The number of items that a user tries to buy during checkout.\u003cbr\u003e\u003cbr\u003eExample: \u00274\u0027."
       },
       {
         "type": "TEXT",
         "name": "search_string",
-        "displayName": "search_string",
+        "displayName": "Search string (search_string)",
         "simpleValueType": true,
         "help": "Use only with Search events. A search query made by a user.\u003cbr\u003e\u003cbr\u003eExample: \u0027lettuce\u0027."
       },
       {
         "type": "TEXT",
         "name": "status",
-        "displayName": "status",
+        "displayName": "Status (status)",
         "simpleValueType": true,
         "help": "Use only with CompleteRegistration events. The status of the registration event.\u003cbr\u003e\u003cbr\u003eExample: \u0027registered\u0027."
       },
       {
         "type": "TEXT",
         "name": "predicted_ltv",
-        "displayName": "predicted_ltv",
+        "displayName": "Predicted LTV (predicted_ltv)",
         "simpleValueType": true,
         "help": "Predicted lifetime value of a subscriber as defined by the advertiser and expressed as an exact value."
       },
@@ -399,42 +441,42 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "em",
-        "displayName": "Email",
+        "displayName": "Email (em)",
         "simpleValueType": true,
         "help": "An email address, in lowercase.\u003cbr\u003e\u003cbr\u003eExample: joe@eg.com\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the email.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
         "name": "ph",
-        "displayName": "Phone",
+        "displayName": "Phone (ph)",
         "simpleValueType": true,
         "help": "A phone number. Include only digits with country code, area code, and number.\u003cbr\u003e\u003cbr\u003eExample: 16505551212"
       },
       {
         "type": "TEXT",
         "name": "fn",
-        "displayName": "First name",
+        "displayName": "First name (fn)",
         "simpleValueType": true,
         "help": "A first name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: joe.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the first name.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
         "name": "ln",
-        "displayName": "Last name",
+        "displayName": "Last name (ln)",
         "simpleValueType": true,
         "help": "A last name in lowercase.\u003cbr\u003e\u003cbr\u003eExample: smith.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the last name.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
         "name": "db",
-        "displayName": "Date of birth",
+        "displayName": "Date of birth (db)",
         "simpleValueType": true,
         "help": "A date of birth given as year, month, and day.\u003cbr\u003e\u003cbr\u003eExample: 19971226 for December 26, 1997."
       },
       {
         "type": "SELECT",
         "name": "ge",
-        "displayName": "Gender",
+        "displayName": "Gender (ge)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -453,35 +495,35 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "ct",
-        "displayName": "City",
+        "displayName": "City (ct)",
         "simpleValueType": true,
         "help": "A city in lower-case without spaces or punctuation.\u003cbr\u003e\u003cbr\u003eExample: menlopark."
       },
       {
         "type": "TEXT",
         "name": "st",
-        "displayName": "State",
+        "displayName": "State (st)",
         "simpleValueType": true,
         "help": "A two-letter state code in lowercase.\u003cbr\u003e\u003cbr\u003eExample: ca."
       },
       {
         "type": "TEXT",
         "name": "zp",
-        "displayName": "Zip code",
+        "displayName": "Zip code (zp)",
         "simpleValueType": true,
         "help": "If you are in the United States, this is a five-digit zip code. For other locations, follow each country\u0027s standards.\u003cbr\u003e\u003cbr\u003eExample: 94035 (for United States)"
       },
       {
         "type": "TEXT",
         "name": "country",
-        "displayName": "Country",
+        "displayName": "Country (country)",
         "simpleValueType": true,
         "help": "A two-letter country code in lowercase.\u003cbr\u003e\u003cbr\u003eExample: us.\u003cbr\u003e\u003cbr\u003e\u003ci\u003eNote: This tag will format the email in lowercase and trim any white spaces that could appear behind or after the country.\u003c/i\u003e"
       },
       {
         "type": "TEXT",
         "name": "external_id",
-        "displayName": "External ID",
+        "displayName": "External ID (external_id)",
         "simpleValueType": true,
         "help": "Any unique ID from the advertiser, such as loyalty membership IDs, user IDs, and external cookie IDs. You can send one or more external IDs for a given event.  If External ID is being sent via other channels, it should be in the same format when sent via conversions API. \u003ca href\u003d\"https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/external-id\"\u003eLearn more about External ID.\u003c/a\u003e"
       }
@@ -495,11 +537,25 @@ ___TEMPLATE_PARAMETERS___
     "groupStyle": "ZIPPY_OPEN_ON_PARAM",
     "subParams": [
       {
+        "type": "TEXT",
+        "name": "test_event_code",
+        "displayName": "Test event code (test_event_code)",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Code used to verify that your server events are received correctly by Facebook. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://developers.facebook.com/docs/marketing-api/conversions-api/using-the-api#testEvents\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
+      },
+      {
         "type": "CHECKBOX",
         "name": "hashData",
         "checkboxText": "Hash user data (read tooltip before checking this)",
         "simpleValueType": true,
-        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed or if you plan to hash the data on the server.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself.",
+        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed or if you plan to hash the data on the server.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself or on the server.",
         "subParams": [
           {
             "type": "CHECKBOX",
@@ -516,12 +572,50 @@ ___TEMPLATE_PARAMETERS___
             ],
             "help": "If checked, the value set in the \"External ID\" field inside the \"Customer information parameters\" section will be hashed too. This may be useful when External ID data that you sent via other methods is hashed, as hashing this field is optional."
           }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "ownServer",
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "hashDataOnST",
+        "checkboxText": "Hash user data on the server",
+        "simpleValueType": true,
+        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want Adsmurai Serverless Tracking servers to hash it for you (hasing will be done on the server). Don\u0027t check this box if your data is already hashed.",
+        "subParams": [
+          {
+            "type": "CHECKBOX",
+            "name": "hashExternalIdOnST",
+            "checkboxText": "Hash also External ID field",
+            "simpleValueType": true,
+            "defaultValue": false,
+            "enablingConditions": [
+              {
+                "paramName": "hashDataOnST",
+                "paramValue": true,
+                "type": "EQUALS"
+              }
+            ],
+            "help": "If checked, the value set in the \"External ID\" field inside the \"Customer information parameters\" section will be hashed too. This may be useful when External ID data that you sent via other methods is hashed, as hashing this field is optional."
+          }
+        ],
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
         ]
       },
       {
         "type": "SELECT",
         "name": "opt_out",
-        "displayName": "Opt out of ad delivery optimization",
+        "displayName": "Opt out of ad delivery optimization (opt_out)",
         "selectItems": [
           {
             "value": true,
@@ -535,14 +629,14 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "order_id",
-        "displayName": "Order ID",
+        "displayName": "Order ID (order_id)",
         "simpleValueType": true,
         "help": "The order ID for this transaction. This is used for event deduplication, not for reporting.\u003cbr\u003e\u003cbr\u003eExample: \u0027order1234\u0027."
       },
       {
         "type": "SELECT",
         "name": "event_id",
-        "displayName": "Event ID",
+        "displayName": "Event ID (event_id)",
         "macrosInSelect": false,
         "selectItems": [
           {
@@ -591,7 +685,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "delivery_category",
-        "displayName": "Delivery category",
+        "displayName": "Delivery category (delivery_category)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -614,7 +708,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "action_source",
-        "displayName": "Action source",
+        "displayName": "Action source (action_source)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -657,21 +751,21 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "subscription_id",
-        "displayName": "Subscription ID",
+        "displayName": "Subscription ID (subscription_id)",
         "simpleValueType": true,
         "help": "The subscription ID for the user in this transaction. This is similar to the order ID for an individual product.\u003cbr\u003e\u003cbr\u003eExample: anid1234."
       },
       {
         "type": "TEXT",
         "name": "fb_login_id",
-        "displayName": "Facebook login ID",
+        "displayName": "Facebook login ID (fb_login_id)",
         "simpleValueType": true,
         "help": "ID issued by Facebook when a person first logs into an instance of an app. This is also known as App-Scoped ID."
       },
       {
         "type": "TEXT",
         "name": "lead_id",
-        "displayName": "Lead ID",
+        "displayName": "Lead ID (lead_id)",
         "simpleValueType": true,
         "help": "ID associated with a lead generated by Facebook\u0027s Lead Ads."
       }
@@ -689,6 +783,35 @@ ___TEMPLATE_PARAMETERS___
       }
     ],
     "help": "Parameters to send for Conversions API events. All fields are optional."
+  },
+  {
+    "type": "GROUP",
+    "name": "pixelSetup",
+    "displayName": "Pixel setup",
+    "groupStyle": "ZIPPY_OPEN_ON_PARAM",
+    "subParams": [
+      {
+        "type": "CHECKBOX",
+        "name": "disablePushState",
+        "checkboxText": "Disable firing PageView on history.pushState()",
+        "simpleValueType": true,
+        "defaultValue": false,
+        "help": "By default Facebook Pixel activates the HTML5 History State API listener. This means that each time a new state appears in the history, such as history.pushState, Facebook Pixel fires a PageView event. If you do not want this default behaviour, you can turn it off by checking this box. The Facebook pixel will stop sending PageView events on history state change."
+      }
+    ],
+    "enablingConditions": [
+      {
+        "paramName": "fireMethod",
+        "paramValue": "onlyPixel",
+        "type": "EQUALS"
+      },
+      {
+        "paramName": "fireMethod",
+        "paramValue": "both",
+        "type": "EQUALS"
+      }
+    ],
+    "help": "Optional configuration options for events sent through Facebook pixel."
   },
   {
     "type": "GROUP",
@@ -749,7 +872,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "data_processing_options",
-        "displayName": "Data processing options",
+        "displayName": "Data processing options (data_processing_options)",
         "macrosInSelect": false,
         "selectItems": [
           {
@@ -769,7 +892,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "data_processing_options_country",
-        "displayName": "Data processing options country",
+        "displayName": "Data processing options country (data_processing_options_country)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -794,7 +917,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SELECT",
         "name": "data_processing_options_state",
-        "displayName": "Data processing options state",
+        "displayName": "Data processing options state (data_processing_options_state)",
         "macrosInSelect": true,
         "selectItems": [
           {
@@ -825,8 +948,8 @@ ___TEMPLATE_PARAMETERS___
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 if (!data.event_name) {
-    data.gtmOnSuccess();
-    return;
+  data.gtmOnSuccess();
+  return;
 }
 
 const copyFromWindow = require('copyFromWindow');
@@ -839,310 +962,413 @@ const getTimestampMillis = require('getTimestampMillis');
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 
 if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
-    firePixelEvent();
+  firePixelEvent();
 }
 
 if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
-    if (!data.serverGtmUrl) {
-        data.gtmOnSuccess();
-        return;
-    }
+  const userForgotOwnServerUrl = data.serverSetup === "ownServer" && !data.serverGtmUrl;
+  const userForgotSTApiKey = data.serverSetup === "serverlessTracking" && !data.stApiKey;
 
-    if (data.hashData) {
-        injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
-    } else {
-        fireCapiEvent();
-    }
+  if (userForgotOwnServerUrl || userForgotSTApiKey) {
+    data.gtmOnSuccess();
+    return;
+  }
+
+  if (data.hashData) {
+    injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
+  } else {
+    fireCapiEvent();
+  }
 }
 
 function firePixelEvent() {
-    const setInWindow = require('setInWindow');
+  const setInWindow = require('setInWindow');
 
-    const fbq = getFbq();
+  const fbq = getFbq();
 
-    // Build the fbq() command arguments
-    const command = data.event_name !== 'customEvent' ? 'trackSingle' : 'trackSingleCustom';
-    const eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
+  // Build the fbq() command arguments
+  const command = data.event_name !== 'customEvent' ? 'trackSingle' : 'trackSingleCustom';
+  const eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
 
-    // Handle consent mode
-    if (data.consentMode) {
-        fbq('consent', data.consentMode);
+  // Handle consent mode
+  if (data.consentMode) {
+    fbq('consent', data.consentMode);
+  }
+
+  // Handle LDU settings
+  if (data.data_processing_options === 'LDU') {
+    fbq('dataProcessingOptions', ['LDU'], data.data_processing_options_country, data.data_processing_options_state);
+  } else if (data.data_processing_options === 'emptyArray') {
+    fbq('dataProcessingOptions', []);
+  }
+  
+  // Handle disablePushState settings
+  if (data.disablePushState) {
+    fbq.disablePushState = true;
+  }
+
+  const initIds = copyFromWindow('_fbq_gtm_ids') || [];
+
+  data.pixels.forEach(pixel => {
+    // Initialize each ID if not done already
+    if (initIds.indexOf(pixel.pixelId) === -1) {
+      // Handle automatic configuration
+      if (data.disableAutomaticConfiguration) {
+        fbq('set', 'autoConfig', false, pixel.pixelId);
+      }
+
+      // Initialize pixel and store in global array
+      fbq('init', pixel.pixelId, getAdvancedMatchingData());
+      initIds.push(pixel.pixelId);
+      setInWindow('_fbq_gtm_ids', initIds, true);
     }
 
-    // Handle LDU settings
-    if (data.data_processing_options === 'LDU') {
-        fbq('dataProcessingOptions', ['LDU'], data.data_processing_options_country, data.data_processing_options_state);
-    } else if (data.data_processing_options === 'emptyArray') {
-        fbq('dataProcessingOptions', []);
+    // Call the fbq() method with the parameters defined earlier
+    // Add event_id in case it's set up
+    if (data.event_id) {
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters(), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
+    } else {
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters());
     }
+  });
 
-    const initIds = copyFromWindow('_fbq_gtm_ids') || [];
+  injectScript('https://connect.facebook.net/en_US/fbevents.js',
+    handlePixelSuccessfullyFired,
+    handlePixelUnsuccessfullyFired,
+    'fbPixel');
 
-    data.pixels.forEach(pixel => {
-        // Initialize each ID if not done already
-        if (initIds.indexOf(pixel.pixelId) === -1) {
-            // Handle automatic configuration
-            if (data.disableAutomaticConfiguration) {
-                fbq('set', 'autoConfig', false, pixel.pixelId);
-            }
+  function getFbq() {
+    const callInWindow = require('callInWindow');
+    const aliasInWindow = require('aliasInWindow');
+    const createQueue = require('createQueue');
 
-            // Initialize pixel and store in global array
-            fbq('init', pixel.pixelId, getAdvancedMatchingData());
-            initIds.push(pixel.pixelId);
-            setInWindow('_fbq_gtm_ids', initIds, true);
-        }
+    let fbq = copyFromWindow('fbq');
 
-        // Call the fbq() method with the parameters defined earlier
-        // Add event_id in case it's set up
-        if (data.event_id) {
-            fbq(command, pixel.pixelId, eventName, getPixelEventParameters(), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
-        } else {
-            fbq(command, pixel.pixelId, eventName, getPixelEventParameters());
-        }
+    if (fbq) return fbq;
+
+    // Initialize the 'fbq' global method to either use fbq.callMethod or fbq.queue
+    setInWindow('fbq', function () {
+      const callMethod = copyFromWindow('fbq.callMethod.apply');
+      if (callMethod) {
+        callInWindow('fbq.callMethod.apply', null, arguments);
+      } else {
+        callInWindow('fbq.queue.push', arguments);
+      }
     });
 
-    injectScript('https://connect.facebook.net/en_US/fbevents.js',
-        handlePixelSuccessfullyFired,
-        handlePixelUnsuccessfullyFired,
-        'fbPixel');
+    aliasInWindow('_fbq', 'fbq');
 
-    function getFbq() {
-        const callInWindow = require('callInWindow');
-        const aliasInWindow = require('aliasInWindow');
-        const createQueue = require('createQueue');
+    createQueue('fbq.queue');
 
-        let fbq = copyFromWindow('fbq');
+    return copyFromWindow('fbq');
+  }
 
-        if (fbq) return fbq;
+  function getAdvancedMatchingData() {
+    let userData = {};
 
-        // Initialize the 'fbq' global method to either use fbq.callMethod or fbq.queue
-        setInWindow('fbq', function () {
-            const callMethod = copyFromWindow('fbq.callMethod.apply');
-            if (callMethod) {
-                callInWindow('fbq.callMethod.apply', null, arguments);
-            } else {
-                callInWindow('fbq.queue.push', arguments);
-            }
-        });
+    const fieldsToAdd = ['em', 'ph', 'fn', 'ln', 'db', 'ge', 'ct', 'st', 'zp', 'country', 'external_id'];
 
-        aliasInWindow('_fbq', 'fbq');
+    fieldsToAdd.forEach(field => {
+      if (data[field] === undefined) return;
 
-        createQueue('fbq.queue');
+      userData[field] = data[field];
+    });
 
-        return copyFromWindow('fbq');
+    return userData;
+  }
+
+  function getPixelEventParameters() {
+    let eventParameters = {};
+
+    const fieldsToAdd = ['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
+      'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'];
+
+    fieldsToAdd.forEach(field => {
+      if (getType(data[field]) === "undefined" || getType(data[field]) === 'function') return;
+
+      if (field === 'customProperties') {
+        data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
+      } else {
+        eventParameters[field] = data[field];
+      }
+    });
+
+    return eventParameters;
+  }
+
+  function handlePixelSuccessfullyFired() {
+    if (data.fireMethod === 'onlyPixel') {
+      data.gtmOnSuccess();
     }
+  }
 
-    function getAdvancedMatchingData() {
-        let userData = {};
-
-        const fieldsToAdd = ['em', 'ph', 'fn', 'ln', 'db', 'ge', 'ct', 'st', 'zp', 'country', 'external_id'];
-
-        fieldsToAdd.forEach(field => {
-            if (data[field] === undefined) return;
-
-            userData[field] = data[field];
-        });
-
-        return userData;
+  function handlePixelUnsuccessfullyFired() {
+    if (data.fireMethod === 'onlyPixel') {
+      data.gtmOnFailure();
     }
-
-    function getPixelEventParameters() {
-        let eventParameters = {};
-
-        const fieldsToAdd = ['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
-            'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'];
-
-        fieldsToAdd.forEach(field => {
-            if (!data[field]) return;
-
-            if (field === 'customProperties') {
-                data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
-            } else {
-                eventParameters[field] = data[field];
-            }
-        });
-
-        return eventParameters;
-    }
-
-    function handlePixelSuccessfullyFired() {
-        if (data.fireMethod === 'onlyPixel') {
-            data.gtmOnSuccess();
-        }
-    }
-
-    function handlePixelUnsuccessfullyFired() {
-        if (data.fireMethod === 'onlyPixel') {
-            data.gtmOnFailure();
-        }
-    }
+  }
 }
 
 function fireCapiEvent() {
-    const sendPixel = require('sendPixel');
+  const sendPixel = require('sendPixel');
+  const getUrl = require('getUrl');
+  const Math = require('Math');
 
-    const url = data.serverGtmUrl + '?' + getRequestQueryParameters();
+  if (data.serverSetup === "ownServer") {
+    const url = data.serverGtmUrl + '?' + getRequestQueryParametersForOwnServer();
     sendPixel(url, handleCapiSuccessfullyFired, handleCapiUnsuccessfullyFired);
+  } else {
+    const stUrl = "https://ev.st.adsmurai.com";
+    const url = stUrl + '/v1.0?' + getRequestQueryParametersForServerlessTracking();
+    sendPixel(url, handleCapiSuccessfullyFired, handleCapiUnsuccessfullyFired);
+  }
 
-    function getRequestQueryParameters() {
-        let url = '';
+  function getRequestQueryParametersForOwnServer() {
+    let url = '';
 
-        const manuallyFilledProps = ['event_name', 'em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp',
-            'country', 'external_id', 'subscription_id', 'lead_id', 'fb_login_id', 'value', 'currency', 'content_name',
-            'content_category', 'content_ids', 'contents', 'content_type', 'order_id', 'customProperties', 'num_items',
-            'predicted_ltv', 'search_string', 'status', 'delivery_category', 'opt_out', 'event_id', 'action_source',
-            'data_processing_options', 'data_processing_options_country', 'data_processing_options_state'];
+    const manuallyFilledProps = ['event_name', 'em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp',
+      'country', 'external_id', 'subscription_id', 'lead_id', 'fb_login_id', 'value', 'currency', 'content_name',
+      'content_category', 'content_ids', 'contents', 'content_type', 'order_id', 'customProperties', 'num_items',
+      'predicted_ltv', 'search_string', 'status', 'delivery_category', 'opt_out', 'event_id', 'action_source',
+      'data_processing_options', 'data_processing_options_country', 'data_processing_options_state'];
 
-        const automaticallyFilledProps = ['fbp', 'fbc', 'event_source_url', 'event_time'];
+    const automaticallyFilledProps = ['fbp', 'fbc', 'event_source_url', 'event_time'];
 
-        const propsToHash = ['em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp', 'country', 'external_id'];
+    const propsToHash = ['em', 'ph', 'ge', 'db', 'ln', 'fn', 'ct', 'st', 'zp', 'country', 'external_id'];
 
-        manuallyFilledProps.forEach(prop => {
-            if (getType(data[prop]) === "undefined" || getType(data[prop]) === 'function') return;
+    manuallyFilledProps.forEach(prop => {
+      if (getType(data[prop]) === "undefined" || getType(data[prop]) === 'function') return;
 
-            let value;
+      let value;
 
-            switch (prop) {
-                case 'event_name':
-                    value = data.event_name === 'customEvent' ? data.customEventName : data.event_name;
-                    break;
-                case 'data_processing_options':
-                    value = data[prop] === 'emptyArray' ? [] : ['LDU'];
-                    break;
-                case 'event_id':
-                    value = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
-                    break;
-                default:
-                    value = data[prop];
-            }
+      switch (prop) {
+        case 'event_name':
+          value = data.event_name === 'customEvent' ? data.customEventName : data.event_name;
+          break;
+        case 'data_processing_options':
+          value = data[prop] === 'emptyArray' ? [] : ['LDU'];
+          break;
+        case 'event_id':
+          value = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+          break;
+        default:
+          value = data[prop];
+      }
 
-            if (data.hashData && propsToHash.some(propToHash => prop === propToHash)) {
-                // Avoid hashing external_id if user didn't ask to
-                if (prop !== 'external_id' || data.hashExternalId) {
-                    value = hash(data[prop]);
-                }
-            }
-
-            url += prop + '=' + encodeProperty(value) + '&';
-        });
-
-        automaticallyFilledProps.forEach(prop => {
-            const getQueryParameters = require('getQueryParameters');
-            const getUrl = require('getUrl');
-            const Math = require('Math');
-
-            let value;
-
-            switch (prop) {
-                case 'fbc':
-                    // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
-                    if (getQueryParameters('fbclid', false)) {
-                        value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid');
-                        // If there's no Facebook pixel on the page that will
-                        // create or update the _fbc cookie automatically, do it manually
-                        let fbq = copyFromWindow('fbq');
-                        if (!fbq) setCookie('_fbc', value, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
-                    } else if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
-                        // If there's an _fbc cookie and is not an empty string
-                        value = getCookieValues('_fbc')[0];
-                    } else {
-                        return undefined;
-                    }
-                    break;
-                case 'fbp':
-                    if (getCookieValues('_fbp').length > 0) {
-                        value = getCookieValues('_fbp')[0];
-                    } else {
-                        value = generateFbpCookie();
-                    }
-                    break;
-                case 'event_source_url':
-                    value = getUrl();
-                    break;
-                case 'event_time':
-                    value = Math.floor(getTimestampMillis() / 1000);
-            }
-
-            url += prop + '=' + encodeProperty(value) + '&';
-        });
-
-        return url.slice(0, -1); // slice() removes the last &
-    }
-
-    function hash(valueToHash) {
-        const makeString = require('makeString');
-
-        const sha256 = copyFromWindow('sha256');
-
-        if (!sha256) return valueToHash;
-
-        switch (getType(valueToHash)) {
-            case 'undefined':
-            case 'null':
-            case 'object':
-            case 'function':
-            case 'boolean':
-                return valueToHash;
-            case 'string':
-                return sha256(valueToHash.toLowerCase().trim());
-            case 'number':
-                return sha256(makeString(valueToHash));
-            case 'array':
-                return valueToHash.map(value => hash(value));
-            default:
-                return sha256(valueToHash);
+      if (data.hashData && propsToHash.some(propToHash => prop === propToHash)) {
+        // Avoid hashing external_id if user didn't ask to
+        if (prop !== 'external_id' || data.hashExternalId) {
+          value = hash(data[prop]);
         }
+      }
+
+      url += prop + '=' + encodeProperty(value) + '&';
+    });
+
+    automaticallyFilledProps.forEach(prop => {
+
+      let value;
+
+      switch (prop) {
+        case 'fbc':
+          value = setOrGetFbcCookie();
+          break;
+        case 'fbp':
+          if (getCookieValues('_fbp').length > 0) {
+            value = getCookieValues('_fbp')[0];
+          } else {
+            value = generateFbpCookie();
+          }
+          break;
+        case 'event_source_url':
+          value = getUrl();
+          break;
+        case 'event_time':
+          value = Math.floor(getTimestampMillis() / 1000);
+      }
+
+      url += prop + '=' + encodeProperty(value) + '&';
+    });
+
+    return url.slice(0, -1); // slice() removes the last &
+  }
+
+  function getRequestQueryParametersForServerlessTracking() {
+    const opts = getOpts();
+    return "ak=" + data.stApiKey + "&type=fb&pid=" + getPixelIds() + "&ed=" + getEventData() + (opts ? "&opt=" + opts : "");
+
+    function getPixelIds() {
+      return data.pixels.map(pixel => pixel.pixelId).join(",");
     }
 
-    function generateFbpCookie() {
-        // If there's no fbp cookie, we build it
-        // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
-        const generateRandom = require('generateRandom');
-        const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
+    function getEventData() {
+      let eventData = [{
+        event_name: data.event_name === 'customEvent' ? data.customEventName : data.event_name,
+        event_time: Math.floor(getTimestampMillis() / 1000),
+        user_data: {
+          em: data.em,
+          ph: data.ph,
+          ge: data.ge,
+          db: data.db,
+          ln: data.ln,
+          fn: data.fn,
+          ct: data.ct,
+          st: data.st,
+          zp: data.zp,
+          country: data.country,
+          external_id: data.external_id,
+          fbc: setOrGetFbcCookie(),
+          fbp: getCookieValues('_fbp').length > 0 ? getCookieValues('_fbp')[0] : generateFbpCookie(),
+          subscription_id: data.subscription_id,
+          lead_id: data.lead_id,
+          fb_login_id: data.fb_login_id
+        },
+        custom_data: {
+          value: data.value,
+          currency: data.currency,
+          content_name: data.content_name,
+          content_category: data.content_category,
+          content_ids: data.content_ids,
+          contents: data.contents,
+          content_type: data.content_type,
+          order_id: data.order_id,
+          predicted_ltv: data.predicted_ltv,
+          num_items: data.num_items,
+          search_string: data.search_string,
+          status: data.status,
+          delivery_category: data.delivery_category
+        },
+        event_source_url: getUrl(),
+        opt_out: data.opt_out,
+        event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
+        action_source: data.action_source,
+        data_processing_options: getDataProcessingOptions(),
+        data_processing_options_country: data.data_processing_options_country,
+        data_processing_options_state: data.data_processing_options_state
+      }];
 
-        setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
-
-        return cookieValue;
+      return encodeProperty({
+        data: eventData,
+        test_event_code: data.test_event_code
+      });
     }
 
-    function encodeProperty(prop) {
-        const encodeUriComponent = require('encodeUriComponent');
-        const JSON = require('JSON');
+    function getOpts() {
+      const hash = data.hashDataOnST;
+      const hashExternalId = data.hashExternalIdOnST;
 
-        switch (getType(prop)) {
-            case 'function':
-            case 'undefined':
-            case 'null':
-                return null;
-            default:
-                return encodeUriComponent(JSON.stringify(prop));
-        }
+      if (!hash && !hashExternalId) return undefined;
+
+      let opts = {};
+      if (hash) opts.hash = "1";
+      if (hashExternalId) opts.hasheid = "1";
+
+      return encodeProperty(opts);
     }
 
-    function handleCapiSuccessfullyFired() {
-        if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
-        data.gtmOnSuccess();
+    function getDataProcessingOptions() {
+      if (!data.data_processing_options) return undefined;
+      if (data.data_processing_options === 'emptyArray') return [];
+      return ['LDU'];
+    }
+  }
+
+  function hash(valueToHash) {
+    const makeString = require('makeString');
+
+    const sha256 = copyFromWindow('sha256');
+
+    if (!sha256) return valueToHash;
+
+    switch (getType(valueToHash)) {
+      case 'undefined':
+      case 'null':
+      case 'object':
+      case 'function':
+      case 'boolean':
+        return valueToHash;
+      case 'string':
+        return sha256(valueToHash.toLowerCase().trim());
+      case 'number':
+        return sha256(makeString(valueToHash));
+      case 'array':
+        return valueToHash.map(value => hash(value));
+      default:
+        return sha256(valueToHash);
+    }
+  }
+
+  function encodeProperty(prop) {
+    const encodeUriComponent = require('encodeUriComponent');
+    const JSON = require('JSON');
+
+    switch (getType(prop)) {
+      case 'function':
+      case 'undefined':
+      case 'null':
+        return null;
+      default:
+        return encodeUriComponent(JSON.stringify(prop));
+    }
+  }
+
+  function setOrGetFbcCookie() {
+    // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
+    const getQueryParameters = require('getQueryParameters');
+
+    let value;
+
+    if (getQueryParameters('fbclid', false)) {
+      value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid');
+      // If there's no Facebook pixel on the page that will
+      // create or update the _fbc cookie automatically, do it manually
+      let fbq = copyFromWindow('fbq');
+      if (!fbq) setCookie('_fbc', value, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
+    } else if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
+      // If there's an _fbc cookie and is not an empty string
+      value = getCookieValues('_fbc')[0];
+    } else {
+      value = undefined;
     }
 
-    function handleCapiUnsuccessfullyFired() {
-        if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
-        data.gtmOnFailure();
+    return value;
+  }
+
+  function generateFbpCookie() {
+    // If there's no fbp cookie, we build it
+    // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
+    const generateRandom = require('generateRandom');
+    const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
+
+    setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
+
+    return cookieValue;
+  }
+
+  function resetCookiesExpiration() {
+    // Facebook pixel's code resets expiration date of _fbc and _fbp cookies to 90 days on every event
+    // If user is sending only through CAPI, thus not sending event through pixel,
+    // we update the expiration date manually here
+    if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
+      const fbcValue = getCookieValues('_fbc')[0];
+      setCookie('_fbc', fbcValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
     }
 
-    function resetCookiesExpiration() {
-        // Facebook pixel's code resets expiration date of _fbc and _fbp cookies to 90 days on every event
-        // If user is sending only through CAPI, thus not sending event through pixel,
-        // we update the expiration date manually here
-        if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
-            const fbcValue = getCookieValues('_fbc')[0];
-            setCookie('_fbc', fbcValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
-        }
-
-        if (getCookieValues('_fbp').length > 0 && getCookieValues('_fbp')[0] !== '') {
-            const fbpValue = getCookieValues('_fbp')[0];
-            setCookie('_fbp', fbpValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
-        }
+    if (getCookieValues('_fbp').length > 0 && getCookieValues('_fbp')[0] !== '') {
+      const fbpValue = getCookieValues('_fbp')[0];
+      setCookie('_fbp', fbpValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
     }
+  }
+
+  function handleCapiSuccessfullyFired() {
+    if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
+    data.gtmOnSuccess();
+  }
+
+  function handleCapiUnsuccessfullyFired() {
+    if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
+    data.gtmOnFailure();
+  }
 }
 
 
@@ -1686,6 +1912,6 @@ scenarios: []
 
 ___NOTES___
 
-Version 0.6
+Version 1.0
 
 
