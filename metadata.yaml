@@ -24,8 +24,8 @@ versions:
       Improve tooltips and texts
   # Older versions
   - sha: 909ba8f81f735d3c642f515cf80c1f2ef8a06663
-      changeNotes: v0.6
-        Fix server events discarding falsy values (fixes geolocation LDU not being sent when set to 0)
+    changeNotes: v0.6
+      Fix server events discarding falsy values (fixes geolocation LDU not being sent when set to 0)
   - sha: c8742b33dad1b947176beba7fdb936c0d0f8e20d
     changeNotes: v0.5
       Add saving of _fbc cookie when there's no pixel basecode
