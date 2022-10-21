@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 7d89f3651759b891923ba91358a5a27f4d0e7212
+    changeNotes: v1.2
+      Add warning when Serverless Tracking API key field is empty
+  # Older versions
   - sha: 484007b764a8172f0cf78a2716dc5c480bb86357
     changeNotes: v1.1
       Add feature to add pixel IDs when setup is only CAPI + Serverless Tracking
-  # Older versions
   - sha: 7529edb60784474e7c3bfa0a396e2669c9f17e10
     changeNotes: v1.0
       Add support for Adsmurai Serverless Tracking (managed server solution for sending events through CAPI)
