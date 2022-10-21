@@ -293,7 +293,13 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "help": "Learn \u003ca href\u003d\"https://www.youtube.com/watch?v\u003dmwgh3Z_PUsc\"\u003ehere\u003c/a\u003e how to retrieve your Serverless Tracking API key. Requires a Serverless Tracking subscription (learn more \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehere\u003c/a\u003e)",
-        "valueHint": "Your Adsmurai Serverless Tracking API Key"
+        "valueHint": "Your Adsmurai Serverless Tracking API Key",
+        "valueValidators": [
+          {
+            "type": "NON_EMPTY",
+            "errorMessage": "Please, add your Serverless Tracking API key"
+          }
+        ]
       }
     ]
   },
@@ -1917,6 +1923,6 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.1
+Version 1.2
 
 
