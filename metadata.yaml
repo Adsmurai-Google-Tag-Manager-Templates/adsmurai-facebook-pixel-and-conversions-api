@@ -16,13 +16,16 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 484007b764a8172f0cf78a2716dc5c480bb86357
+    changeNotes: v1.1
+      Add feature to add pixel IDs when setup is only CAPI + Serverless Tracking
+  # Older versions
   - sha: 7529edb60784474e7c3bfa0a396e2669c9f17e10
     changeNotes: v1.0
       Add support for Adsmurai Serverless Tracking (managed server solution for sending events through CAPI)
       Add support for disabledPushState
       Fix pixel events discarding falsy values
       Improve tooltips and texts
-  # Older versions
   - sha: 909ba8f81f735d3c642f515cf80c1f2ef8a06663
     changeNotes: v0.6
       Fix server events discarding falsy values (fixes geolocation LDU not being sent when set to 0)
