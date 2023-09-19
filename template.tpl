@@ -13,7 +13,7 @@ ___INFO___
   "id": "cvt_temp_public_id",
   "version": 1,
   "securityGroups": [],
-  "displayName": "Adsmurai Facebook Pixel \u0026 Conversions API (CAPI)",
+  "displayName": "Adsmurai Facebook and TikTok Pixel \u0026 Conversions API (CAPI)",
   "categories": [
     "ADVERTISING",
     "CONVERSIONS",
@@ -24,7 +24,7 @@ ___INFO___
     "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
   },
-  "description": "This tag helps you to send event data to Facebook via conventional pixel and via Conversions API.",
+  "description": "This tag helps you to send event data to Facebook & TikTok via conventional pixel and via Conversions API.",
   "containerContexts": [
     "WEB"
   ]
@@ -159,7 +159,7 @@ ___TEMPLATE_PARAMETERS___
         "selectItems": [
           {
             "value": "onlyPixel",
-            "displayValue": "Only Facebook pixel for web"
+            "displayValue": "Only pixel for web"
           },
           {
             "value": "onlyCapi",
@@ -167,31 +167,27 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "value": "both",
-            "displayValue": "Both Facebook pixel for web \u0026 Conversions API"
+            "displayValue": "Both pixel for web \u0026 Conversions API"
           }
         ],
         "simpleValueType": true,
         "alwaysInSummary": true,
         "subParams": [],
-        "help": "Choose if you want to send this event only through Facebook pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up a server if you plan to use Conversions API. If you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
+        "help": "Choose if you want to send this event only through pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up a server if you plan to use Conversions API. If you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
         "defaultValue": "both"
       },
       {
         "type": "SIMPLE_TABLE",
         "name": "pixels",
-        "displayName": "Pixel(s)",
+        "displayName": "Facebook Pixel(s)",
         "simpleTableColumns": [
           {
             "defaultValue": "",
-            "displayName": "Pixel ID",
+            "displayName": "Facebook Pixel ID",
             "name": "pixelId",
             "type": "TEXT",
             "isUnique": true,
             "valueValidators": [
-              {
-                "type": "NON_EMPTY",
-                "errorMessage": "Please, add a valid pixel ID"
-              },
               {
                 "type": "POSITIVE_NUMBER",
                 "errorMessage": "Please, add a valid pixel ID"
@@ -219,10 +215,91 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "tiktok_pixels",
+        "displayName": "TikTok Pixel(s)",
+        "simpleTableColumns": [
           {
-            "type": "NON_EMPTY",
-            "errorMessage": "Please, add at least one pixel ID"
+            "defaultValue": "",
+            "displayName": "TikTok Pixel ID",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
           }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "google_pixels",
+        "displayName": "Google Ads Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Google Ads conversion ID + label",
+            "valueHint": "Ex: AW-857837465656/h3fawt68rjk",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+              {
+                "type": "REGEX",
+                "args": [
+                  "AW-\\d+\/[a-zA-Z0-9_]+"
+                ],
+                "errorMessage": "the format should be like \"AW-857837465656/h3fawt68rjk\"",
+                "enablingConditions": []
+              }
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
         ],
         "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
@@ -550,7 +627,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "test_event_code",
-        "displayName": "Test event code (test_event_code)",
+        "displayName": "FB Test event code (test_event_code)",
         "simpleValueType": true,
         "enablingConditions": [
           {
@@ -562,11 +639,25 @@ ___TEMPLATE_PARAMETERS___
         "help": "Code used to verify that your server events are received correctly by Facebook. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://developers.facebook.com/docs/marketing-api/conversions-api/using-the-api#testEvents\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
       },
       {
+        "type": "TEXT",
+        "name": "tiktok_test_event_code",
+        "displayName": "Tiktok Test event code (test_event_code)",
+        "simpleValueType": true,
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Code used to verify that your server events are received correctly by Tiktok. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://ads.tiktok.com/help/article/test-tiktok-pixel-events-video-walkthrough?lang=en\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
+      },
+      {
         "type": "CHECKBOX",
         "name": "hashData",
         "checkboxText": "Hash user data (read tooltip before checking this)",
         "simpleValueType": true,
-        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want this tag to hash it for you. Don\u0027t check this box if your data is already hashed or if you plan to hash the data on the server.\n\u003cbr\u003e\n\u003cbr\u003e\n\u003cb\u003eImportant\u003c/b\u003e: checking this will load \u003ca href\u003d\"https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js\"\u003ethis third-party Javascript library\u003c/a\u003e in order to be able to hash the user data for you. Injecting code from third-party sources may introduce unexpected behaviour on your website or a way to attack your site. While this library is generally considered safe, the developers of this tag won\u0027t be responsible of any unwanted output resulting from injecting the library and recommend, whenever possible, to hash the data yourself or on the server.",
+        "help": "Hashing user data is mandatory. Check this box if you're not hashing it, so we can do it for you.",
         "subParams": [
           {
             "type": "CHECKBOX",
@@ -756,7 +847,7 @@ ___TEMPLATE_PARAMETERS___
           }
         ],
         "simpleValueType": true,
-        "help": "This field allows you to specify where your conversions occurred. Knowing where your events took place helps ensure your ads go to the right people. The values you can send are as follows:\n\u003cul\u003e\n\u003cli\u003eemail: Conversion happened over email.\u003c/li\u003e\n\u003cli\u003ewebsite: Conversion was made on your website.\u003c/li\u003e\n\u003cli\u003eapp: Conversion was made using your app.\u003c/li\u003e\n\u003cli\u003ephone_call: Conversion was made over the phone.\u003c/li\u003e\n\u003cli\u003echat: Conversion was made via a messaging app, SMS, or online messaging feature.\u003c/li\u003e\n\u003cli\u003ephysical_store: Conversion was made in person at your physical store.\u003c/li\u003e\n\u003cli\u003esystem_generated: Conversion happened automatically, for example, a subscription renewal that’s set on auto-pay each month.\u003c/li\u003e\n\u003cli\u003eother: Conversion happened in a way that is not listed.\u003c/li\u003e\n\u003c/ul\u003e\u003cbr\u003e\u003cb\u003eAll events sent through Conversions API must be sent with an action source parameter.\u003c/b\u003e",
+        "help": "This field allows you to specify where your conversions occurred. Knowing where your events took place helps ensure your ads go to the right people. The values you can send are as follows:\n\u003cul\u003e\n\u003cli\u003eemail: Conversion happened over email.\u003c/li\u003e\n\u003cli\u003ewebsite: Conversion was made on your website.\u003c/li\u003e\n\u003cli\u003eapp: Conversion was made using your app.\u003c/li\u003e\n\u003cli\u003ephone_call: Conversion was made over the phone.\u003c/li\u003e\n\u003cli\u003echat: Conversion was made via a messaging app, SMS, or online messaging feature.\u003c/li\u003e\n\u003cli\u003ephysical_store: Conversion was made in person at your physical store.\u003c/li\u003e\n\u003cli\u003esystem_generated: Conversion happened automatically, for example, a subscription renewal thatâ€™s set on auto-pay each month.\u003c/li\u003e\n\u003cli\u003eother: Conversion happened in a way that is not listed.\u003c/li\u003e\n\u003c/ul\u003e\u003cbr\u003e\u003cb\u003eAll events sent through Conversions API must be sent with an action source parameter.\u003c/b\u003e",
         "defaultValue": "website"
       },
       {
@@ -963,17 +1054,34 @@ if (!data.event_name) {
   return;
 }
 
+const log = require('logToConsole');
 const copyFromWindow = require('copyFromWindow');
 const getType = require('getType');
 const injectScript = require('injectScript');
 const getCookieValues = require('getCookieValues');
 const setCookie = require('setCookie');
 const getTimestampMillis = require('getTimestampMillis');
+const callInWindow = require('callInWindow');
+const getQueryParameters = require('getQueryParameters');
+const getReferrerUrl = require('getReferrerUrl');
+const templateVersion = 1.3;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
+let providersToRun = countConfiguredProviders();
+let executedProviders = 0;
 
 if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
-  firePixelEvent();
+  if (data.pixels) {
+    firePixelEvent();
+  }
+
+  if (data.tiktok_pixels) {
+    fireTikTokPixel();
+  }
+
+  if (data.google_pixels) {
+    fireGooglePixel();
+  }
 }
 
 if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
@@ -992,6 +1100,217 @@ if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
   }
 }
 
+function countConfiguredProviders () {
+  let count = 0;
+
+  if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
+    if (data.pixels) {
+      count++;
+    }
+
+    if (data.tiktok_pixels) {
+      count++;
+    }
+
+    if (data.google_pixels) {
+      count++;
+    }
+  }
+
+  if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
+    count++;
+  }
+
+  return count;
+}
+
+function triggerSuccess () {
+  executedProviders++;
+
+  if (executedProviders === providersToRun) {
+    data.gtmOnSuccess();
+  }
+}
+
+// https://www.facebook.com/business/help/402791146561655?id=1205376682832142
+// https://ads.tiktok.com/gateway/docs/index?identify_key=2b9b4278e47b275f36e7c39a4af4ba067d088e031d5f5fe45d381559ac89ba48&language=ENGLISH&doc_id=1701890973258754#item-link-What%20are%20event%20codes?
+function getEventName (pixelType) {
+  let eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
+  const nameConventions = {
+    tiktok: {
+      "Purchase": "CompletePayment"
+    },
+    facebook: {
+      "CompletePayment": "Purchase",
+      "PlaceAnOrder": "Purchase"
+    }
+  };
+
+  if (getType(nameConventions[pixelType]) === "undefined" ||
+    getType(nameConventions[pixelType][eventName]) === "undefined"
+  ) {
+    return eventName;
+  }
+
+  return nameConventions[pixelType][eventName];
+}
+
+function getPixelEventParameters(pixelType) {
+  let eventParameters = {};
+
+  const fieldsToAdd = ['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
+    'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'];
+
+  fieldsToAdd.forEach(field => {
+    if (getType(data[field]) === "undefined" || getType(data[field]) === 'function') return;
+
+    if (field === 'customProperties') {
+      data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
+    } else {
+      eventParameters[field] = data[field];
+    }
+  });
+
+	switch (pixelType) {
+		case "tiktok":
+			eventParameters = setupTiktokEventData(eventParameters);
+			break;
+    case "facebook":
+      eventParameters = setupFacebookEventData(eventParameters);
+      break;
+	}
+
+	return eventParameters;
+}
+
+function setupTiktokEventData(rawEvent) {
+	if (getType(data.contents) !== "undefined") {
+		let products = [];
+
+		data.contents.forEach((product) => {
+			products.push({
+				content_id: product.id,
+				price: product.item_price,
+				quantity: product.quantity,
+				content_type: product.content_type ? product.content_type : rawEvent.content_type,
+			});
+		});
+		rawEvent.contents = products;
+	}
+	return rawEvent;
+}
+function setupFacebookEventData(rawEvent) {
+  if (getType(data.contents) !== "undefined") {
+    let products = [];
+
+    data.contents.forEach((product) => {
+      products.push({
+        id: product.id,
+        item_price: product.item_price,
+        quantity: product.quantity,
+        delivery_category: product.delivery_category,
+      });
+    });
+    rawEvent.contents = products;
+  }
+  return rawEvent;
+}
+
+function injectSDK (callback) {
+
+  const adsmuraiSDKScriptUrl = 'https://cdn-st.adsmurai.com/sdk.js?tv='+ templateVersion;
+  injectScript(
+    adsmuraiSDKScriptUrl,
+    callback,
+    data.gtmOnFailure,
+    adsmuraiSDKScriptUrl
+  );
+}
+
+function fireGooglePixel () {
+
+  injectSDK(() => {
+    data.google_pixels.forEach(pixel => {
+      // event', 'conversion', {send_to: "<conversion_id>/<conversion_label>, value: 1.0, currency: "USD", transaction_id: 1234
+      callInWindow('adsmuraiSDK.pushEvent', 'event', 'conversion', {
+        'send_to': pixel.pixelId,
+        value: data.value,
+        currency: data.currency,
+        transaction_id: data.order_id
+      });
+    });
+
+
+    triggerSuccess();
+  });
+}
+
+
+function fireTikTokPixel () {
+  const setInWindow = require('setInWindow');
+
+  const eventName = getEventName("tiktok");
+  const ttq = getTtq();
+
+  function handlePixelSuccessfullyFired() {
+    triggerSuccess();
+
+    const ttq = getTtq();
+    const initIds = copyFromWindow('_ttq_gtm_ids') || [];
+
+    data.tiktok_pixels.forEach((pixel, i) => {
+      // Initialize each ID if not done already
+      if (initIds.indexOf(pixel.pixelId) === -1) {
+        ttq.load(pixel.pixelId);
+        initIds.push(pixel.pixelId);
+        setInWindow('_ttq_gtm_ids', initIds, true);
+      }
+
+      // PageView is always triggered by tiktok on the first pixel
+      if (eventName === "PageView" && i === 0) {
+        return;
+      }
+
+      // Call the fbq() method with the parameters defined earlier
+      // Add event_id in case it's set up
+
+      if (data.event_id) {
+        ttq.track(eventName, getPixelEventParameters("tiktok"), {
+          event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
+          pixel_code: pixel.pixelId,
+        });
+      } else {
+        ttq.track(eventName, getPixelEventParameters("tiktok"), {
+          pixel_code: pixel.pixelId,
+        });
+      }
+    });
+  }
+
+  if (ttq) { // they may already be loading the sdk from elsewhere
+    handlePixelSuccessfullyFired();
+  } else {
+    injectTiktokSDK(handlePixelSuccessfullyFired);
+  }
+
+  function getTtq() {
+    return copyFromWindow('ttq');
+  }
+}
+
+function injectTiktokSDK (onSuccess) {
+  function handlePixelUnsuccessfullyFired() {
+    if (data.fireMethod === 'onlyPixel') {
+      data.gtmOnFailure();
+    }
+  }
+
+  injectScript('https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=' + data.tiktok_pixels[0].pixelId,
+    onSuccess,
+    handlePixelUnsuccessfullyFired,
+    'tiktokPixel');
+}
+
 function firePixelEvent() {
   const setInWindow = require('setInWindow');
 
@@ -999,7 +1318,7 @@ function firePixelEvent() {
 
   // Build the fbq() command arguments
   const command = data.event_name !== 'customEvent' ? 'trackSingle' : 'trackSingleCustom';
-  const eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
+  const eventName = getEventName("facebook");
 
   // Handle consent mode
   if (data.consentMode) {
@@ -1012,7 +1331,7 @@ function firePixelEvent() {
   } else if (data.data_processing_options === 'emptyArray') {
     fbq('dataProcessingOptions', []);
   }
-  
+
   // Handle disablePushState settings
   if (data.disablePushState) {
     fbq.disablePushState = true;
@@ -1037,14 +1356,14 @@ function firePixelEvent() {
     // Call the fbq() method with the parameters defined earlier
     // Add event_id in case it's set up
     if (data.event_id) {
-      fbq(command, pixel.pixelId, eventName, getPixelEventParameters(), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("facebook"), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
     } else {
-      fbq(command, pixel.pixelId, eventName, getPixelEventParameters());
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("facebook"));
     }
   });
 
   injectScript('https://connect.facebook.net/en_US/fbevents.js',
-    handlePixelSuccessfullyFired,
+    triggerSuccess,
     handlePixelUnsuccessfullyFired,
     'fbPixel');
 
@@ -1088,37 +1407,14 @@ function firePixelEvent() {
     return userData;
   }
 
-  function getPixelEventParameters() {
-    let eventParameters = {};
-
-    const fieldsToAdd = ['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
-      'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'];
-
-    fieldsToAdd.forEach(field => {
-      if (getType(data[field]) === "undefined" || getType(data[field]) === 'function') return;
-
-      if (field === 'customProperties') {
-        data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
-      } else {
-        eventParameters[field] = data[field];
-      }
-    });
-
-    return eventParameters;
-  }
-
-  function handlePixelSuccessfullyFired() {
-    if (data.fireMethod === 'onlyPixel') {
-      data.gtmOnSuccess();
-    }
-  }
-
   function handlePixelUnsuccessfullyFired() {
     if (data.fireMethod === 'onlyPixel') {
       data.gtmOnFailure();
     }
   }
 }
+
+
 
 function fireCapiEvent() {
   const sendPixel = require('sendPixel');
@@ -1129,9 +1425,135 @@ function fireCapiEvent() {
     const url = data.serverGtmUrl + '?' + getRequestQueryParametersForOwnServer();
     sendPixel(url, handleCapiSuccessfullyFired, handleCapiUnsuccessfullyFired);
   } else {
-    const stUrl = "https://ev.st.adsmurai.com";
-    const url = stUrl + '/v1.0?' + getRequestQueryParametersForServerlessTracking();
-    sendPixel(url, handleCapiSuccessfullyFired, handleCapiUnsuccessfullyFired);
+    injectSDK(afterInjection);
+  }
+
+  function getOpts() {
+    const hash = data.hashDataOnST;
+    const hashExternalId = data.hashExternalIdOnST;
+
+    if (!hash && !hashExternalId) return undefined;
+
+    let opts = {};
+    if (hash) opts.hash = "1";
+    if (hashExternalId) opts.hasheid = "1";
+
+    return encodeProperty(opts);
+  }
+
+  let retries = 0;
+
+  function retryCookies () {
+    callInWindow('adsmuraiSDK.setTimeout', () => {
+      if (getCookieValues('_ttp').length === 0 && retries < 20) {
+        retries++;
+        retryCookies();
+      } else {
+        sendPostRequest();
+      }
+    }, 50);
+  }
+
+  function afterInjection () {
+    if (data.tiktok_pixels && getCookieValues('_ttp').length === 0) {
+      injectTiktokSDK(function() {
+        // tiktok cookie cant be manually generated, but we can trigger its creation
+        if (getCookieValues('_ttp').length === 0) {
+          let ttq = copyFromWindow('ttq');
+          ttq.enableCookie();
+          retryCookies();
+        } else {
+          sendPostRequest();
+        }
+      });
+    } else {
+      sendPostRequest();
+    }
+  }
+
+  function sendPostRequest () {
+    const callInWindow = require('callInWindow');
+    const opts = getOpts();
+
+    let body = {
+      pixels: getGroupedPixels(),
+      data: getEventData(),
+      templateVersion: templateVersion.toString()
+    };
+    if (opts) {
+      body.opts = opts;
+    }
+
+    callInWindow('adsmuraiSDK.post', data.stApiKey, body);
+
+    handleCapiSuccessfullyFired();
+  }
+
+  function getEventData() {
+    const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
+
+    let eventData = [{
+      event_name: data.event_name === 'customEvent' ? data.customEventName : data.event_name,
+      event_time: Math.floor(getTimestampMillis() / 1000),
+      user_data: {
+        em: data.em,
+        ph: data.ph,
+        ge: data.ge,
+        db: data.db,
+        ln: data.ln,
+        fn: data.fn,
+        ct: data.ct,
+        st: data.st,
+        zp: data.zp,
+        country: data.country,
+        external_id: data.external_id,
+        fbc: setOrGetFbcCookie(),
+        fbp: getCookieValues('_fbp').length > 0 ? getCookieValues('_fbp')[0] : generateFbpCookie(),  // fb tracking cookie
+        ttp: getCookieValues('_ttp').length > 0 ? getCookieValues('_ttp')[0] : null,  // tiktok tracking cookie
+        ggau: getCookieValues('_gcl_au').length > 0 ? getCookieValues('_gcl_au')[0] : null,  // google tracking cookie
+        ttclid: getQueryParameters("ttclid"), // tiktok tracking param
+        gclid: getQueryParameters("gclid"), // google tracking param
+        wbraid: getQueryParameters("wbraid"), // google tracking param
+        gbraid: getQueryParameters("gbraid"), // google tracking param
+        subscription_id: data.subscription_id,
+        lead_id: data.lead_id,
+        fb_login_id: data.fb_login_id,
+        platform: platformSpecs.platform,
+        screen: platformSpecs.screen,
+        bg: platformSpecs.bg,
+        tz: platformSpecs.tz,
+      },
+      container_ids: platformSpecs.containers,
+      custom_data: {
+        value: data.value,
+        currency: data.currency,
+        content_name: data.content_name,
+        content_category: data.content_category,
+        content_ids: data.content_ids,
+        contents: data.contents,
+        content_type: data.content_type,
+        order_id: data.order_id,
+        predicted_ltv: data.predicted_ltv,
+        num_items: data.num_items,
+        search_string: data.search_string,
+        status: data.status,
+        delivery_category: data.delivery_category
+      },
+      event_source_url: getUrl(),
+      referrer: getReferrerUrl(),
+      opt_out: data.opt_out,
+      event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
+      action_source: data.action_source,
+      data_processing_options: getDataProcessingOptions(),
+      data_processing_options_country: data.data_processing_options_country,
+      data_processing_options_state: data.data_processing_options_state
+    }];
+
+    return {
+      data: eventData,
+      test_event_code: data.test_event_code,
+      tiktok_test_event_code: data.tiktok_test_event_code,
+    };
   }
 
   function getRequestQueryParametersForOwnServer() {
@@ -1204,84 +1626,43 @@ function fireCapiEvent() {
     return url.slice(0, -1); // slice() removes the last &
   }
 
-  function getRequestQueryParametersForServerlessTracking() {
-    const opts = getOpts();
-    return "ak=" + data.stApiKey + "&type=fb&pid=" + getPixelIds() + "&ed=" + getEventData() + (opts ? "&opt=" + opts : "");
+  function getGroupedPixels () {
+    let pixels = [];
 
-    function getPixelIds() {
-      return data.pixels.map(pixel => pixel.pixelId).join(",");
-    }
-
-    function getEventData() {
-      let eventData = [{
-        event_name: data.event_name === 'customEvent' ? data.customEventName : data.event_name,
-        event_time: Math.floor(getTimestampMillis() / 1000),
-        user_data: {
-          em: data.em,
-          ph: data.ph,
-          ge: data.ge,
-          db: data.db,
-          ln: data.ln,
-          fn: data.fn,
-          ct: data.ct,
-          st: data.st,
-          zp: data.zp,
-          country: data.country,
-          external_id: data.external_id,
-          fbc: setOrGetFbcCookie(),
-          fbp: getCookieValues('_fbp').length > 0 ? getCookieValues('_fbp')[0] : generateFbpCookie(),
-          subscription_id: data.subscription_id,
-          lead_id: data.lead_id,
-          fb_login_id: data.fb_login_id
-        },
-        custom_data: {
-          value: data.value,
-          currency: data.currency,
-          content_name: data.content_name,
-          content_category: data.content_category,
-          content_ids: data.content_ids,
-          contents: data.contents,
-          content_type: data.content_type,
-          order_id: data.order_id,
-          predicted_ltv: data.predicted_ltv,
-          num_items: data.num_items,
-          search_string: data.search_string,
-          status: data.status,
-          delivery_category: data.delivery_category
-        },
-        event_source_url: getUrl(),
-        opt_out: data.opt_out,
-        event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
-        action_source: data.action_source,
-        data_processing_options: getDataProcessingOptions(),
-        data_processing_options_country: data.data_processing_options_country,
-        data_processing_options_state: data.data_processing_options_state
-      }];
-
-      return encodeProperty({
-        data: eventData,
-        test_event_code: data.test_event_code
+    if (data.pixels) {
+      data.pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "fb"
+        });
       });
     }
 
-    function getOpts() {
-      const hash = data.hashDataOnST;
-      const hashExternalId = data.hashExternalIdOnST;
-
-      if (!hash && !hashExternalId) return undefined;
-
-      let opts = {};
-      if (hash) opts.hash = "1";
-      if (hashExternalId) opts.hasheid = "1";
-
-      return encodeProperty(opts);
+    if (data.tiktok_pixels) {
+      data.tiktok_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "tiktok"
+        });
+      });
     }
 
-    function getDataProcessingOptions() {
-      if (!data.data_processing_options) return undefined;
-      if (data.data_processing_options === 'emptyArray') return [];
-      return ['LDU'];
+    if (data.google_pixels) {
+      data.google_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "google"
+        });
+      });
     }
+
+    return pixels;
+  }
+
+  function getDataProcessingOptions() {
+    if (!data.data_processing_options) return undefined;
+    if (data.data_processing_options === 'emptyArray') return [];
+    return ['LDU'];
   }
 
   function hash(valueToHash) {
@@ -1369,11 +1750,14 @@ function fireCapiEvent() {
       const fbpValue = getCookieValues('_fbp')[0];
       setCookie('_fbp', fbpValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
     }
+
+    // tiktok leaves them for 13 months
+    // https://ads.tiktok.com/help/article/using-cookies-with-tiktok-pixel?redirected=2
   }
 
   function handleCapiSuccessfullyFired() {
     if (data.fireMethod === 'onlyCapi') resetCookiesExpiration();
-    data.gtmOnSuccess();
+    triggerSuccess();
   }
 
   function handleCapiUnsuccessfullyFired() {
@@ -1421,6 +1805,84 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
+                    "string": "_ttq_gtm_ids"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "ttq"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
                     "string": "fbq"
                   },
                   {
@@ -1434,6 +1896,123 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.post"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.pushEvent"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   }
                 ]
               },
@@ -1655,6 +2234,45 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
+                    "string": "dataLayer"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
                     "string": "sha256"
                   },
                   {
@@ -1668,6 +2286,162 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.fetch"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.setTimeout"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.log"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.getPlatformSpecs"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   }
                 ]
               }
@@ -1700,6 +2474,14 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"
+              },
+              {
+                "type": 1,
+                "string": "https://analytics.tiktok.com/"
+              },
+              {
+                "type": 1,
+                "string": "https://cdn-st.adsmurai.com/"
               }
             ]
           }
@@ -1737,6 +2519,14 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "_fbp"
+              },
+              {
+                "type": 1,
+                "string": "_ttp"
+              },
+              {
+                "type": 1,
+                "string": "_gcl_au"
               }
             ]
           }
@@ -1912,6 +2702,55 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "get_referrer",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "urlParts",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        },
+        {
+          "key": "queriesAllowed",
+          "value": {
+            "type": 1,
+            "string": "any"
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "logging",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "environments",
+          "value": {
+            "type": 1,
+            "string": "debug"
+          }
+        }
+      ]
+    },
+    "clientAnnotations": {
+      "isEditedByUser": true
+    },
+    "isRequired": true
   }
 ]
 
@@ -1923,6 +2762,5 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.2
-
+Version 1.3
 
