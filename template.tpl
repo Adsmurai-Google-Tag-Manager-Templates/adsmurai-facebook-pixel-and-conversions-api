@@ -387,6 +387,60 @@ ___TEMPLATE_PARAMETERS___
     "groupStyle": "ZIPPY_OPEN_ON_PARAM",
     "subParams": [
       {
+        "type": "SIMPLE_TABLE",
+        "name": "useEcommerceData",
+        "displayName": "Use Ecommerce data",
+        "simpleTableColumns": [
+          {
+            "type": "SELECT",
+            "name": "provider",
+            "displayName": "Provider",
+            "macrosInSelect": false,
+            "selectItems": [
+              {
+                "value": "all",
+                "displayValue": "All"
+              },
+              {
+                "value": "fb",
+                "displayValue": "Facebook"
+              },
+              {
+                "value": "tiktok",
+                "displayValue": "TikTok"
+              }
+            ],
+            "simpleValueType": true,
+            "alwaysInSummary": true,
+            "subParams": [],
+            "help": "Choose if you want to send this property to be set for all providers or only for a specific one",
+            "defaultValue": "all"
+          },
+          {
+            "type": "SELECT",
+            "name": "enabled",
+            "displayName": "Use Ecommerce data",
+            "macrosInSelect": false,
+            "selectItems": [
+              {
+                "value": true,
+                "displayValue": "Yes"
+              },
+              {
+                "value": false,
+                "displayValue": "No"
+              }
+            ],
+            "simpleValueType": true,
+            "alwaysInSummary": true,
+            "subParams": [],
+            "help": "Use Ecommerce/Enhanced Ecommerce data sent to dataLayer as base info for this provider.",
+            "defaultValue": true
+          }
+        ],
+        "help": "Use Ecommerce/Enhanced Ecommerce data sent to dataLayer as base info for the parameters below. Any param can still be overwritten by filling it below."
+      },
+      {
         "type": "TEXT",
         "name": "content_name",
         "displayName": "Content name (content_name)",
@@ -502,11 +556,36 @@ ___TEMPLATE_PARAMETERS___
         "displayName": "Custom properties",
         "simpleTableColumns": [
           {
+            "type": "SELECT",
+            "name": "provider",
+            "displayName": "Provider",
+            "macrosInSelect": false,
+            "selectItems": [
+              {
+                "value": "all",
+                "displayValue": "All"
+              },
+              {
+                "value": "fb",
+                "displayValue": "Facebook"
+              },
+              {
+                "value": "tiktok",
+                "displayValue": "TikTok"
+              }
+            ],
+            "simpleValueType": true,
+            "alwaysInSummary": true,
+            "subParams": [],
+            "help": "Choose if you want to send this property to be set for all providers or only for a specific one",
+            "defaultValue": "all"
+          },
+          {
             "defaultValue": "",
             "displayName": "Property name",
             "name": "propertyName",
             "type": "TEXT",
-            "isUnique": true
+            "isUnique": false
           },
           {
             "defaultValue": "",
@@ -1064,40 +1143,48 @@ const getTimestampMillis = require('getTimestampMillis');
 const callInWindow = require('callInWindow');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerUrl = require('getReferrerUrl');
-const templateVersion = 1.3;
+const templateVersion = 1.4;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
 let executedProviders = 0;
 
-if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
-  if (data.pixels) {
-    firePixelEvent();
+function onFire () {
+  if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
+    if (data.pixels) {
+      firePixelEvent();
+    }
+
+    if (data.tiktok_pixels) {
+      fireTikTokPixel();
+    }
+
+    if (data.google_pixels) {
+      fireGooglePixel();
+    }
   }
 
-  if (data.tiktok_pixels) {
-    fireTikTokPixel();
-  }
+  if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
+    const userForgotOwnServerUrl = data.serverSetup === "ownServer" && !data.serverGtmUrl;
+    const userForgotSTApiKey = data.serverSetup === "serverlessTracking" && !data.stApiKey;
 
-  if (data.google_pixels) {
-    fireGooglePixel();
+    if (userForgotOwnServerUrl || userForgotSTApiKey) {
+      data.gtmOnSuccess();
+      return;
+    }
+
+    if (data.hashData) {
+      injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
+    } else {
+      fireCapiEvent();
+    }
   }
 }
 
-if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
-  const userForgotOwnServerUrl = data.serverSetup === "ownServer" && !data.serverGtmUrl;
-  const userForgotSTApiKey = data.serverSetup === "serverlessTracking" && !data.stApiKey;
-
-  if (userForgotOwnServerUrl || userForgotSTApiKey) {
-    data.gtmOnSuccess();
-    return;
-  }
-
-  if (data.hashData) {
-    injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
-  } else {
-    fireCapiEvent();
-  }
+if (data.useEcommerceData) {
+  injectSDK(onFire);
+} else {
+  onFire();
 }
 
 function countConfiguredProviders () {
@@ -1155,27 +1242,148 @@ function getEventName (pixelType) {
   return nameConventions[pixelType][eventName];
 }
 
-function getPixelEventParameters(pixelType) {
-  let eventParameters = {};
+const translateFields = (customData, ecommerce, fields) => {
+  const Object = require('Object');
 
-  const fieldsToAdd = ['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
-    'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'];
+  for(const fieldName of Object.keys(fields)) {
+    const translatedField = fields[fieldName];
 
-  fieldsToAdd.forEach(field => {
-    if (getType(data[field]) === "undefined" || getType(data[field]) === 'function') return;
-
-    if (field === 'customProperties') {
-      data[field].forEach(property => eventParameters[property.propertyName] = property.propertyValue);
-    } else {
-      eventParameters[field] = data[field];
+    if (getType(ecommerce[fieldName]) !== "undefined") {
+      customData[translatedField] = ecommerce[fieldName];
     }
-  });
+  }
+  return customData;
+};
+
+function getEcommerceData () {
+  const makeNumber = require('makeNumber');
+  let ecommerce = {};
+  let customData = {};
+  const dataLayer = callInWindow('adsmuraiSDK.getFromWindow', "dataLayer");
+
+  if (!dataLayer || getType(dataLayer) !== "array") {
+    return customData;
+  }
+
+  for (const event of dataLayer) {
+    if (getType(event) !== "object") {
+      continue;
+    }
+
+    if (getType(event.item_name) !== "undefined") {
+      ecommerce = event;
+      customData.num_items = 1;
+      customData.content_type = 'product';
+      customData = translateFields(customData, ecommerce, {
+        currency: "currency",
+        item_name: "content_name",
+        price: "value",
+        item_category: "content_category",
+      });
+      if (getType(ecommerce.item_id) !== "undefined") {
+        customData.content_ids = [ecommerce.item_id];
+        customData.contents = [
+          translateFields({}, ecommerce, {
+            item_id: "id",
+            price: "item_price",
+          })
+        ];
+      }
+      break;
+    } else if (getType(event[2]) === "object" && getType(event[2].items) === "array") {
+      ecommerce = event[2];
+      customData.num_items = ecommerce.items.length;
+      customData.content_type = ecommerce.items.length > 1 ? 'product_group' : 'product';
+
+      if (ecommerce.items.length === 1 && getType(ecommerce.items[0].item_name) !== "undefined") {
+        customData.content_name = ecommerce.items[0].item_name;
+      }
+
+      customData = translateFields(customData, ecommerce, {
+        currency: "currency",
+        value: "value",
+      });
+      customData.content_ids = [];
+      customData.contents = [];
+      let price = 0;
+      for (const item of ecommerce.items) {
+        const id = getType(item.id) !== "undefined" ? item.id : item.item_id;
+        customData.content_ids.push(id);
+        const summary = translateFields({
+          id: id
+        }, item, {
+          price: "item_price",
+          quantity: "quantity",
+        });
+        customData.contents.push(summary);
+        if (summary.item_price) {
+          price += makeNumber(summary.item_price);
+        }
+      }
+
+      if (!customData.value && price > 0) {
+        customData.value = price;
+      }
+
+      if (customData.num_items > 0 && getType(customData.currency) === "undefined" && getType(ecommerce.items[0].currency) !== "undefined") {
+        customData.currency = ecommerce.items[0].currency;
+      }
+      if (customData.num_items === 1 && getType(ecommerce.items[0].item_name) !== "undefined") {
+        customData.content_name = ecommerce.items[0].item_name;
+      }
+      break;
+    } else if (getType(event.ecommerce) === "object" && (getType(event.ecommerce.detail) === "object" || getType(event.ecommerce.items) === "array" )) {
+      ecommerce = getType(event.ecommerce.detail) === "object" ? event.ecommerce.detail.products : event.ecommerce.items;
+      customData.num_items = ecommerce.length;
+      customData.content_type = ecommerce.length > 1 ? 'product_group' : 'product';
+      customData.content_ids = [];
+      customData.contents = [];
+      let price = 0;
+      for (const item of ecommerce) {
+        const itemId = item.id ? item.id : item.item_id;
+        customData.content_ids.push(itemId);
+        const summary = translateFields({
+          id: itemId
+        }, item, {
+          price: "item_price",
+          quantity: "quantity",
+        });
+        customData.contents.push(summary);
+
+        if (summary.item_price) {
+          price += makeNumber(summary.item_price);
+        }
+      }
+
+      if (price > 0) {
+        customData.value = price;
+      }
+      if (event.ecommerce.currency) {
+        customData.currency = event.ecommerce.currency;
+      }
+      if (customData.num_items > 0 && getType(customData.currency) === "undefined" && getType(ecommerce[0].currency) !== "undefined") {
+        customData.currency = ecommerce[0].currency;
+      }
+      if (customData.num_items === 1 && getType(ecommerce[0].name) !== "undefined") {
+        customData.content_name = ecommerce[0].name;
+      }
+      break;
+    }
+  }
+
+  return customData;
+}
+
+
+function getPixelEventParameters(pixelType) {
+  let eventParameters = getCustomData(['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
+    'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'], pixelType);
 
 	switch (pixelType) {
 		case "tiktok":
 			eventParameters = setupTiktokEventData(eventParameters);
 			break;
-    case "facebook":
+    case "fb": // must be fb to match the pixelType
       eventParameters = setupFacebookEventData(eventParameters);
       break;
 	}
@@ -1218,7 +1426,7 @@ function setupFacebookEventData(rawEvent) {
 
 function injectSDK (callback) {
 
-  const adsmuraiSDKScriptUrl = 'https://cdn-st.adsmurai.com/sdk.js?tv='+ templateVersion;
+  const adsmuraiSDKScriptUrl = 'https://cdn-st.adsmurai.com/sdk.js?tv=' + templateVersion;
   injectScript(
     adsmuraiSDKScriptUrl,
     callback,
@@ -1318,7 +1526,7 @@ function firePixelEvent() {
 
   // Build the fbq() command arguments
   const command = data.event_name !== 'customEvent' ? 'trackSingle' : 'trackSingleCustom';
-  const eventName = getEventName("facebook");
+  const eventName = getEventName("fb");
 
   // Handle consent mode
   if (data.consentMode) {
@@ -1356,9 +1564,9 @@ function firePixelEvent() {
     // Call the fbq() method with the parameters defined earlier
     // Add event_id in case it's set up
     if (data.event_id) {
-      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("facebook"), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("fb"), {eventID: data.event_id === 'autogenerate' ? event_id : data.ownEventId});
     } else {
-      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("facebook"));
+      fbq(command, pixel.pixelId, eventName, getPixelEventParameters("fb"));
     }
   });
 
@@ -1414,7 +1622,43 @@ function firePixelEvent() {
   }
 }
 
+function useEcommerceDataFor (pixelType) {
+  if (!data.useEcommerceData) {
+    return false;
+  }
 
+  for (const entry of data.useEcommerceData) {
+    if (entry.provider === pixelType || entry.provider === 'all') {
+      return entry.enabled;
+    }
+  }
+
+  return false;
+}
+
+function getCustomData (customDataFields, pixelType) {
+  let customData = {};
+
+  if (useEcommerceDataFor(pixelType)) {
+    customData = getEcommerceData();
+  }
+
+  customDataFields.forEach(field => {
+    if (getType(data[field]) === "undefined" || getType(data[field]) === 'function') return;
+
+    if (field === 'customProperties') {
+      data[field].forEach(property => {
+        if (property.provider === pixelType || property.provider === 'all') {
+          customData[property.propertyName] = property.propertyValue;
+        }
+      });
+    } else {
+      customData[field] = data[field];
+    }
+  });
+
+  return customData;
+}
 
 function fireCapiEvent() {
   const sendPixel = require('sendPixel');
@@ -1474,10 +1718,11 @@ function fireCapiEvent() {
   function sendPostRequest () {
     const callInWindow = require('callInWindow');
     const opts = getOpts();
+    const groupedPixels = getGroupedPixels();
 
     let body = {
-      pixels: getGroupedPixels(),
-      data: getEventData(),
+      pixels: groupedPixels,
+      data: getEventData(groupedPixels),
       templateVersion: templateVersion.toString()
     };
     if (opts) {
@@ -1489,8 +1734,17 @@ function fireCapiEvent() {
     handleCapiSuccessfullyFired();
   }
 
-  function getEventData() {
+  function getEventData(pixels) {
     const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
+
+    const customDataPerProvider = {};
+    for (const pixel of pixels) {
+      if (getType(customDataPerProvider[pixel.type]) !== "undefined") {
+        continue;
+      }
+      customDataPerProvider[pixel.type] = getCustomData(['value', 'currency', 'content_name', 'content_category', 'content_ids', 'contents',
+        'content_type', 'order_id', 'predicted_ltv', 'num_items', 'search_string', 'status', 'delivery_category', 'customProperties'], pixel.type);
+    }
 
     let eventData = [{
       event_name: data.event_name === 'customEvent' ? data.customEventName : data.event_name,
@@ -1524,21 +1778,7 @@ function fireCapiEvent() {
         tz: platformSpecs.tz,
       },
       container_ids: platformSpecs.containers,
-      custom_data: {
-        value: data.value,
-        currency: data.currency,
-        content_name: data.content_name,
-        content_category: data.content_category,
-        content_ids: data.content_ids,
-        contents: data.contents,
-        content_type: data.content_type,
-        order_id: data.order_id,
-        predicted_ltv: data.predicted_ltv,
-        num_items: data.num_items,
-        search_string: data.search_string,
-        status: data.status,
-        delivery_category: data.delivery_category
-      },
+      custom_data: customDataPerProvider[pixels[0].type],
       event_source_url: getUrl(),
       referrer: getReferrerUrl(),
       opt_out: data.opt_out,
@@ -1548,6 +1788,10 @@ function fireCapiEvent() {
       data_processing_options_country: data.data_processing_options_country,
       data_processing_options_state: data.data_processing_options_state
     }];
+
+    if (pixels.length > 1) {
+      eventData[0].custom_data_per_provider = customDataPerProvider;
+    }
 
     return {
       data: eventData,
@@ -2444,6 +2688,45 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.getFromWindow"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -2762,5 +3045,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.3
-
+Version 1.4
