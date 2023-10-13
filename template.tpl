@@ -9,25 +9,25 @@ Google may provide), as modified from time to time.
 ___INFO___
 
 {
-  "type": "TAG",
-  "id": "cvt_temp_public_id",
-  "version": 1,
-  "securityGroups": [],
-  "displayName": "Adsmurai Facebook and TikTok Pixel \u0026 Conversions API (CAPI)",
+"type": "TAG",
+"id": "cvt_temp_public_id",
+"version": 1,
+"securityGroups": [],
+"displayName": "Adsmurai Facebook, TikTok and Pinterest Pixel \u0026 Conversions API (CAPI)",
   "categories": [
     "ADVERTISING",
     "CONVERSIONS",
     "REMARKETING"
   ],
-  "brand": {
-    "id": "github.com_Adsmurai-Google-Tag-Manager-Templates",
-    "displayName": "Adsmurai-Google-Tag-Manager-Templates",
+"brand": {
+"id": "github.com_Adsmurai-Google-Tag-Manager-Templates",
+"displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
-  },
-  "description": "This tag helps you to send event data to Facebook & TikTok via conventional pixel and via Conversions API.",
-  "containerContexts": [
-    "WEB"
-  ]
+},
+"description": "This tag helps you to send event data to Facebook, TikTok & Pinterest via conventional pixel and via Conversions API.",
+"containerContexts": [
+"WEB"
+]
 }
 
 
@@ -258,6 +258,46 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SIMPLE_TABLE",
+        "name": "pinterest_pixels",
+        "displayName": "Pinterest Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Pinterest Pixel ID",
+            "valueHint": "Expected format: tag_id|advertiser_id . Ex: 12314534|6565823462",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
         "name": "google_pixels",
         "displayName": "Google Ads Pixel(s)",
         "simpleTableColumns": [
@@ -408,6 +448,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "tiktok",
                 "displayValue": "TikTok"
+              },
+              {
+                "value": "pinterest",
+                "displayValue": "Pinterest"
               }
             ],
             "simpleValueType": true,
@@ -572,6 +616,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "tiktok",
                 "displayValue": "TikTok"
+              },
+              {
+                "value": "pinterest",
+                "displayValue": "Pinterest"
               }
             ],
             "simpleValueType": true,
@@ -1143,7 +1191,8 @@ const getTimestampMillis = require('getTimestampMillis');
 const callInWindow = require('callInWindow');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerUrl = require('getReferrerUrl');
-const templateVersion = 1.4;
+const createArgumentsQueue = require('createArgumentsQueue');
+const templateVersion = 1.5;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1161,6 +1210,9 @@ function onFire () {
 
     if (data.google_pixels) {
       fireGooglePixel();
+    }
+    if (data.pinterest_pixels) {
+      firePinterestPixel();
     }
   }
 
@@ -1202,6 +1254,9 @@ function countConfiguredProviders () {
     if (data.google_pixels) {
       count++;
     }
+    if (data.pinterest_pixels) {
+      count++;
+    }
   }
 
   if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
@@ -1230,6 +1285,14 @@ function getEventName (pixelType) {
     facebook: {
       "CompletePayment": "Purchase",
       "PlaceAnOrder": "Purchase"
+    },
+    pinterest: {
+      "Purchase": "purchase",
+      "AddToCart": "addtocart", // fb
+      "PageView": "pagevisit", // fb
+      "Lead": "lead", // fb
+      "Search": "search", // fb
+      "InitiateCheckout": "checkout", // fb
     }
   };
 
@@ -1453,6 +1516,64 @@ function fireGooglePixel () {
   });
 }
 
+function firePinterestPixel () {
+  const isLoaded = isPinterestLoaded(); // must be fired before getPintrk
+  const pintrk = getPintrk();
+
+  function handlePixelSuccessfullyFired() {
+    const eventName = getEventName("pinterest");
+
+    data.pinterest_pixels.forEach((pixel, i) => {
+      const tagId = pixel.pixelId.split("|")[0];
+      // Initialize each ID if not done already
+      let alreadyLoaded = false;
+      if (pintrk.queue && getType(pintrk.queue) === 'array') {
+        for (const e of pintrk.queue) {
+          if (getType(e) !== "array" || e.length < 2) {
+            continue;
+          }
+          if (e[0] === "load" && e[1] === tagId) {
+            alreadyLoaded = true;
+            break;
+          }
+        }
+      }
+      if (pintrk.tagId && pintrk.tagId === tagId) {
+        alreadyLoaded = true;
+      }
+
+      if (!alreadyLoaded) {
+        pintrk('load', tagId);
+        pintrk('page');
+      }
+
+      // Add event_id in case it's set up
+      const event = getPixelEventParameters("pinterest");
+      if (data.event_id) {
+        event.event_id = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+      } else {
+        event.event_id = event_id;
+      }
+
+      pintrk('track', eventName, event);
+    });
+    triggerSuccess();
+  }
+
+  if (isLoaded) {
+    handlePixelSuccessfullyFired();
+  } else {
+    injectProviderSDK("https://s.pinimg.com/ct/core.js", "pinterest-sdk", handlePixelSuccessfullyFired);
+  }
+
+  function isPinterestLoaded() {
+    return copyFromWindow('pintrk');
+  }
+
+  function getPintrk() {
+    return createArgumentsQueue('pintrk', 'pintrk.queue');
+  }
+}
 
 function fireTikTokPixel () {
   const setInWindow = require('setInWindow');
@@ -1517,6 +1638,19 @@ function injectTiktokSDK (onSuccess) {
     onSuccess,
     handlePixelUnsuccessfullyFired,
     'tiktokPixel');
+}
+
+function injectProviderSDK (url, id, onSuccess) {
+  function handlePixelUnsuccessfullyFired() {
+    if (data.fireMethod === 'onlyPixel') {
+      data.gtmOnFailure();
+    }
+  }
+
+  injectScript(url,
+    onSuccess,
+    handlePixelUnsuccessfullyFired,
+    id);
 }
 
 function firePixelEvent() {
@@ -1891,6 +2025,15 @@ function fireCapiEvent() {
       });
     }
 
+    if (data.pinterest_pixels) {
+      data.pinterest_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "pinterest"
+        });
+      });
+    }
+
     if (data.google_pixels) {
       data.google_pixels.forEach(pixel => {
         pixels.push({
@@ -2101,6 +2244,84 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "pintrk"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "pintrk.queue"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
                   }
                 ]
               },
@@ -2760,6 +2981,10 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
+                "string": "https://s.pinimg.com/ct/core.js"
+              },
+              {
+                "type": 1,
                 "string": "https://analytics.tiktok.com/"
               },
               {
@@ -3045,4 +3270,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.4
+Version 1.5
