@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: bad754e9fc830d69aec68f0c76c4509430b7550b
+    changeNotes: v1.5
+      Support for Pinterest Pixel
+  # Older versions
   - sha: 81a0c1d4ee602bbcc6b4e72166fa6dda5a6b4264
     changeNotes: v1.4
       Ability to use Enhanced Ecommerce data
-  # Older versions
   - sha: 400043fac88212c6089ddfe676904863bd5758b6
     changeNotes: v1.3
       Support for TikTok Pixel & Track API
