@@ -24,7 +24,7 @@ ___INFO___
 "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
 },
-"description": "This tag helps you to send event data to Facebook, TikTok & Pinterest via conventional pixel and via Conversions API.",
+"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest & Snapchat via conventional pixel and via Conversions API.",
 "containerContexts": [
 "WEB"
 ]
@@ -298,6 +298,46 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SIMPLE_TABLE",
+        "name": "snapchat_pixels",
+        "displayName": "Snapchat Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Snapchat Pixel ID",
+            "valueHint": "Expected format: 867f406d-330cd-49d7-8425-21434f5c778c",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
         "name": "google_pixels",
         "displayName": "Google Ads Pixel(s)",
         "simpleTableColumns": [
@@ -452,6 +492,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "pinterest",
                 "displayValue": "Pinterest"
+              },
+              {
+                "value": "snapchat",
+                "displayValue": "Snapchat"
               }
             ],
             "simpleValueType": true,
@@ -620,6 +664,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "pinterest",
                 "displayValue": "Pinterest"
+              },
+              {
+                "value": "snapchat",
+                "displayValue": "Snapchat"
               }
             ],
             "simpleValueType": true,
@@ -1192,7 +1240,9 @@ const callInWindow = require('callInWindow');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerUrl = require('getReferrerUrl');
 const createArgumentsQueue = require('createArgumentsQueue');
-const templateVersion = 1.5;
+const Object = require('Object');
+const JSON = require('JSON');
+const templateVersion = 1.6;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1213,6 +1263,9 @@ function onFire () {
     }
     if (data.pinterest_pixels) {
       firePinterestPixel();
+    }
+    if (data.snapchat_pixels) {
+      fireSnapchatPixel();
     }
   }
 
@@ -1257,6 +1310,9 @@ function countConfiguredProviders () {
     if (data.pinterest_pixels) {
       count++;
     }
+    if (data.snapchat_pixels) {
+      count++;
+    }
   }
 
   if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
@@ -1293,6 +1349,19 @@ function getEventName (pixelType) {
       "Lead": "lead", // fb
       "Search": "search", // fb
       "InitiateCheckout": "checkout", // fb
+    },
+    snapchat: {
+      "PageView": "PAGE_VIEW",
+      "AddToCart": "ADD_CART",
+      "Purchase": "PURCHASE",
+      "InitiateCheckout": "START_CHECKOUT",
+      "AddToWishlist": "ADD_TO_WISHLIST",
+      "Search": "SEARCH",
+      "StartTrial": "START_TRIAL",
+      "Subscribe": "SUBSCRIBE",
+      "ViewContent": "VIEW_CONTENT",
+      "CompleteRegistration": "SIGN_UP",
+      "AddPaymentInfo": "ADD_BILLING",
     }
   };
 
@@ -1306,8 +1375,6 @@ function getEventName (pixelType) {
 }
 
 const translateFields = (customData, ecommerce, fields) => {
-  const Object = require('Object');
-
   for(const fieldName of Object.keys(fields)) {
     const translatedField = fields[fieldName];
 
@@ -1449,9 +1516,29 @@ function getPixelEventParameters(pixelType) {
     case "fb": // must be fb to match the pixelType
       eventParameters = setupFacebookEventData(eventParameters);
       break;
+    case "snapchat":
+      eventParameters = setupSnapchatEventData();
+      break;
 	}
 
 	return eventParameters;
+}
+
+function setupSnapchatEventData() {
+  let eventData = translateFields({}, data, {
+    value: "price",
+    currency: "currency",
+    content_ids: "item_ids",
+    content_category: "item_category",
+    search_string: "search_string",
+    num_items: "number_items",
+  });
+
+  if (data.custom_data && data.custom_data.order_id) {
+    eventData.transaction_id = data.custom_data.order_id;
+  }
+
+  return eventData;
 }
 
 function setupTiktokEventData(rawEvent) {
@@ -1514,6 +1601,75 @@ function fireGooglePixel () {
 
     triggerSuccess();
   });
+
+}
+
+function fireSnapchatPixel () {
+  const isLoaded = isSnapchatLoaded(); // must be fired before getSnaptr
+  const snaptr = getSnaptr();
+
+  // https://businesshelp.snapchat.com/s/article/pixel-direct-implementation?language=en_US
+  function getAdvancedMatchingData () {
+    return translateFields({}, data, {
+      'em' : "user_hashed_email",
+      'ph' : "user_hashed_phone_number",
+      'fn' : "firstname",
+      'ln' : "lastname",
+      'ct' : "geo_city",
+      'zp' : "geo_postal_code",
+      'country' : "geo_country",
+    });
+  }
+
+  function handlePixelSuccessfullyFired() {
+    const eventName = getEventName("snapchat");
+    const templateStorage = require('templateStorage');
+
+    // Add event_id in case it's set up
+    const event = getPixelEventParameters("snapchat");
+    if (data.event_id) {
+      event.client_dedup_id = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+    } else {
+      event.client_dedup_id = event_id;
+    }
+    const matchingData = getAdvancedMatchingData();
+
+    data.snapchat_pixels.forEach((pixel, i) => {
+      const pixelKey = pixel.pixelId + "-snapchat";
+      // Initialize each ID if not done already
+      const alreadyLoaded = templateStorage.getItem(pixelKey) || (snaptr && snaptr.context && snaptr.context.config && snaptr.context.config[pixel.pixelId]);
+
+      if (!alreadyLoaded) {
+        // snapchat load is ultra slow, so if this template is fired several times at once, it may say that it's not loaded
+        // on all of them, so we use templateStorage to avoid that
+        templateStorage.setItem(pixelKey, true);
+        snaptr('init', pixel.pixelId, matchingData);
+        snaptr('track', "PAGE_VIEW", event);
+
+        // avoid duplicating the event if its just a PAGE_VIEW
+        if (eventName === "PAGE_VIEW") {
+          return;
+        }
+      }
+
+      snaptr('track', eventName, event);
+    });
+    triggerSuccess();
+  }
+
+  if (isLoaded) {
+    handlePixelSuccessfullyFired();
+  } else {
+    injectProviderSDK("https://sc-static.net/scevent.min.js", "snapchat-sdk", handlePixelSuccessfullyFired);
+  }
+
+  function isSnapchatLoaded() {
+    return copyFromWindow('snaptr');
+  }
+
+  function getSnaptr() {
+    return createArgumentsQueue('snaptr', 'snaptr.queue');
+  }
 }
 
 function firePinterestPixel () {
@@ -1521,9 +1677,11 @@ function firePinterestPixel () {
   const pintrk = getPintrk();
 
   function handlePixelSuccessfullyFired() {
+    const templateStorage = require('templateStorage');
     const eventName = getEventName("pinterest");
 
     data.pinterest_pixels.forEach((pixel, i) => {
+      const pixelKey = pixel.pixelId + "-pinterest";
       const tagId = pixel.pixelId.split("|")[0];
       // Initialize each ID if not done already
       let alreadyLoaded = false;
@@ -1538,11 +1696,12 @@ function firePinterestPixel () {
           }
         }
       }
-      if (pintrk.tagId && pintrk.tagId === tagId) {
+      if ((pintrk.tagId && pintrk.tagId === tagId) || templateStorage.getItem(pixelKey)) {
         alreadyLoaded = true;
       }
 
       if (!alreadyLoaded) {
+        templateStorage.setItem(pixelKey, true);
         pintrk('load', tagId);
         pintrk('page');
       }
@@ -2033,6 +2192,15 @@ function fireCapiEvent() {
         });
       });
     }
+    
+    if (data.snapchat_pixels) {
+      data.snapchat_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "snapchat"
+        });
+      });
+    }
 
     if (data.google_pixels) {
       data.google_pixels.forEach(pixel => {
@@ -2079,7 +2247,6 @@ function fireCapiEvent() {
 
   function encodeProperty(prop) {
     const encodeUriComponent = require('encodeUriComponent');
-    const JSON = require('JSON');
 
     switch (getType(prop)) {
       case 'function':
@@ -2310,6 +2477,84 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 1,
                     "string": "pintrk.queue"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "snaptr"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "snaptr.queue"
                   },
                   {
                     "type": 8,
@@ -2894,6 +3139,45 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
+                    "string": "adsmuraiSDK.logs"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
                     "string": "adsmuraiSDK.getPlatformSpecs"
                   },
                   {
@@ -2986,6 +3270,10 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://analytics.tiktok.com/"
+              },
+              {
+                "type": 1,
+                "string": "https://sc-static.net/scevent.min.js"
               },
               {
                 "type": 1,
@@ -3242,6 +3530,16 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
+        "publicId": "access_template_storage",
+        "versionId": "1"
+      },
+      "param": []
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
         "publicId": "logging",
         "versionId": "1"
       },
@@ -3270,4 +3568,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.5
+Version 1.6
