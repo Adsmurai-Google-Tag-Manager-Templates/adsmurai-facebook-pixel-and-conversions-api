@@ -1242,7 +1242,7 @@ const getReferrerUrl = require('getReferrerUrl');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 1.6;
+const templateVersion = 1.7;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -3568,4 +3568,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.6
+Version 1.7
