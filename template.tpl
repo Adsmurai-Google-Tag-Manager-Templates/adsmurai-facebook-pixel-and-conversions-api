@@ -1374,7 +1374,7 @@ function getEventName (pixelType) {
   return nameConventions[pixelType][eventName];
 }
 
-const translateFields = (customData, ecommerce, fields) => {
+function translateFields (customData, ecommerce, fields) {
   for(const fieldName of Object.keys(fields)) {
     const translatedField = fields[fieldName];
 
@@ -1383,7 +1383,7 @@ const translateFields = (customData, ecommerce, fields) => {
     }
   }
   return customData;
-};
+}
 
 function getEcommerceData () {
   const makeNumber = require('makeNumber');
