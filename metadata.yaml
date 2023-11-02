@@ -15,11 +15,15 @@
 homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
+
   # Latest version
+  - sha: f5d3a7b59a6a5b861917140a317d5bf44a4a7615
+    changeNotes: v1.8
+      Improve Facebook cookie handling
+  # Older versions
   - sha: a320638bab76808ca4e45e3d8c19a96024afdbfd
     changeNotes: v1.7
       Improve Snapchat multitag compatibility
-  # Older versions
   - sha: 781fd23b5e56278875086ddfaae449e657ca4cb9
     changeNotes: v1.6
       Support for Snapchat Pixel
