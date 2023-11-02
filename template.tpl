@@ -2262,19 +2262,20 @@ function fireCapiEvent() {
     // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc/#fbc
     const getQueryParameters = require('getQueryParameters');
 
-    let value;
+    let value = undefined;
 
     if (getQueryParameters('fbclid', false)) {
       value = 'fb.1.' + getTimestampMillis() + '.' + getQueryParameters('fbclid');
       // If there's no Facebook pixel on the page that will
       // create or update the _fbc cookie automatically, do it manually
       let fbq = copyFromWindow('fbq');
-      if (!fbq) setCookie('_fbc', value, {'domain': 'auto', 'max-age': 7776000, 'path': '/'});
-    } else if (getCookieValues('_fbc').length > 0 && getCookieValues('_fbc')[0] !== '') {
-      // If there's an _fbc cookie and is not an empty string
-      value = getCookieValues('_fbc')[0];
+      if (!fbq) setCookie('_fbc', value, { 'domain': 'auto', 'max-age': 7776000, 'path': '/' });
     } else {
-      value = undefined;
+      let fbcCookieValues = getCookieValues('_fbc');
+      // expected format is like fb.1.1554763741205.AbCdEfGhIjKlMnOpQrStUvWxYz1234567890
+      if (fbcCookieValues.length > 0 && fbcCookieValues[0] !== '' && fbcCookieValues[0].split('.').length === 4) {
+        value = fbcCookieValues[0];
+      }
     }
 
     return value;
