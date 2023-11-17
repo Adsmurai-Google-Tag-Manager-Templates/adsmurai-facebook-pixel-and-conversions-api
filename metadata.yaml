@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 9e9f1803caf928f6bc9be6132f2d0829781b9e15
+    changeNotes: v1.9
+      Use _gtmeec cookie when possible
+  # Older versions
   - sha: f5d3a7b59a6a5b861917140a317d5bf44a4a7615
     changeNotes: v1.8
       Improve Facebook cookie handling
-  # Older versions
   - sha: a320638bab76808ca4e45e3d8c19a96024afdbfd
     changeNotes: v1.7
       Improve Snapchat multitag compatibility
