@@ -1239,10 +1239,11 @@ const getTimestampMillis = require('getTimestampMillis');
 const callInWindow = require('callInWindow');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerUrl = require('getReferrerUrl');
+const fromBase64 = require('fromBase64');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 1.7;
+const templateVersion = 1.8;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1602,7 +1603,7 @@ function fireGooglePixel () {
     triggerSuccess();
   });
 
-}
+  }
 
 function fireSnapchatPixel () {
   const isLoaded = isSnapchatLoaded(); // must be fired before getSnaptr
@@ -1993,7 +1994,7 @@ function fireCapiEvent() {
 
   function afterInjection () {
     if (data.tiktok_pixels && getCookieValues('_ttp').length === 0) {
-      injectTiktokSDK(function() {
+            injectTiktokSDK(function() {
         // tiktok cookie cant be manually generated, but we can trigger its creation
         if (getCookieValues('_ttp').length === 0) {
           let ttq = copyFromWindow('ttq');
@@ -2027,6 +2028,78 @@ function fireCapiEvent() {
     handleCapiSuccessfullyFired();
   }
 
+  function fillUserDataFromFB () {
+    const cookieValues = getCookieValues('_gtmeec', true);
+
+    if (!cookieValues || cookieValues.length === 0) {
+      return;
+    }
+
+    const encodedValue = cookieValues[0];
+
+    if (!encodedValue) {
+      return;
+    }
+
+    const jsonStr = fromBase64(encodedValue);
+    if (!jsonStr) {
+      return;
+    }
+
+    const gtmeecData = JSON.parse(jsonStr);
+
+    // if incoming event has already have the customer information then don't change
+    if (gtmeecData) {
+      if (!data.em && gtmeecData.em) {
+        data.em = gtmeecData.em;
+      }
+
+      if (!data.ph && gtmeecData.ph) {
+        data.ph = gtmeecData.ph;
+      }
+
+      if (!data.ln && gtmeecData.ln) {
+        data.ln = gtmeecData.ln;
+      }
+
+      if (!data.fn && gtmeecData.fn) {
+        data.fn = gtmeecData.fn;
+      }
+
+      if (!data.ct && gtmeecData.ct) {
+        data.ct = gtmeecData.ct;
+      }
+
+      if (!data.st && gtmeecData.st) {
+        data.st = gtmeecData.st;
+      }
+
+      if (!data.zp && gtmeecData.zp) {
+        data.zp = gtmeecData.zp;
+      }
+
+      if (!data.ge && gtmeecData.ge) {
+        data.ge = gtmeecData.ge;
+      }
+
+      if (!data.db && gtmeecData.db) {
+        data.db = gtmeecData.db;
+      }
+
+      if (!data.country && gtmeecData.country) {
+        data.country = gtmeecData.country;
+      }
+
+      if (!data.external_id && gtmeecData.external_id) {
+        data.external_id = gtmeecData.external_id;
+      }
+
+      if (!data.fb_login_id && gtmeecData.fb_login_id) {
+        data.fb_login_id = gtmeecData.fb_login_id;
+      }
+    }
+  }
+
   function getEventData(pixels) {
     const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
 
@@ -2038,6 +2111,8 @@ function fireCapiEvent() {
       customDataPerProvider[pixel.type] = getCustomData(['value', 'currency', 'content_name', 'content_category', 'content_ids', 'contents',
         'content_type', 'order_id', 'predicted_ltv', 'num_items', 'search_string', 'status', 'delivery_category', 'customProperties'], pixel.type);
     }
+
+    fillUserDataFromFB();
 
     let eventData = [{
       event_name: data.event_name === 'customEvent' ? data.customEventName : data.event_name,
@@ -2192,7 +2267,7 @@ function fireCapiEvent() {
         });
       });
     }
-    
+
     if (data.snapchat_pixels) {
       data.snapchat_pixels.forEach(pixel => {
         pixels.push({
@@ -3324,6 +3399,10 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "_gcl_au"
+              },
+              {
+                "type": 1,
+                "string": "_gtmeec"
               }
             ]
           }
@@ -3569,4 +3648,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.7
+Version 1.8
