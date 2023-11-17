@@ -1243,7 +1243,7 @@ const fromBase64 = require('fromBase64');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 1.8;
+const templateVersion = 1.9;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -3648,4 +3648,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.8
+Version 1.9
