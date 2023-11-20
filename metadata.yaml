@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 22f72dd4636284cf2cbdcefea3ff8de6f12c4965
+    changeNotes: v2.0
+      Ability to set first party subdomain
+  # Older versions
   - sha: 9e9f1803caf928f6bc9be6132f2d0829781b9e15
     changeNotes: v1.9
       Use _gtmeec cookie when possible
-  # Older versions
   - sha: f5d3a7b59a6a5b861917140a317d5bf44a4a7615
     changeNotes: v1.8
       Improve Facebook cookie handling
