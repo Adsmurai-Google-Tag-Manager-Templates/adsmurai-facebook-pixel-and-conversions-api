@@ -457,6 +457,22 @@ ___TEMPLATE_PARAMETERS___
             "errorMessage": "Please, add your Serverless Tracking API key"
           }
         ]
+      },
+      {
+        "type": "TEXT",
+        "name": "stSubdomain",
+        "displayName": "Your tracking subdomain",
+        "simpleValueType": true,
+        "notSetText": "Please, fill this value",
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "help": "Optional. For first party tracking you can set your own subdomain. Learn more <a href=\"https://help.adsmurai.com/custom-domains-one-tag\">here</a>",
+        "valueHint": "https://tr.yourdomain.com"
       }
     ]
   },
@@ -1243,7 +1259,7 @@ const fromBase64 = require('fromBase64');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 1.9;
+const templateVersion = 2.0;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -2023,7 +2039,7 @@ function fireCapiEvent() {
       body.opts = opts;
     }
 
-    callInWindow('adsmuraiSDK.post', data.stApiKey, body);
+    callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
 
     handleCapiSuccessfullyFired();
   }
@@ -3648,4 +3664,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 1.9
+Version 2.0
