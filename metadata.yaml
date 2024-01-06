@@ -15,11 +15,36 @@
 homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
+
   # Latest version
+  - sha: 22f72dd4636284cf2cbdcefea3ff8de6f12c4965
+    changeNotes: v2.0
+      Ability to set first party subdomain
+  # Older versions
+  - sha: 9e9f1803caf928f6bc9be6132f2d0829781b9e15
+    changeNotes: v1.9
+      Use _gtmeec cookie when possible
+  - sha: f5d3a7b59a6a5b861917140a317d5bf44a4a7615
+    changeNotes: v1.8
+      Improve Facebook cookie handling
+  - sha: a320638bab76808ca4e45e3d8c19a96024afdbfd
+    changeNotes: v1.7
+      Improve Snapchat multitag compatibility
+  - sha: 781fd23b5e56278875086ddfaae449e657ca4cb9
+    changeNotes: v1.6
+      Support for Snapchat Pixel
+  - sha: bad754e9fc830d69aec68f0c76c4509430b7550b
+    changeNotes: v1.5
+      Support for Pinterest Pixel
+  - sha: 81a0c1d4ee602bbcc6b4e72166fa6dda5a6b4264
+    changeNotes: v1.4
+      Ability to use Enhanced Ecommerce data
+  - sha: 400043fac88212c6089ddfe676904863bd5758b6
+    changeNotes: v1.3
+      Support for TikTok Pixel & Track API
   - sha: 7d89f3651759b891923ba91358a5a27f4d0e7212
     changeNotes: v1.2
       Add warning when Serverless Tracking API key field is empty
-  # Older versions
   - sha: 484007b764a8172f0cf78a2716dc5c480bb86357
     changeNotes: v1.1
       Add feature to add pixel IDs when setup is only CAPI + Serverless Tracking
