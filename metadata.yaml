@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: b2ffaa164ecdbb510e3f67ee6bcdddf8587f303a
+    changeNotes: v2.1
+      Support for Google Analytics 4 (api only)
+  # Older versions
   - sha: 22f72dd4636284cf2cbdcefea3ff8de6f12c4965
     changeNotes: v2.0
       Ability to set first party subdomain
-  # Older versions
   - sha: 9e9f1803caf928f6bc9be6132f2d0829781b9e15
     changeNotes: v1.9
       Use _gtmeec cookie when possible
