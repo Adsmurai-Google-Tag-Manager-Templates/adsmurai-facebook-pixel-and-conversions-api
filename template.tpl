@@ -173,7 +173,7 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "alwaysInSummary": true,
         "subParams": [],
-        "help": "Choose if you want to send this event only through pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up a server if you plan to use Conversions API. If you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
+        "help": "Choose if you want to send this event only through pixel (web), through Conversions API (server) or both.\n\nRemember that you need to set up a server if you plan to use Conversions API. If you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag pre-made servers\u003c/a\u003e.",
         "defaultValue": "both"
       },
       {
@@ -216,7 +216,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "SIMPLE_TABLE",
@@ -254,7 +254,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "SIMPLE_TABLE",
@@ -294,7 +294,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "SIMPLE_TABLE",
@@ -334,7 +334,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "SIMPLE_TABLE",
@@ -352,7 +352,7 @@ ___TEMPLATE_PARAMETERS___
               {
                 "type": "REGEX",
                 "args": [
-                  "AW-\\d+\/[a-zA-Z0-9_]+"
+                  "AW-\\d+\/[a-zA-Z0-9_-]+"
                 ],
                 "errorMessage": "the format should be like \"AW-857837465656/h3fawt68rjk\"",
                 "enablingConditions": []
@@ -381,7 +381,54 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "ga4_pixels",
+        "displayName": "Google Analytics 4 Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Measurement ID",
+            "valueHint": "Ex: G-G45H4HD",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+              {
+                "type": "REGEX",
+                "args": [
+                  "G-[a-zA-Z0-9]+"
+                ],
+                "errorMessage": "the format should be like \"G-G45H4HD\"",
+                "enablingConditions": []
+              }
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "RADIO",
@@ -390,7 +437,7 @@ ___TEMPLATE_PARAMETERS___
         "radioItems": [
           {
             "value": "serverlessTracking",
-            "displayValue": "I have an API key from Adsmurai Serverless Tracking"
+            "displayValue": "I have an API key from Adsmurai One Tag"
           },
           {
             "value": "ownServer",
@@ -399,7 +446,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "simpleValueType": true,
         "defaultValue": "serverlessTracking",
-        "help": "- \u003cb\u003e(Recommended) I have an API key from Adsmurai Serverless Tracking\u003c/b\u003e: You can avoid setting up your own tracking server and its related costs by using a Serverless Tracking subscription. It will provide you an API key that you\u0027ll need to enter in the field below when choosing this option. Nothing else required! Learn more or purchase a subscription at \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehttps://www.adsmurai.com/en/product/serverless-tracking\u003c/a\u003e.\u003cbr\u003e\u003cbr\u003e- \u003cb\u003eI have my own server\u003c/b\u003e: Choose this if you already set up your own tracking server and enter its URL in the field below. Facebook events are going to be sent there, so make sure your server processes the events accordingly. Consider the option above if you want to save time on setting up and maintaining your server, and potentially save money on server costs.",
+        "help": "- \u003cb\u003e(Recommended) I have an API key from Adsmurai One Tag\u003c/b\u003e: You can avoid setting up your own tracking server and its related costs by using a One Tag subscription. It will provide you an API key that you\u0027ll need to enter in the field below when choosing this option. Nothing else required! Learn more or purchase a subscription at \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehttps://www.adsmurai.com/en/product/serverless-tracking\u003c/a\u003e.\u003cbr\u003e\u003cbr\u003e- \u003cb\u003eI have my own server\u003c/b\u003e: Choose this if you already set up your own tracking server and enter its URL in the field below. Facebook events are going to be sent there, so make sure your server processes the events accordingly. Consider the option above if you want to save time on setting up and maintaining your server, and potentially save money on server costs.",
         "enablingConditions": [
           {
             "paramName": "fireMethod",
@@ -426,7 +473,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "help": "The URL of the tag management server you are using for Conversions API. Your server is responsible for adding the pixel ID and the access token required for this event.\u003cbr\u003e\u003cbr\u003eIf you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking pre-made servers\u003c/a\u003e.",
+        "help": "The URL of the tag management server you are using for Conversions API. Your server is responsible for adding the pixel ID and the access token required for this event.\u003cbr\u003e\u003cbr\u003eIf you don\u0027t want to set up your own server and save costs, consider using \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag pre-made servers\u003c/a\u003e.",
         "valueValidators": [
           {
             "type": "NON_EMPTY",
@@ -439,7 +486,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "TEXT",
         "name": "stApiKey",
-        "displayName": "Adsmurai Serverless Tracking API key",
+        "displayName": "Adsmurai One Tag API key",
         "simpleValueType": true,
         "notSetText": "Please, fill this value",
         "enablingConditions": [
@@ -449,12 +496,12 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "help": "Learn \u003ca href\u003d\"https://www.youtube.com/watch?v\u003dmwgh3Z_PUsc\"\u003ehere\u003c/a\u003e how to retrieve your Serverless Tracking API key. Requires a Serverless Tracking subscription (learn more \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehere\u003c/a\u003e)",
-        "valueHint": "Your Adsmurai Serverless Tracking API Key",
+        "help": "Learn \u003ca href\u003d\"https://www.youtube.com/watch?v\u003dmwgh3Z_PUsc\"\u003ehere\u003c/a\u003e how to retrieve your One Tag API key. Requires a One Tag subscription (learn more \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003ehere\u003c/a\u003e)",
+        "valueHint": "Your Adsmurai One Tag API Key",
         "valueValidators": [
           {
             "type": "NON_EMPTY",
-            "errorMessage": "Please, add your Serverless Tracking API key"
+            "errorMessage": "Please, add your One Tag API key"
           }
         ]
       },
@@ -512,6 +559,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "snapchat",
                 "displayValue": "Snapchat"
+              },
+              {
+                "value": "ga4",
+                "displayValue": "GA4"
               }
             ],
             "simpleValueType": true,
@@ -684,6 +735,14 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "snapchat",
                 "displayValue": "Snapchat"
+              },
+              {
+                "value": "google",
+                "displayValue": "Google Ads"
+              },
+              {
+                "value": "ga4",
+                "displayValue": "GA4"
               }
             ],
             "simpleValueType": true,
@@ -827,7 +886,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "help": "Code used to verify that your server events are received correctly by Facebook. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://developers.facebook.com/docs/marketing-api/conversions-api/using-the-api#testEvents\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
+        "help": "Code used to verify that your server events are received correctly by Facebook. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://developers.facebook.com/docs/marketing-api/conversions-api/using-the-api#testEvents\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
       },
       {
         "type": "TEXT",
@@ -841,7 +900,7 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "help": "Code used to verify that your server events are received correctly by Tiktok. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://ads.tiktok.com/help/article/test-tiktok-pixel-events-video-walkthrough?lang=en\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai Serverless Tracking\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
+        "help": "Code used to verify that your server events are received correctly by Tiktok. Use this code to test your server events in the Test Events feature in Events Manager. See \u003ca href\u003d\"https://ads.tiktok.com/help/article/test-tiktok-pixel-events-video-walkthrough?lang=en\"\u003eTest Events Tool\u003c/a\u003e for an example.\n\u003cbr\u003e\n\u003cbr\u003e\nNote: this option only appears when you use \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e to send server events. If you set up your own server, please set there your test event code."
       },
       {
         "type": "CHECKBOX",
@@ -879,7 +938,7 @@ ___TEMPLATE_PARAMETERS___
         "name": "hashDataOnST",
         "checkboxText": "Hash user data on the server",
         "simpleValueType": true,
-        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want Adsmurai Serverless Tracking servers to hash it for you (hasing will be done on the server). Don\u0027t check this box if your data is already hashed.",
+        "help": "When sending user data through Conversions API, user data must be hashed in SHA-256. Check this box if you want Adsmurai One Tag servers to hash it for you (hasing will be done on the server). Don\u0027t check this box if your data is already hashed.",
         "subParams": [
           {
             "type": "CHECKBOX",
@@ -1259,7 +1318,7 @@ const fromBase64 = require('fromBase64');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 2.0;
+const templateVersion = 2.1;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1328,6 +1387,9 @@ function countConfiguredProviders () {
       count++;
     }
     if (data.snapchat_pixels) {
+      count++;
+    }
+    if (data.ga4_pixels) {
       count++;
     }
   }
@@ -2149,6 +2211,7 @@ function fireCapiEvent() {
         fbp: getCookieValues('_fbp').length > 0 ? getCookieValues('_fbp')[0] : generateFbpCookie(),  // fb tracking cookie
         ttp: getCookieValues('_ttp').length > 0 ? getCookieValues('_ttp')[0] : null,  // tiktok tracking cookie
         ggau: getCookieValues('_gcl_au').length > 0 ? getCookieValues('_gcl_au')[0] : null,  // google tracking cookie
+        _ga: getCookieValues('_ga').length > 0 ? getCookieValues('_ga')[0] : null,  // google client id
         ttclid: getQueryParameters("ttclid"), // tiktok tracking param
         gclid: getQueryParameters("gclid"), // google tracking param
         wbraid: getQueryParameters("wbraid"), // google tracking param
@@ -2298,6 +2361,15 @@ function fireCapiEvent() {
         pixels.push({
           id: pixel.pixelId,
           type: "google"
+        });
+      });
+    }
+
+    if (data.ga4_pixels) {
+      data.ga4_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "ga4"
         });
       });
     }
@@ -3418,6 +3490,10 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
+                "string": "_ga"
+              },
+              {
+                "type": 1,
                 "string": "_gtmeec"
               }
             ]
@@ -3664,4 +3740,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 2.0
+Version 2.1
