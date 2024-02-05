@@ -1318,7 +1318,8 @@ const fromBase64 = require('fromBase64');
 const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
-const templateVersion = 2.1;
+const templateStorage = require('templateStorage');
+const templateVersion = 2.2;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1702,7 +1703,6 @@ function fireSnapchatPixel () {
 
   function handlePixelSuccessfullyFired() {
     const eventName = getEventName("snapchat");
-    const templateStorage = require('templateStorage');
 
     // Add event_id in case it's set up
     const event = getPixelEventParameters("snapchat");
@@ -1756,7 +1756,6 @@ function firePinterestPixel () {
   const pintrk = getPintrk();
 
   function handlePixelSuccessfullyFired() {
-    const templateStorage = require('templateStorage');
     const eventName = getEventName("pinterest");
 
     data.pinterest_pixels.forEach((pixel, i) => {
@@ -2189,7 +2188,7 @@ function fireCapiEvent() {
       customDataPerProvider[pixel.type] = getCustomData(['value', 'currency', 'content_name', 'content_category', 'content_ids', 'contents',
         'content_type', 'order_id', 'predicted_ltv', 'num_items', 'search_string', 'status', 'delivery_category', 'customProperties'], pixel.type);
     }
-
+    storeAMPIds();
     fillUserDataFromFB();
 
     let eventData = [{
@@ -2227,6 +2226,7 @@ function fireCapiEvent() {
       container_ids: platformSpecs.containers,
       custom_data: customDataPerProvider[pixels[0].type],
       event_source_url: getUrl(),
+      amp: getAMPIds(),
       referrer: getReferrerUrl(),
       opt_out: data.opt_out,
       event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
@@ -2245,6 +2245,22 @@ function fireCapiEvent() {
       test_event_code: data.test_event_code,
       tiktok_test_event_code: data.tiktok_test_event_code,
     };
+  }
+
+  function getAMPIds () {
+    const ids = callInWindow('adsmuraiSDK.getItem', '_amp_ids');
+    return ids ? JSON.parse(ids) : null;
+  }
+
+  function storeAMPIds () {
+    if (!getQueryParameters("amfid")) {
+      return;
+    }
+    callInWindow('adsmuraiSDK.setItem', '_amp_ids', JSON.stringify({
+      ampid: getQueryParameters("ampid"),
+      amfid: getQueryParameters("amfid"),
+      amcid: getQueryParameters("amcid"),
+    }));
   }
 
   function getRequestQueryParametersForOwnServer() {
@@ -3396,6 +3412,84 @@ ___WEB_PERMISSIONS___
                     "boolean": true
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.setItem"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "adsmuraiSDK.getItem"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
               }
             ]
           }
@@ -3740,4 +3834,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 2.1
+Version 2.2
