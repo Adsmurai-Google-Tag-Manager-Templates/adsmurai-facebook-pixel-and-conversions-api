@@ -904,6 +904,20 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
+        "name": "pinterest_test",
+        "checkboxText": "Set test mode for pinterest pixels",
+        "simpleValueType": true,
+        "help": "Events will be sent in test mode (?test=true) to pinterest.",
+        "enablingConditions": [
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ]
+      },
+      {
+        "type": "CHECKBOX",
         "name": "hashData",
         "checkboxText": "Hash user data (read tooltip before checking this)",
         "simpleValueType": true,
@@ -1319,7 +1333,7 @@ const createArgumentsQueue = require('createArgumentsQueue');
 const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
-const templateVersion = 2.2;
+const templateVersion = 2.3;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1423,6 +1437,7 @@ function getEventName (pixelType) {
       "PlaceAnOrder": "Purchase"
     },
     pinterest: {
+      "ViewContent": "pagevisit", // ViewContent doesnt exist for pint
       "Purchase": "purchase",
       "AddToCart": "addtocart", // fb
       "PageView": "pagevisit", // fb
@@ -2244,6 +2259,7 @@ function fireCapiEvent() {
       data: eventData,
       test_event_code: data.test_event_code,
       tiktok_test_event_code: data.tiktok_test_event_code,
+      pinterest_test: data.pinterest_test,
     };
   }
 
@@ -3834,4 +3850,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 2.2
+Version 2.3
