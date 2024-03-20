@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 2e56b7be2f76859d8152cf8e8bb831691bdf9f36
+    changeNotes: v2.4
+      Support for LinkedIn
+  # Older versions
   - sha: 0bc3416f2a4c11013a4afc5ffff23b85487b9bad
     changeNotes: v2.3
       Pinterest test mode
-  # Older versions
   - sha: 1347e4c591e232df84461af83b8d70f02b69c872
     changeNotes: v2.2
       Keep AMP ids during session
