@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: eb4068b4b0d4840ad23b649f68b106c90fe717d4
+    changeNotes: v2.5
+      Ability to ignore appspot events
+  # Older versions
   - sha: 2e56b7be2f76859d8152cf8e8bb831691bdf9f36
     changeNotes: v2.4
       Support for LinkedIn
-  # Older versions
   - sha: 0bc3416f2a4c11013a4afc5ffff23b85487b9bad
     changeNotes: v2.3
       Pinterest test mode
