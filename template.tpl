@@ -560,6 +560,14 @@ ___TEMPLATE_PARAMETERS___
         ],
         "help": "Optional. For first party tracking you can set your own subdomain. Learn more <a href=\"https://help.adsmurai.com/custom-domains-one-tag\">here</a>",
         "valueHint": "https://tr.yourdomain.com"
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "ignoreGTMMSR",
+        "checkboxText": "Don't fire events if url is gtm-msr.appspot.com",
+        "simpleValueType": true,
+        "defaultValue": false,
+        "help": "Google Tag Manager does periodically fire your tags for testing this can lead to events with empty data and with gtm-msr.appspot.com as origin."
       }
     ]
   },
@@ -1374,7 +1382,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 2.4;
+const templateVersion = 2.5;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
@@ -1755,7 +1763,7 @@ function fireGooglePixel () {
     triggerSuccess();
   });
 
-  }
+}
 
 function fireSnapchatPixel () {
   const isLoaded = isSnapchatLoaded(); // must be fired before getSnaptr
@@ -2180,7 +2188,7 @@ function fireCapiEvent() {
 
   function afterInjection () {
     if (data.tiktok_pixels && getCookieValues('_ttp').length === 0) {
-            injectTiktokSDK(function() {
+      injectTiktokSDK(function() {
         // tiktok cookie cant be manually generated, but we can trigger its creation
         if (getCookieValues('_ttp').length === 0) {
           let ttq = copyFromWindow('ttq');
@@ -2207,6 +2215,11 @@ function fireCapiEvent() {
     };
     if (opts) {
       body.opts = opts;
+    }
+
+    if (body.data.data[0].event_source_url.indexOf('gtm-msr.appspot.com') !== -1 && data.ignoreGTMMSR) {
+      handleCapiSuccessfullyFired();
+      return;
     }
 
     callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
@@ -3996,4 +4009,4 @@ scenarios: []
 
 ___NOTES___
 
-Version 2.4
+Version 2.5
