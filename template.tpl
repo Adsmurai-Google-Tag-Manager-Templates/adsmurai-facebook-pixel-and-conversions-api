@@ -2210,6 +2210,7 @@ function fireCapiEvent() {
 
     let body = {
       pixels: groupedPixels,
+      ignoreGTMMSR: data.ignoreGTMMSR,
       data: getEventData(groupedPixels),
       templateVersion: templateVersion.toString()
     };
