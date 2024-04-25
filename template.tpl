@@ -1382,13 +1382,44 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 2.5;
+const templateVersion = 2.6;
 
 const event_id = data.fireMethod === 'both' ? getTimestampMillis().toString() : undefined;
 let providersToRun = countConfiguredProviders();
 let executedProviders = 0;
 
+function removeEntriesWithEmptyPixelId(array) {
+  var newArray = [];
+  for (var i = 0; i < array.length; i++) {
+    if (array[i].pixelId !== "") {
+      newArray.push(array[i]);
+    }
+  }
+  if (newArray.length > 0) {
+    return newArray;
+  }
+  return undefined;
+}
 function onFire () {
+  if (data.pixels) {
+    data.pixels = removeEntriesWithEmptyPixelId(data.pixels);
+  }
+  if (data.tiktok_pixels) {
+    data.tiktok_pixels = removeEntriesWithEmptyPixelId(data.tiktok_pixels);
+  }
+  if (data.google_pixels) {
+    data.google_pixels = removeEntriesWithEmptyPixelId(data.google_pixels);
+  }
+  if (data.pinterest_pixels) {
+    data.pinterest_pixels = removeEntriesWithEmptyPixelId(data.pinterest_pixels);
+  }
+  if (data.linkedin_pixels) {
+    data.linkedin_pixels = removeEntriesWithEmptyPixelId(data.linkedin_pixels);
+  }
+  if (data.snapchat_pixels) {
+    data.snapchat_pixels = removeEntriesWithEmptyPixelId(data.snapchat_pixels);
+  }
+
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
       firePixelEvent();
@@ -4005,9 +4036,37 @@ ___WEB_PERMISSIONS___
 
 ___TESTS___
 
-scenarios: []
+scenarios:
+- name: Facebook Pixel
+  code: "const mockData = {\n  event_name: \"PageView\",\n  fireMethod: \"onlyPixel\"\
+    ,\n  event_id: 1135,\n  ownEventId: 1135,\n  pixels: [{\n    pixelId: \"11111\"\
+    \n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('setInWindow').wasCalledWith('_fbq_gtm_ids',\
+    \ [\"11111\"], true);\nassertApi('createQueue').wasCalledWith('fbq.queue');\n\
+    assertApi('aliasInWindow').wasCalledWith('_fbq', 'fbq');\nassertApi('copyFromWindow').wasCalledWith('fbq');\n\
+    assertApi('callInWindow').wasCalledWith('fbq.queue.push', [\"trackSingle\", \"\
+    11111\", \"PageView\", {},{\"eventID\":1135}]);\n"
+- name: Tiktok Pixel
+  code: "const mockData = {\n  event_name: \"PageView\",\n  fireMethod: \"onlyPixel\"\
+    ,\n  event_id: 1135,\n  ownEventId: 1135,\n  tiktok_pixels: [{\n    pixelId: \"\
+    11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('ttq');\n\
+    \n"
+- name: Pinterest Pixel
+  code: "const mockData = {\n  event_name: \"pagevisit\",\n  fireMethod: \"onlyPixel\"\
+    ,\n  event_id: 1135,\n  ownEventId: 1135,\n  pinterest_pixels: [{\n    pixelId:\
+\ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('pintrk');\n\
+    assertApi('createArgumentsQueue').wasCalledWith('pintrk', 'pintrk.queue');\n\n"
+- name: Linkedin Pixel
+  code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
+    ,\n  event_id: 1135,\n  ownEventId: 1135,\n  linkedin_pixels: [{\n    pixelId:\
+\ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('lintrk');\n\
+    \n"
+- name: Snapchat Pixel
+  code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
+    ,\n  event_id: 1135,\n  ownEventId: 1135,\n  snapchat_pixels: [{\n    pixelId:\
+\ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('snaptr');\n\
+    assertApi('createArgumentsQueue').wasCalledWith('snaptr', 'snaptr.queue');\n\n"
 
 
 ___NOTES___
 
-Version 2.5
+Version 2.6
