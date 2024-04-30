@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 3eb60c4fb26139f17f6913b7d7a6bf486fec0926
+    changeNotes: v2.8
+      Always generate event id
+  # Older versions
   - sha: eadf5e82888fc900e82eb6de791a8976cbcc2171
     changeNotes: v2.7
       Tests
-  # Older versions
   - sha: 02079290be886c1dd3fea02c3cf6c182ab7738ac
     changeNotes: v2.6
       Send ignore MSR to server as fallback
