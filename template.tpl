@@ -1382,7 +1382,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 2.8;
+const templateVersion = 2.9;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2383,7 +2383,7 @@ function fireCapiEvent() {
       amp: getAMPIds(),
       referrer: getReferrerUrl(),
       opt_out: data.opt_out,
-      event_id: data.event_id === 'autogenerate' ? event_id : data.ownEventId,
+      event_id: data.ownEventId ? data.ownEventId : event_id,
       action_source: data.action_source,
       data_processing_options: getDataProcessingOptions(),
       data_processing_options_country: data.data_processing_options_country,
@@ -4069,4 +4069,4 @@ scenarios:
 
 ___NOTES___
 
-Version 2.8
+Version 2.9
