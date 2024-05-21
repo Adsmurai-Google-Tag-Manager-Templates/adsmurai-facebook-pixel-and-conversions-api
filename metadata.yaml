@@ -17,10 +17,37 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: b1e37f4cf9fe49aebe4750d87e1811a12e50dc4c
+    changeNotes: v2.9
+      Always send event id to CAPI
+  # Older versions
+  - sha: 3eb60c4fb26139f17f6913b7d7a6bf486fec0926
+    changeNotes: v2.8
+      Always generate event id
+  - sha: eadf5e82888fc900e82eb6de791a8976cbcc2171
+    changeNotes: v2.7
+      Tests
+  - sha: 02079290be886c1dd3fea02c3cf6c182ab7738ac
+    changeNotes: v2.6
+      Send ignore MSR to server as fallback
+  - sha: eb4068b4b0d4840ad23b649f68b106c90fe717d4
+    changeNotes: v2.5
+      Ability to ignore appspot events
+  - sha: 2e56b7be2f76859d8152cf8e8bb831691bdf9f36
+    changeNotes: v2.4
+      Support for LinkedIn
+  - sha: 0bc3416f2a4c11013a4afc5ffff23b85487b9bad
+    changeNotes: v2.3
+      Pinterest test mode
+  - sha: 1347e4c591e232df84461af83b8d70f02b69c872
+    changeNotes: v2.2
+      Keep AMP ids during session
+  - sha: b2ffaa164ecdbb510e3f67ee6bcdddf8587f303a
+    changeNotes: v2.1
+      Support for Google Analytics 4 (api only)
   - sha: 22f72dd4636284cf2cbdcefea3ff8de6f12c4965
     changeNotes: v2.0
       Ability to set first party subdomain
-  # Older versions
   - sha: 9e9f1803caf928f6bc9be6132f2d0829781b9e15
     changeNotes: v1.9
       Use _gtmeec cookie when possible
