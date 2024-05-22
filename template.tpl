@@ -1382,7 +1382,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 2.9;
+const templateVersion = 3.0;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1524,12 +1524,11 @@ function getEventName (pixelType) {
     },
     pinterest: {
       "ViewContent": "pagevisit", // ViewContent doesnt exist for pint
-      "Purchase": "purchase",
+      "Purchase": "checkout",
       "AddToCart": "addtocart", // fb
       "PageView": "pagevisit", // fb
       "Lead": "lead", // fb
       "Search": "search", // fb
-      "InitiateCheckout": "checkout", // fb
     },
     snapchat: {
       "PageView": "PAGE_VIEW",
@@ -4069,4 +4068,4 @@ scenarios:
 
 ___NOTES___
 
-Version 2.9
+Version 3.0
