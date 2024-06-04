@@ -1420,7 +1420,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.1;
+const templateVersion = 3.2;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1706,7 +1706,10 @@ function getEcommerceData () {
         }
       }
 
-      if (price > 0) {
+      if (event.ecommerce.value) {
+        customData.value = event.ecommerce.value;
+      }
+      if (!customData.value && price > 0) {
         customData.value = price;
       }
       if (event.ecommerce.currency) {
@@ -4118,4 +4121,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.1
+Version 3.2
