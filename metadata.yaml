@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: a091abed5cea3b5078be0a199841f9985068b46c
+    changeNotes: v3.1
+      Postback - Set your own url to also receive the events
+  # Older versions
   - sha: 578e65f1264a002b34b853f79e572dc7c875829a
     changeNotes: v3.0
       Pinterest - Change events conversion
-  # Older versions
   - sha: b1e37f4cf9fe49aebe4750d87e1811a12e50dc4c
     changeNotes: v2.9
       Always send event id to CAPI
