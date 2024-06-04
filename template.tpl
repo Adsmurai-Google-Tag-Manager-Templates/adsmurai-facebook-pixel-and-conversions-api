@@ -471,6 +471,44 @@ ___TEMPLATE_PARAMETERS___
         "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
+        "type": "SIMPLE_TABLE",
+        "name": "postback_pixels",
+        "displayName": "Postback Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Pixel ID",
+            "valueHint": "Ex: 12345",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": []
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyCapi",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
         "type": "RADIO",
         "name": "serverSetup",
         "displayName": "Server setup for Conversions API",
@@ -1382,7 +1420,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.0;
+const templateVersion = 3.1;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1418,6 +1456,9 @@ function onFire () {
   }
   if (data.snapchat_pixels) {
     data.snapchat_pixels = removeEntriesWithEmptyPixelId(data.snapchat_pixels);
+  }
+  if (data.postback_pixels) {
+    data.postback_pixels = removeEntriesWithEmptyPixelId(data.postback_pixels);
   }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
@@ -2549,6 +2590,15 @@ function fireCapiEvent() {
         pixels.push({
           id: pixel.pixelId,
           type: "ga4"
+        });
+      });
+    }
+
+    if (data.postback_pixels) {
+      data.postback_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "postback"
         });
       });
     }
@@ -4068,4 +4118,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.0
+Version 3.1
