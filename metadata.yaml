@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: e7d47be58ac0b02d4c45c339a93abcfe6fa3bae4
+    changeNotes: v3.4
+      Minor correction
+  # Older versions
   - sha: 9e4763ab4ee4a31af331c481ccb435fe90fc269d
     changeNotes: v3.3
       Tiktok - Convert Lead events to SubmitForm
-  # Older versions
   - sha: 07b88e111fcc7d2a67d6eff69173f5225be10d6b
     changeNotes: v3.2
       Ecommerce data - Grab value field too
