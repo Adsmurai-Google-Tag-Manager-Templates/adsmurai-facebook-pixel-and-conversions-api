@@ -1420,7 +1420,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.4;
+const templateVersion = 3.5;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1731,14 +1731,17 @@ function getEcommerceData () {
 
 
 function getPixelEventParameters(pixelType) {
-  let eventParameters = getCustomData(['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
-    'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'], pixelType);
+  let eventParameters;
 
 	switch (pixelType) {
 		case "tiktok":
+      eventParameters = getCustomData(['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
+        'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties'], pixelType);
 			eventParameters = setupTiktokEventData(eventParameters);
 			break;
     case "fb": // must be fb to match the pixelType
+      eventParameters = getCustomData(['content_name', 'content_category', 'content_type', 'content_ids', 'contents', 'value',
+        'currency', 'num_items', 'search_string', 'status', 'predicted_ltv', 'customProperties', 'order_id'], pixelType);
       eventParameters = setupFacebookEventData(eventParameters);
       break;
     case "linkedin":
@@ -4122,4 +4125,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.4
+Version 3.5
