@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: e3dfa11e05891cd5bb1b0f08cc0076d47147c946
+    changeNotes: v3.5
+      FB pixel - Include order_id
+  # Older versions
   - sha: e7d47be58ac0b02d4c45c339a93abcfe6fa3bae4
     changeNotes: v3.4
       Minor correction
-  # Older versions
   - sha: 9e4763ab4ee4a31af331c481ccb435fe90fc269d
     changeNotes: v3.3
       Tiktok - Convert Lead events to SubmitForm
