@@ -1,6 +1,6 @@
 # Adsmurai Universal Pixel & Conversions API
 
-This Google Tag Manager custom tag for web containers helps with firing Facebook, TikTok & Pinterest events via regular pixel and Conversions API.
+This Google Tag Manager custom tag for web containers helps with firing Facebook, TikTok, Pinterest, Snapchat, Linkedin, Quora events via regular pixel and Conversions API.
 
 ## Installation
 
