@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: d1d891492f026b5096e3fbc795f9b673638ccf4b
+    changeNotes: v3.8
+      Update copys
+  # Older versions
   - sha: 9b1d598aef63286676ae55875a70cb561166dbbf
     changeNotes: v3.7
       Change CDN
-  # Older versions
   - sha: b89084f7ac5a4241cb847a3df6d9d0cdfa664e29
     changeNotes: v3.6
       Support for Quora
