@@ -378,6 +378,46 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SIMPLE_TABLE",
+        "name": "quora_pixels",
+        "displayName": "Quora Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Quora Pixel ID",
+            "valueHint": "Expected format: 527765582828194|7d3d75f5a34f4a7c9",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
         "name": "google_pixels",
         "displayName": "Google Ads Pixel(s)",
         "simpleTableColumns": [
@@ -506,7 +546,7 @@ ___TEMPLATE_PARAMETERS___
         ],
         "valueValidators": [
         ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "RADIO",
@@ -1420,7 +1460,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.5;
+const templateVersion = 3.6;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1460,6 +1500,9 @@ function onFire () {
   if (data.postback_pixels) {
     data.postback_pixels = removeEntriesWithEmptyPixelId(data.postback_pixels);
   }
+  if (data.quora_pixels) {
+    data.quora_pixels = removeEntriesWithEmptyPixelId(data.quora_pixels);
+  }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
@@ -1481,6 +1524,9 @@ function onFire () {
     }
     if (data.snapchat_pixels) {
       fireSnapchatPixel();
+    }
+    if (data.quora_pixels) {
+      fireQuoraPixel();
     }
   }
 
@@ -1584,6 +1630,9 @@ function getEventName (pixelType) {
       "ViewContent": "VIEW_CONTENT",
       "CompleteRegistration": "SIGN_UP",
       "AddPaymentInfo": "ADD_BILLING",
+    },
+    quora: {
+      "Lead": "GenerateLead"
     }
   };
 
@@ -1726,6 +1775,10 @@ function getEcommerceData () {
     }
   }
 
+  if (customData.value && !customData.price) {
+    customData.price = customData.value;
+  }
+
   return customData;
 }
 
@@ -1749,6 +1802,9 @@ function getPixelEventParameters(pixelType) {
       break;
     case "snapchat":
       eventParameters = setupSnapchatEventData();
+      break;
+    case "quora":
+      eventParameters = {};
       break;
 	}
 
@@ -1840,7 +1896,68 @@ function fireGooglePixel () {
 
     triggerSuccess();
   });
+}
 
+function fireQuoraPixel () {
+
+  function isQuoraLoaded() {
+    return copyFromWindow('qp');
+  }
+  function getQp() {
+    const callInWindow = require('callInWindow');
+    const createQueue = require('createQueue');
+    const setInWindow = require('setInWindow');
+
+    let qp = copyFromWindow('qp');
+
+    if (qp) return qp;
+
+    setInWindow('qp', function () {
+      if (copyFromWindow('qp.qp')) {
+        callInWindow('qp.qp.apply', qp, arguments);
+      } else {
+        callInWindow('qp.queue.push', arguments);
+      }
+    });
+
+    createQueue('qp.queue');
+
+    return copyFromWindow('qp');
+  }
+
+  function getAdvancedMatchingData () {
+    return translateFields({}, data, {
+      'em' : "email",
+    });
+  }
+
+  const isLoaded = isQuoraLoaded();
+  const qp = getQp();
+  function handlePixelSuccessfullyFired() {
+    const eventName = getEventName("quora");
+
+    // Add event_id in case it's set up
+    const event = getPixelEventParameters("quora");
+    if (data.event_id) {
+      event.event_id = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+    } else {
+      event.event_id = event_id;
+    }
+
+    const matchingData = getAdvancedMatchingData();
+
+    data.quora_pixels.forEach((pixel, i) => {
+      qp('init', pixel.pixelId.split("|")[1], matchingData);
+      qp('track', eventName, event);
+    });
+    triggerSuccess();
+  }
+
+  if (isLoaded) {
+    handlePixelSuccessfullyFired();
+  } else {
+    injectProviderSDK("https://a.quora.com/qevents.js", "quora-sdk", handlePixelSuccessfullyFired);
+  }
 }
 
 function fireSnapchatPixel () {
@@ -2610,6 +2727,15 @@ function fireCapiEvent() {
       });
     }
 
+    if (data.quora_pixels) {
+      data.quora_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "quora"
+        });
+      });
+    }
+
     return pixels;
   }
 
@@ -2924,6 +3050,201 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 8,
                     "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "qp"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "qp.queue"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "qp.qp"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "qp.queue.push"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "qp.qp.apply"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
                   },
                   {
                     "type": 8,
@@ -3798,7 +4119,11 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
-                "string": "https://cdn-st.adsmurai.com/"
+                "string": "https://a.quora.com/qevents.js"
+              },
+              {
+                "type": 1,
+                "string": "https://cdn.jsdelivr.net/"
               }
             ]
           }
@@ -4125,4 +4450,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.5
+Version 3.6
