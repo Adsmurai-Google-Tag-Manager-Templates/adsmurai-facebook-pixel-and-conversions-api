@@ -4123,7 +4123,7 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
-                "string": "https://cdn.jsdelivr.net/"
+                "string": "https://cdn-st.adsmurai.com/"
               }
             ]
           }
