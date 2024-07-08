@@ -1460,7 +1460,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.8;
+const templateVersion = 3.9;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1803,12 +1803,49 @@ function getPixelEventParameters(pixelType) {
     case "snapchat":
       eventParameters = setupSnapchatEventData();
       break;
+    case "pinterest":
+      eventParameters = setupPinterestEventData();
+      break;
     case "quora":
+    default:
       eventParameters = {};
       break;
 	}
 
 	return eventParameters;
+}
+
+function setupPinterestEventData() {
+  let eventData = getCustomData(['value', 'currency', 'order_id'], "pinterest");
+
+  eventData = translateFields(eventData, data, {
+    search_string: "search_query",
+  });
+
+  if (getType(data.contents) !== "undefined") {
+    let products = [];
+
+    data.contents.forEach((product) => {
+      products.push({
+        product_id: product.id,
+        product_price: product.item_price,
+        product_quantity: product.quantity,
+        product_category: product.category,
+      });
+    });
+    eventData.line_items = products;
+  } else if (getType(data.content_ids) !== "undefined") {
+    let products = [];
+
+    data.content_ids.forEach((productId) => {
+      products.push({
+        product_id: productId,
+      });
+    });
+    eventData.line_items = products;
+  }
+
+  return eventData;
 }
 
 function setupLinkedinEventData() {
@@ -1827,11 +1864,8 @@ function setupSnapchatEventData() {
     content_category: "item_category",
     search_string: "search_string",
     num_items: "number_items",
+    order_id: "transaction_id",
   });
-
-  if (data.custom_data && data.custom_data.order_id) {
-    eventData.transaction_id = data.custom_data.order_id;
-  }
 
   return eventData;
 }
@@ -4450,4 +4484,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.8
+Version 3.9
