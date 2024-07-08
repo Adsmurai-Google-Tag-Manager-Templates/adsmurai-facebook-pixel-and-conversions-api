@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 2b0f51f76e8529710009c86e4ab0197d09fbfa3d
+    changeNotes: v3.9
+      Send more data to pinterest pixel
+  # Older versions
   - sha: d1d891492f026b5096e3fbc795f9b673638ccf4b
     changeNotes: v3.8
       Update copys
-  # Older versions
   - sha: 9b1d598aef63286676ae55875a70cb561166dbbf
     changeNotes: v3.7
       Change CDN
