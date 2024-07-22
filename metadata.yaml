@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 9fe772d356aa53956b19a8f24c1775eaf5d178b9
+    changeNotes: v4.0
+      Quora - Default unknown event names to Generic
+  # Older versions
   - sha: 2b0f51f76e8529710009c86e4ab0197d09fbfa3d
     changeNotes: v3.9
       Send more data to pinterest pixel
-  # Older versions
   - sha: d1d891492f026b5096e3fbc795f9b673638ccf4b
     changeNotes: v3.8
       Update copys
