@@ -1460,7 +1460,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 3.9;
+const templateVersion = 4.0;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4487,4 +4487,4 @@ scenarios:
 
 ___NOTES___
 
-Version 3.9
+Version 4.0
