@@ -1968,7 +1968,10 @@ function fireQuoraPixel () {
   const isLoaded = isQuoraLoaded();
   const qp = getQp();
   function handlePixelSuccessfullyFired() {
-    const eventName = getEventName("quora");
+    let eventName = getEventName("quora");
+    if (["Generic", "AppInstall", "Purchase", "GenerateLead", "CompleteRegistration", "AddPaymentInfo", "AddToCart", "AddToWishlist", "InitiateCheckout", "Search"].indexOf(eventName) === -1) {
+      eventName = "Generic";
+    }
 
     // Add event_id in case it's set up
     const event = getPixelEventParameters("quora");
