@@ -869,6 +869,14 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "ga4",
                 "displayValue": "GA4"
+              },
+              {
+                "value": "quora",
+                "displayValue": "Quora"
+              },
+              {
+                "value": "linkedin",
+                "displayValue": "Linkedin"
               }
             ],
             "simpleValueType": true,
@@ -1460,7 +1468,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.0;
+const templateVersion = 4.1;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4487,4 +4495,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.0
+Version 4.1
