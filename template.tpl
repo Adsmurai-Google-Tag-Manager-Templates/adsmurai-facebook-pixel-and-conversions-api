@@ -1468,7 +1468,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.1;
+const templateVersion = 4.2;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1912,7 +1912,9 @@ function setupFacebookEventData(rawEvent) {
 }
 
 function injectSDK (callback) {
-
+  if (getType(copyFromWindow('adsmuraiSDK.post')) !== 'undefined') {
+    return callback();
+  }
   const adsmuraiSDKScriptUrl = 'https://cdn-st.adsmurai.com/sdk.js?tv=' + templateVersion;
   injectScript(
     adsmuraiSDKScriptUrl,
@@ -2221,10 +2223,13 @@ function fireTikTokPixel () {
   }
 }
 
-function injectTiktokSDK (onSuccess) {
+function injectTiktokSDK (onSuccess, onError) {
   function handlePixelUnsuccessfullyFired() {
     if (data.fireMethod === 'onlyPixel') {
       data.gtmOnFailure();
+    }
+    if (onError) {
+      onError();
     }
   }
 
@@ -2428,7 +2433,7 @@ function fireCapiEvent() {
 
   function afterInjection () {
     if (data.tiktok_pixels && getCookieValues('_ttp').length === 0) {
-      injectTiktokSDK(function() {
+      function afterTiktokInjection() {
         // tiktok cookie cant be manually generated, but we can trigger its creation
         if (getCookieValues('_ttp').length === 0) {
           let ttq = copyFromWindow('ttq');
@@ -2437,7 +2442,9 @@ function fireCapiEvent() {
         } else {
           sendPostRequest();
         }
-      });
+      }
+
+      injectTiktokSDK(afterTiktokInjection, afterTiktokInjection);
     } else {
       sendPostRequest();
     }
@@ -4495,4 +4502,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.1
+Version 4.2
