@@ -1173,14 +1173,7 @@ ___TEMPLATE_PARAMETERS___
             ]
           }
         ],
-        "defaultValue": "autogenerate",
-        "enablingConditions": [
-          {
-            "paramName": "fireMethod",
-            "paramValue": "both",
-            "type": "EQUALS"
-          }
-        ]
+        "defaultValue": "autogenerate"
       },
       {
         "type": "SELECT",
@@ -1468,7 +1461,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.2;
+const templateVersion = 4.3;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4502,4 +4495,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.2
+Version 4.3
