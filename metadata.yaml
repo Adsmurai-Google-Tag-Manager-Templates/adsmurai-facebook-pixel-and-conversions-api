@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: a1fc26e8640f0b02229e3b357e4734c5ced079f6
+    changeNotes: v4.3
+      Allow setting custom event id on any case
+  # Older versions
   - sha: d4421562e9e64d63c7a93d7c6e97f7f575d57962
     changeNotes: v4.2
       Make sure CAPI is fired even if TikTok fails
-  # Older versions
   - sha: a9789be7ce092545e4bc24c5052a6fe8b388529b
     changeNotes: v4.1
       Add quora and linkedin to custom properties
