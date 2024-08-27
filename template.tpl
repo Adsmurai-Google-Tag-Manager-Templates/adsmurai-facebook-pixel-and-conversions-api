@@ -419,7 +419,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SIMPLE_TABLE",
         "name": "google_pixels",
-        "displayName": "Google Ads Pixel(s)",
+        "displayName": "Google Ads Pixel(s) - Discontinued",
         "simpleTableColumns": [
           {
             "defaultValue": "",
@@ -466,7 +466,7 @@ ___TEMPLATE_PARAMETERS___
       {
         "type": "SIMPLE_TABLE",
         "name": "ga4_pixels",
-        "displayName": "Google Analytics 4 Pixel(s)",
+        "displayName": "Google Analytics 4 Pixel(s) - Discontinued",
         "simpleTableColumns": [
           {
             "defaultValue": "",
@@ -1461,7 +1461,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.3;
+const templateVersion = 4.4;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4495,4 +4495,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.3
+Version 4.4
