@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: fa28845f8c9e49f685311378957db93dcf8fb2ef
+    changeNotes: v4.4
+      Discontinue GA4 & Google Ads pixels
+  # Older versions
   - sha: a1fc26e8640f0b02229e3b357e4734c5ced079f6
     changeNotes: v4.3
       Allow setting custom event id on any case
-  # Older versions
   - sha: d4421562e9e64d63c7a93d7c6e97f7f575d57962
     changeNotes: v4.2
       Make sure CAPI is fired even if TikTok fails
