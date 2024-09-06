@@ -1453,6 +1453,7 @@ const getCookieValues = require('getCookieValues');
 const setCookie = require('setCookie');
 const getTimestampMillis = require('getTimestampMillis');
 const callInWindow = require('callInWindow');
+const setInWindow = require('setInWindow');
 const getQueryParameters = require('getQueryParameters');
 const getReferrerUrl = require('getReferrerUrl');
 const fromBase64 = require('fromBase64');
@@ -1461,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.4;
+const templateVersion = 4.5;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2068,7 +2069,14 @@ function fireSnapchatPixel () {
 }
 
 function fireLinkedinPixel () {
+  const createQueue = require('createQueue');
+
   const isLoaded = isLinkedinLoaded(); // must be fired before getPintrk
+
+  if (getEventName('linkedin') === 'PageView') {
+    const partnersPush = createQueue('_linkedin_data_partner_ids');
+    partnersPush(data.linkedin_pixels[0].pixelId);
+  }
 
   function handlePixelSuccessfullyFired() {
     const lintrk = getLintrk();
@@ -3632,6 +3640,45 @@ ___WEB_PERMISSIONS___
                 "mapValue": [
                   {
                     "type": 1,
+                    "string": "_linkedin_data_partner_ids"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
                     "string": "_fbq_gtm_ids"
                   },
                   {
@@ -4495,4 +4542,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.4
+Version 4.5
