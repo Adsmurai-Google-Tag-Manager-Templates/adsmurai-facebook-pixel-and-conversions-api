@@ -559,7 +559,7 @@ ___TEMPLATE_PARAMETERS___
           },
           {
             "value": "ownServer",
-            "displayValue": "I have my own server"
+            "displayValue": "I have my own server (deprecated)"
           }
         ],
         "simpleValueType": true,
@@ -1462,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.5;
+const templateVersion = 4.6;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4542,4 +4542,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.5
+Version 4.6
