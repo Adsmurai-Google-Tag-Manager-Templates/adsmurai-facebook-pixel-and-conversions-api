@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 27ffe8ccf1c0f67bb9f757df6c12b39fe756fe19
+    changeNotes: v4.7
+      Tiktok - Identify user on web pixel too
+  # Older versions
   - sha: a71d5b3638815e43a3c408b844379a4563971e71
     changeNotes: v4.5
       Linkedin - Set pixel as partner id too
-  # Older versions
   - sha: fa28845f8c9e49f685311378957db93dcf8fb2ef
     changeNotes: v4.4
       Discontinue GA4 & Google Ads pixels
