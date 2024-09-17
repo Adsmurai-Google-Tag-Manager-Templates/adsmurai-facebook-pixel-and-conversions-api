@@ -1462,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.6;
+const templateVersion = 4.7;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2190,6 +2190,13 @@ function fireTikTokPixel () {
         ttq.load(pixel.pixelId);
         initIds.push(pixel.pixelId);
         setInWindow('_ttq_gtm_ids', initIds, true);
+      }
+
+      if (data.em || data.ph) {
+        ttq.identify({
+          email: data.em,
+          phone_number: data.ph,
+        });
       }
 
       // PageView is always triggered by tiktok on the first pixel
@@ -4542,4 +4549,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.6
+Version 4.7
