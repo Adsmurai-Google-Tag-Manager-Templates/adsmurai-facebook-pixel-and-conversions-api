@@ -1462,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.7;
+const templateVersion = 4.8;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1606,7 +1606,8 @@ function getEventName (pixelType) {
   const nameConventions = {
     tiktok: {
       "Purchase": "CompletePayment",
-      "Lead": "SubmitForm"
+      "Lead": "SubmitForm",
+      "SubmitApplication": "SubmitForm"
     },
     facebook: {
       "CompletePayment": "Purchase",
@@ -1619,6 +1620,7 @@ function getEventName (pixelType) {
       "PageView": "pagevisit", // fb
       "Lead": "lead", // fb
       "Search": "search", // fb
+      "SubmitApplication": "lead", // fb
     },
     snapchat: {
       "PageView": "PAGE_VIEW",
@@ -4549,4 +4551,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.7
+Version 4.8
