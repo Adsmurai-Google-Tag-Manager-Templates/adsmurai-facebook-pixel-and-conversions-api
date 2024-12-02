@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 3240dc5b3ec5b04a975d2c24ef2d33342ade684f
+    changeNotes: v4.9
+      TikTok - Make sure pageview also has event_id
+  # Older versions
   - sha: 0e5d22c212f22b11303f3fb13c91d1513f3e8de4
     changeNotes: v4.8
       Convert SubmitApplication in some cases
-  # Older versions
   - sha: 27ffe8ccf1c0f67bb9f757df6c12b39fe756fe19
     changeNotes: v4.7
       Tiktok - Identify user on web pixel too
