@@ -1462,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.8;
+const templateVersion = 4.9;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2201,11 +2201,6 @@ function fireTikTokPixel () {
         });
       }
 
-      // PageView is always triggered by tiktok on the first pixel
-      if (eventName === "PageView" && i === 0) {
-        return;
-      }
-
       // Call the fbq() method with the parameters defined earlier
       // Add event_id in case it's set up
 
@@ -2216,6 +2211,7 @@ function fireTikTokPixel () {
         });
       } else {
         ttq.track(eventName, getPixelEventParameters("tiktok"), {
+          event_id: !data.event_id || data.event_id === 'autogenerate' ? event_id : data.ownEventId,
           pixel_code: pixel.pixelId,
         });
       }
@@ -2225,7 +2221,13 @@ function fireTikTokPixel () {
   if (ttq) { // they may already be loading the sdk from elsewhere
     handlePixelSuccessfullyFired();
   } else {
-    injectTiktokSDK(handlePixelSuccessfullyFired);
+    injectTiktokSDK(function () {
+      // Tiktok SDK has a race condition where first sent event won't have event_id unless you wait for
+      // events.js to also be loaded. This is the hack.
+      callInWindow('adsmuraiSDK.setTimeout', () => {
+        handlePixelSuccessfullyFired();
+      }, 1000);
+    });
   }
 
   function getTtq() {
@@ -2243,7 +2245,8 @@ function injectTiktokSDK (onSuccess, onError) {
     }
   }
 
-  injectScript('https://analytics.tiktok.com/i18n/pixel/sdk.js?sdkid=' + data.tiktok_pixels[0].pixelId,
+  // DO NOT include sdkid query param, or tiktok will automatically fire a Pageview event without event id...
+  injectScript('https://analytics.tiktok.com/i18n/pixel/sdk.js',
     onSuccess,
     handlePixelUnsuccessfullyFired,
     'tiktokPixel');
@@ -4551,4 +4554,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.8
+Version 4.9
