@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: cb65b0beb2d5c4251f50ae3a2c1ed9c07b7c3ecc
+    changeNotes: v5.0
+      Snapchat - Include provider based data
+  # Older versions
   - sha: 3240dc5b3ec5b04a975d2c24ef2d33342ade684f
     changeNotes: v4.9
       TikTok - Make sure pageview also has event_id
-  # Older versions
   - sha: 0e5d22c212f22b11303f3fb13c91d1513f3e8de4
     changeNotes: v4.8
       Convert SubmitApplication in some cases
