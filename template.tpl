@@ -1462,7 +1462,7 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 4.9;
+const templateVersion = 5.0;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1861,7 +1861,13 @@ function setupLinkedinEventData() {
 }
 
 function setupSnapchatEventData() {
-  let eventData = translateFields({}, data, {
+  const customData = getCustomData(['customProperties'], "snapchat");
+  const fullData = JSON.parse(JSON.stringify(data));
+  for(const fieldName of Object.keys(customData)) {
+    fullData[fieldName] = customData[fieldName];
+  }
+
+  let eventData = translateFields({}, fullData, {
     value: "price",
     currency: "currency",
     content_ids: "item_ids",
@@ -4554,4 +4560,4 @@ scenarios:
 
 ___NOTES___
 
-Version 4.9
+Version 5.0
