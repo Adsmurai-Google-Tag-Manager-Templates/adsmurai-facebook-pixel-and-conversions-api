@@ -1462,7 +1462,8 @@ const Object = require('Object');
 const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
-const templateVersion = 5.0;
+const callLater = require('callLater');
+const templateVersion = 5.1;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2099,7 +2100,10 @@ function fireLinkedinPixel () {
       }
       event.conversion_id = pixel.pixelId;
 
-      lintrk('track', event);
+      // for some reason linkedin method blocks the whole tag from completion, so we run it async...
+      callLater(function () {
+        lintrk('track', event);
+      });
     });
     triggerSuccess();
   }
@@ -4560,4 +4564,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.0
+Version 5.1
