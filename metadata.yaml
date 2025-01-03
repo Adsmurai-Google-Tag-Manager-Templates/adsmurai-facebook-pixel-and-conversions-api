@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: c99d4772a8826edbf03f2caf8065523087d4cffa
+    changeNotes: v5.2
+      Make sure SDK is available for TikTok
+  # Older versions
   - sha: 6b45cc98c79eab60b7fd2f983a2453ce32c1a48d
     changeNotes: v5.1
       Prevent Linkedin from blocking tag completion
-  # Older versions
   - sha: cb65b0beb2d5c4251f50ae3a2c1ed9c07b7c3ecc
     changeNotes: v5.0
       Snapchat - Include provider based data
