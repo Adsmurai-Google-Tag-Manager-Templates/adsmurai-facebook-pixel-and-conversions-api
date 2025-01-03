@@ -1463,7 +1463,7 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 5.1;
+const templateVersion = 5.2;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1550,7 +1550,7 @@ function onFire () {
   }
 }
 
-if (data.useEcommerceData) {
+if (data.useEcommerceData || data.tiktok_pixels) {
   injectSDK(onFire);
 } else {
   onFire();
@@ -4564,4 +4564,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.1
+Version 5.2
