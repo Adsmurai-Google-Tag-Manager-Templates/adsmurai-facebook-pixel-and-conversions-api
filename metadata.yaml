@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 63f397f819ad3849d363181f05c2b5d33de8de0c
+    changeNotes: v5.3
+      Apply E164 format to TikTok phones
+  # Older versions
   - sha: c99d4772a8826edbf03f2caf8065523087d4cffa
     changeNotes: v5.2
       Make sure SDK is available for TikTok
-  # Older versions
   - sha: 6b45cc98c79eab60b7fd2f983a2453ce32c1a48d
     changeNotes: v5.1
       Prevent Linkedin from blocking tag completion
