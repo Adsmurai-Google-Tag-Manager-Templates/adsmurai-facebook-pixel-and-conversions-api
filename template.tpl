@@ -1463,7 +1463,7 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 5.2;
+const templateVersion = 5.3;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2190,6 +2190,13 @@ function fireTikTokPixel () {
   const eventName = getEventName("tiktok");
   const ttq = getTtq();
 
+  function phoneToE164 (phone) {
+    if (phone.length < 64) { // detect if its hashed
+      return "+" + phone; // tiktok wants phones in E164 format
+    }
+    return phone;
+  }
+
   function handlePixelSuccessfullyFired() {
     triggerSuccess();
 
@@ -2207,7 +2214,7 @@ function fireTikTokPixel () {
       if (data.em || data.ph) {
         ttq.identify({
           email: data.em,
-          phone_number: data.ph,
+          phone_number: data.ph && data.ph.indexOf('+') === -1 ? phoneToE164(data.ph) : data.ph,
         });
       }
 
@@ -4564,4 +4571,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.2
+Version 5.3
