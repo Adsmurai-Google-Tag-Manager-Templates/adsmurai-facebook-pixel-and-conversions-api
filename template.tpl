@@ -1463,7 +1463,7 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 5.3;
+const templateVersion = 5.4;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1887,8 +1887,8 @@ function setupTiktokEventData(rawEvent) {
 
 		data.contents.forEach((product) => {
 			products.push({
-				content_id: product.id,
-				price: product.item_price,
+				content_id: product.id ? product.id : product.content_id,
+				price: product.item_price ? product.item_price : product.price,
 				quantity: product.quantity,
 				content_type: product.content_type ? product.content_type : rawEvent.content_type,
 			});
@@ -4571,4 +4571,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.3
+Version 5.4
