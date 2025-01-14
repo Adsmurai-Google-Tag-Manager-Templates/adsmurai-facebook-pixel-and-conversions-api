@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 02f47bbe019a8586050620f1f24033dab9ca2d63
+    changeNotes: v5.5
+      TikTok - Convert PageView to Pageview
+  # Older versions
   - sha: 87c06de6fc9abbace71c2dffdddccc71a638a413
     changeNotes: v5.4
       Tiktok - Handle content_id and price too
-  # Older versions
   - sha: 63f397f819ad3849d363181f05c2b5d33de8de0c
     changeNotes: v5.3
       Apply E164 format to TikTok phones
