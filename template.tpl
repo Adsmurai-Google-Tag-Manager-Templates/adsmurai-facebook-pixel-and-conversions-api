@@ -1463,7 +1463,7 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 5.4;
+const templateVersion = 5.5;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1606,6 +1606,7 @@ function getEventName (pixelType) {
   let eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
   const nameConventions = {
     tiktok: {
+      "PageView": "Pageview",
       "Purchase": "CompletePayment",
       "Lead": "SubmitForm",
       "SubmitApplication": "SubmitForm"
@@ -4571,4 +4572,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.4
+Version 5.5
