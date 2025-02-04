@@ -418,6 +418,46 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SIMPLE_TABLE",
+        "name": "microsoft_pixels",
+        "displayName": "Microsoft Ads Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Microsoft UET Tag ID",
+            "valueHint": "Expected format: 527765582828194",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
         "name": "google_pixels",
         "displayName": "Google Ads Pixel(s) - Discontinued",
         "simpleTableColumns": [
@@ -1463,7 +1503,8 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 5.5;
+const generateRandom = require('generateRandom');
+const templateVersion = 5.6;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1506,6 +1547,9 @@ function onFire () {
   if (data.quora_pixels) {
     data.quora_pixels = removeEntriesWithEmptyPixelId(data.quora_pixels);
   }
+  if (data.microsoft_pixels) {
+    data.microsoft_pixels = removeEntriesWithEmptyPixelId(data.microsoft_pixels);
+  }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
@@ -1530,6 +1574,9 @@ function onFire () {
     }
     if (data.quora_pixels) {
       fireQuoraPixel();
+    }
+    if (data.microsoft_pixels) {
+      fireMicrosoftPixel();
     }
   }
 
@@ -1812,6 +1859,9 @@ function getPixelEventParameters(pixelType) {
     case "pinterest":
       eventParameters = setupPinterestEventData();
       break;
+    case "microsoft":
+      eventParameters = setupMicrosoftEventData();
+      break;
     case "quora":
     default:
       eventParameters = {};
@@ -1819,6 +1869,105 @@ function getPixelEventParameters(pixelType) {
 	}
 
 	return eventParameters;
+}
+
+function hashIfNeeded(val) {
+  return data.hashData ? hash(val) : val;
+}
+
+function hash(valueToHash) {
+  const makeString = require('makeString');
+
+  const sha256 = copyFromWindow('sha256');
+
+  if (!sha256) return valueToHash;
+
+  switch (getType(valueToHash)) {
+    case 'undefined':
+    case 'null':
+    case 'object':
+    case 'function':
+    case 'boolean':
+      return valueToHash;
+    case 'string':
+      return sha256(valueToHash.toLowerCase().trim());
+    case 'number':
+      return sha256(makeString(valueToHash));
+    case 'array':
+      return valueToHash.map(value => hash(value));
+    default:
+      return sha256(valueToHash);
+  }
+}
+
+// https://help.ads.microsoft.com/#apex/ads/en/56955/1-500
+function setupMicrosoftEventData() {
+  const readTitle = require('readTitle');
+  const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
+
+  function getContentIds() {
+    if (data.content_ids) {
+      if (getType(data.content_ids) === 'array') {
+        return data.content_ids.join(",");
+      } else {
+        return data.content_ids;
+      }
+    }
+    return "";
+  }
+
+  function items() {
+    let result = "";
+    if (data.contents && getType(data.contents) === 'array') {
+      data.contents.forEach((product, i) => {
+        var item = {
+          content_id: product.id ? product.id : product.content_id,
+          price: product.item_price ? product.item_price : product.price,
+        };
+        result += "id=" + item.content_id + 'quantity=' + product.quantity + 'price=' + item.price;
+        if (i < data.contents.length - 1) {
+          result += ',';
+        }
+      });
+    }
+    return result;
+  }
+
+  let params = {};
+  params.rn = generateRandom(100000, 999999);
+  params.ver = '2.3';
+  params.p = getUrl();
+  params.r = getReferrerUrl();
+  params.tl = readTitle();
+  params.pagetype = "other";
+  params.items = items();
+  params.prodid = getContentIds();
+  params.search_term = data.search_string;
+  params.transaction_id = data.order_id;
+  params.lg = "en";
+  params.sw = platformSpecs.screen.width;
+  params.sh = platformSpecs.screen.height;
+  params.sc = "";
+  params.spa = "N";
+  params.msclkid = setOrGetMsClickCookie();
+  params.uid = setOrGetMicrosoftCookie('_uetuid', 7776000);
+  params.sid = setOrGetMicrosoftCookie('_uetsid', 86400);
+  params.vid = setOrGetMicrosoftCookie('_uetvid', 33696000);
+  params.page_path = "";
+  params.gc = data.currency;
+  params.gv = data.value;
+
+  if (data.em || data.ph) {
+    params.pid = "";
+    if (data.em) {
+      params.pid += "em=" + hashIfNeeded(data.em);
+    }
+    if (data.ph) {
+      params.pid += (params.pid.length > 0 ? '&' : '') + "ph=" + hashIfNeeded(phoneToE164(data.ph));
+    }
+  }
+
+  return params;
 }
 
 function setupPinterestEventData() {
@@ -1946,15 +2095,48 @@ function fireGooglePixel () {
   });
 }
 
+function fireMicrosoftPixel () {
+  function afterInjection () {
+    const sendPixel = require('sendPixel');
+    const encodeUriComponent = require('encodeUriComponent');
+    let eventName = getEventName("microsoft");
+
+    // Add event_id in case it's set up
+    const event = getPixelEventParameters("microsoft");
+    event.mid = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+    event.evt = eventName === 'PageView' ? 'pageLoad' : 'custom';
+    if(eventName !== 'PageView') {
+      event.ea = eventName;
+    }
+
+    data.microsoft_pixels.forEach((pixel, i) => {
+      event.ti = pixel.pixelId;
+      let url = 'https://bat.bing.com/action/0?';
+      let all_params = "";
+      if(event){
+        for (var key in event){
+          if (event[key] == undefined || event[key] == null) {
+            continue;
+          }
+          all_params += key + "=" + encodeUriComponent(event[key]) + "&";
+        }
+        url += all_params;
+      }
+
+      sendPixel(url);
+    });
+    triggerSuccess();
+  }
+  injectSDK(afterInjection);
+}
+
 function fireQuoraPixel () {
 
   function isQuoraLoaded() {
     return copyFromWindow('qp');
   }
   function getQp() {
-    const callInWindow = require('callInWindow');
     const createQueue = require('createQueue');
-    const setInWindow = require('setInWindow');
 
     let qp = copyFromWindow('qp');
 
@@ -2186,17 +2368,9 @@ function firePinterestPixel () {
 }
 
 function fireTikTokPixel () {
-  const setInWindow = require('setInWindow');
 
   const eventName = getEventName("tiktok");
   const ttq = getTtq();
-
-  function phoneToE164 (phone) {
-    if (phone.length < 64) { // detect if its hashed
-      return "+" + phone; // tiktok wants phones in E164 format
-    }
-    return phone;
-  }
 
   function handlePixelSuccessfullyFired() {
     triggerSuccess();
@@ -2284,8 +2458,6 @@ function injectProviderSDK (url, id, onSuccess) {
 }
 
 function firePixelEvent() {
-  const setInWindow = require('setInWindow');
-
   const fbq = getFbq();
 
   // Build the fbq() command arguments
@@ -2340,7 +2512,6 @@ function firePixelEvent() {
     'fbPixel');
 
   function getFbq() {
-    const callInWindow = require('callInWindow');
     const aliasInWindow = require('aliasInWindow');
     const createQueue = require('createQueue');
 
@@ -2482,7 +2653,6 @@ function fireCapiEvent() {
   }
 
   function sendPostRequest () {
-    const callInWindow = require('callInWindow');
     const opts = getOpts();
     const groupedPixels = getGroupedPixels();
 
@@ -2500,7 +2670,6 @@ function fireCapiEvent() {
       handleCapiSuccessfullyFired();
       return;
     }
-
     callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
 
     handleCapiSuccessfullyFired();
@@ -2616,6 +2785,10 @@ function fireCapiEvent() {
         gclid: getQueryParameters("gclid"), // google tracking param
         wbraid: getQueryParameters("wbraid"), // google tracking param
         gbraid: getQueryParameters("gbraid"), // google tracking param
+        _msclkid: setOrGetMsClickCookie(), // microsoft tracking param
+        _buid: setOrGetMicrosoftCookie('_uetuid', 7776000), // microsoft tracking param
+        _uetsid: setOrGetMicrosoftCookie('_uetsid', 86400), // microsoft tracking param
+        _uetvid: setOrGetMicrosoftCookie('_uetvid', 33696000), // microsoft tracking param
         subscription_id: data.subscription_id,
         lead_id: data.lead_id,
         fb_login_id: data.fb_login_id,
@@ -2819,6 +2992,15 @@ function fireCapiEvent() {
       });
     }
 
+    if (data.microsoft_pixels) {
+      data.microsoft_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "microsoftads"
+        });
+      });
+    }
+
     return pixels;
   }
 
@@ -2826,31 +3008,6 @@ function fireCapiEvent() {
     if (!data.data_processing_options) return undefined;
     if (data.data_processing_options === 'emptyArray') return [];
     return ['LDU'];
-  }
-
-  function hash(valueToHash) {
-    const makeString = require('makeString');
-
-    const sha256 = copyFromWindow('sha256');
-
-    if (!sha256) return valueToHash;
-
-    switch (getType(valueToHash)) {
-      case 'undefined':
-      case 'null':
-      case 'object':
-      case 'function':
-      case 'boolean':
-        return valueToHash;
-      case 'string':
-        return sha256(valueToHash.toLowerCase().trim());
-      case 'number':
-        return sha256(makeString(valueToHash));
-      case 'array':
-        return valueToHash.map(value => hash(value));
-      default:
-        return sha256(valueToHash);
-    }
   }
 
   function encodeProperty(prop) {
@@ -2892,7 +3049,6 @@ function fireCapiEvent() {
   function generateFbpCookie() {
     // If there's no fbp cookie, we build it
     // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
-    const generateRandom = require('generateRandom');
     const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
 
     setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
@@ -2928,6 +3084,84 @@ function fireCapiEvent() {
     data.gtmOnFailure();
   }
 }
+
+function setOrGetMsClickCookie() {
+  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
+    return undefined;
+  }
+
+  const getQueryParameters = require('getQueryParameters');
+
+  let value = undefined;
+
+  if (getQueryParameters('msclkid', false)) {
+    value = getQueryParameters('msclkid');
+
+    if (getCookieValues('_uetmsclkid').length === 0) {
+      setCookie('_uetmsclkid', value, { 'domain': 'auto', 'max-age': 7776000, 'path': '/' });
+    }
+  } else {
+    let values = getCookieValues('_uetmsclkid');
+    if (values.length > 0 && values[0] !== '') {
+      value = values[0];
+    }
+  }
+
+  return value;
+}
+
+function setOrGetMicrosoftCookie(cookieName, duration) {
+  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
+    return undefined;
+  }
+  let value = undefined;
+
+  if (getCookieValues(cookieName).length === 0) {
+    value = generateUUID();
+    setCookie(cookieName, value, { 'domain': 'auto', 'max-age': duration, 'path': '/' });
+  } else {
+    let values = getCookieValues(cookieName);
+    if (values.length > 0 && values[0] !== '') {
+      value = values[0];
+    }
+  }
+
+  return value;
+}
+
+function phoneToE164 (phone) {
+  if (phone.length < 64) { // detect if its hashed
+    return "+" + phone;
+  }
+  return phone;
+}
+
+function generateUUID() {
+  const Math = require('Math');
+  function cryptoRandom() {
+    return Math.floor(generateRandom(1000000000, 9999999999) * 16);
+  }
+
+  var uuid = '',
+    i,
+    c;
+
+  for (i = 0; i < 36; i++) {
+    if (i === 8 || i === 13 || i === 18 || i === 23) {
+      uuid += '-';
+    } else if (i === 14) {
+      uuid += '4';
+    } else {
+      c = cryptoRandom();
+      if (i === 19) {
+        c = (c & 3) | 8; // Set bits according to UUID v4 standard
+      }
+      uuid += c.toString(16);
+    }
+  }
+  return uuid;
+}
+
 
 
 ___WEB_PERMISSIONS___
@@ -4299,6 +4533,22 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "_gtmeec"
+              },
+              {
+                "type": 1,
+                "string": "_uetuid"
+              },
+              {
+                "type": 1,
+                "string": "_uetmsclkid"
+              },
+              {
+                "type": 1,
+                "string": "_uetsid"
+              },
+              {
+                "type": 1,
+                "string": "_uetvid"
               }
             ]
           }
@@ -4464,6 +4714,194 @@ ___WEB_PERMISSIONS___
                     "string": "any"
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetuid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetmsclkid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetsid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetvid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
               }
             ]
           }
@@ -4572,4 +5010,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.5
+Version 5.6
