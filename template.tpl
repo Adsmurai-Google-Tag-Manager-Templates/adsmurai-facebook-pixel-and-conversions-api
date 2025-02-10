@@ -1504,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 5.6;
+const templateVersion = 5.7;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2096,6 +2096,12 @@ function fireGooglePixel () {
 }
 
 function fireMicrosoftPixel () {
+
+  if (data.fireMethod === 'both') { // microsoft ads deduplication is superbad
+    triggerSuccess();
+    return;
+  }
+
   function afterInjection () {
     const sendPixel = require('sendPixel');
     const encodeUriComponent = require('encodeUriComponent');
@@ -5010,4 +5016,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.6
+Version 5.7
