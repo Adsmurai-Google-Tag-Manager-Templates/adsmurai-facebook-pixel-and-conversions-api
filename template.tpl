@@ -24,7 +24,7 @@ ___INFO___
 "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
 },
-"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora & Snapchat via conventional pixel and via their Conversions API.",
+"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora, Snapchat & Microsoft Ads via conventional pixel and via their Conversions API.",
 "containerContexts": [
 "WEB"
 ]
@@ -1504,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 5.7;
+const templateVersion = 5.8;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -5016,4 +5016,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.7
+Version 5.8
