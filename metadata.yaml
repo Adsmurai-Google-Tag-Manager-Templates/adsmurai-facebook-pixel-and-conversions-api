@@ -17,10 +17,13 @@ documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmura
 versions:
 
   # Latest version
+  - sha: 58c59be44e834365182bf9a3f67ea5fb78614a0d
+    changeNotes: v5.8
+      List Microsoft Ads
+  # Older versions
   - sha: e7e2cfcf76e8d119d686526e557e367887b36b40
     changeNotes: v5.7
       Microsoft Ads - Do not send pixel events on both mode
-  # Older versions
   - sha: 22d84a3718af01f3a998d31678db8e1ca1cc36b9
     changeNotes: v5.6
       Support for Microsoft Ads
