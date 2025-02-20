@@ -15,7 +15,6 @@
 homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
-
   # Latest version
   - sha: 58c59be44e834365182bf9a3f67ea5fb78614a0d
     changeNotes: v5.8
