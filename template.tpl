@@ -1504,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 5.8;
+const templateVersion = 5.9;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1522,7 +1522,35 @@ function removeEntriesWithEmptyPixelId(array) {
   }
   return undefined;
 }
+
+function storeUTMs() {
+  const key = "utms-store";
+  const url = getUrl();
+
+  if (templateStorage.getItem(key) || url.indexOf("utm_") === -1) {
+    return;
+  }
+
+  let utms = {
+    utm_source: getQueryParameters('utm_source', false),
+    utm_campaign: getQueryParameters('utm_campaign', false),
+    utm_medium: getQueryParameters('utm_medium', false),
+    utm_term: getQueryParameters('utm_term', false),
+    utm_content: getQueryParameters('utm_content', false),
+    utm_id: getQueryParameters('utm_id', false),
+  };
+
+  templateStorage.setItem(key, utms);
+}
+
+function getStoredUTMs() {
+  return templateStorage.getItem("utms-store");
+}
+
 function onFire () {
+
+  storeUTMs();
+
   if (data.pixels) {
     data.pixels = removeEntriesWithEmptyPixelId(data.pixels);
   }
@@ -2666,7 +2694,8 @@ function fireCapiEvent() {
       pixels: groupedPixels,
       ignoreGTMMSR: data.ignoreGTMMSR,
       data: getEventData(groupedPixels),
-      templateVersion: templateVersion.toString()
+      templateVersion: templateVersion.toString(),
+      utms: getStoredUTMs()
     };
     if (opts) {
       body.opts = opts;
@@ -5016,4 +5045,4 @@ scenarios:
 
 ___NOTES___
 
-Version 5.8
+Version 5.9
