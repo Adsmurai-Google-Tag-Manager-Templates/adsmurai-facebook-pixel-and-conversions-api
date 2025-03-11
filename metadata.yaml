@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 626044c90c45c6f9ef2c8daa2a1e634064bc50ad
+    changeNotes: v5.9
+      Keep utms between pages
+  # Older versions
   - sha: 58c59be44e834365182bf9a3f67ea5fb78614a0d
     changeNotes: v5.8
       List Microsoft Ads
-  # Older versions
   - sha: e7e2cfcf76e8d119d686526e557e367887b36b40
     changeNotes: v5.7
       Microsoft Ads - Do not send pixel events on both mode
