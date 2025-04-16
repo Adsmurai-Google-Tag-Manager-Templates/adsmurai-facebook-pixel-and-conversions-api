@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 626044c90c45c6f9ef2c8daa2a1e634064bc50ad
+    changeNotes: v6.1
+      Keep utms between pages
+  # Older versions
   - sha: d6a315256d0b8456cb557bf8a90e05e385d9493a
     changeNotes: v6.0
       Rollback changes to see if google updates the template again...
-  # Older versions
   - sha: 626044c90c45c6f9ef2c8daa2a1e634064bc50ad
     changeNotes: v5.9
       Keep utms between pages
