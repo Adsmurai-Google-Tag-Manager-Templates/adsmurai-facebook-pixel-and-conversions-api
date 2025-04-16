@@ -24,7 +24,7 @@ ___INFO___
 "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
 },
-"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora, Snapchat & Microsoft Ads via conventional pixel and via their Conversions API.",
+"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora & Snapchat via conventional pixel and via their Conversions API.",
 "containerContexts": [
 "WEB"
 ]
@@ -385,46 +385,6 @@ ___TEMPLATE_PARAMETERS___
             "defaultValue": "",
             "displayName": "Quora Pixel ID",
             "valueHint": "Expected format: 527765582828194|7d3d75f5a34f4a7c9",
-            "displayValue": "",
-            "name": "pixelId",
-            "type": "TEXT",
-            "isUnique": true,
-            "valueValidators": [
-            ]
-          }
-        ],
-        "newRowButtonText": "Add pixel ID",
-        "notSetText": "Please, add at least one pixel ID",
-        "enablingConditions": [
-          {
-            "paramName": "fireMethod",
-            "paramValue": "onlyPixel",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "fireMethod",
-            "paramValue": "both",
-            "type": "EQUALS"
-          },
-          {
-            "paramName": "serverSetup",
-            "paramValue": "serverlessTracking",
-            "type": "EQUALS"
-          }
-        ],
-        "valueValidators": [
-        ],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
-      },
-      {
-        "type": "SIMPLE_TABLE",
-        "name": "microsoft_pixels",
-        "displayName": "Microsoft Ads Pixel(s)",
-        "simpleTableColumns": [
-          {
-            "defaultValue": "",
-            "displayName": "Microsoft UET Tag ID",
-            "valueHint": "Expected format: 527765582828194",
             "displayValue": "",
             "name": "pixelId",
             "type": "TEXT",
@@ -1503,8 +1463,7 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const generateRandom = require('generateRandom');
-const templateVersion = 6.1;
+const templateVersion = 6.2;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1522,35 +1481,7 @@ function removeEntriesWithEmptyPixelId(array) {
   }
   return undefined;
 }
-
-function storeUTMs() {
-  const key = "utms-store";
-  const url = getUrl();
-
-  if (templateStorage.getItem(key) || url.indexOf("utm_") === -1) {
-    return;
-  }
-
-  let utms = {
-    utm_source: getQueryParameters('utm_source', false),
-    utm_campaign: getQueryParameters('utm_campaign', false),
-    utm_medium: getQueryParameters('utm_medium', false),
-    utm_term: getQueryParameters('utm_term', false),
-    utm_content: getQueryParameters('utm_content', false),
-    utm_id: getQueryParameters('utm_id', false),
-  };
-
-  templateStorage.setItem(key, utms);
-}
-
-function getStoredUTMs() {
-  return templateStorage.getItem("utms-store");
-}
-
 function onFire () {
-
-  storeUTMs();
-
   if (data.pixels) {
     data.pixels = removeEntriesWithEmptyPixelId(data.pixels);
   }
@@ -1574,9 +1505,6 @@ function onFire () {
   }
   if (data.quora_pixels) {
     data.quora_pixels = removeEntriesWithEmptyPixelId(data.quora_pixels);
-  }
-  if (data.microsoft_pixels) {
-    data.microsoft_pixels = removeEntriesWithEmptyPixelId(data.microsoft_pixels);
   }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
@@ -1602,9 +1530,6 @@ function onFire () {
     }
     if (data.quora_pixels) {
       fireQuoraPixel();
-    }
-    if (data.microsoft_pixels) {
-      fireMicrosoftPixel();
     }
   }
 
@@ -1887,9 +1812,6 @@ function getPixelEventParameters(pixelType) {
     case "pinterest":
       eventParameters = setupPinterestEventData();
       break;
-    case "microsoft":
-      eventParameters = setupMicrosoftEventData();
-      break;
     case "quora":
     default:
       eventParameters = {};
@@ -1897,105 +1819,6 @@ function getPixelEventParameters(pixelType) {
 	}
 
 	return eventParameters;
-}
-
-function hashIfNeeded(val) {
-  return data.hashData ? hash(val) : val;
-}
-
-function hash(valueToHash) {
-  const makeString = require('makeString');
-
-  const sha256 = copyFromWindow('sha256');
-
-  if (!sha256) return valueToHash;
-
-  switch (getType(valueToHash)) {
-    case 'undefined':
-    case 'null':
-    case 'object':
-    case 'function':
-    case 'boolean':
-      return valueToHash;
-    case 'string':
-      return sha256(valueToHash.toLowerCase().trim());
-    case 'number':
-      return sha256(makeString(valueToHash));
-    case 'array':
-      return valueToHash.map(value => hash(value));
-    default:
-      return sha256(valueToHash);
-  }
-}
-
-// https://help.ads.microsoft.com/#apex/ads/en/56955/1-500
-function setupMicrosoftEventData() {
-  const readTitle = require('readTitle');
-  const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
-
-  function getContentIds() {
-    if (data.content_ids) {
-      if (getType(data.content_ids) === 'array') {
-        return data.content_ids.join(",");
-      } else {
-        return data.content_ids;
-      }
-    }
-    return "";
-  }
-
-  function items() {
-    let result = "";
-    if (data.contents && getType(data.contents) === 'array') {
-      data.contents.forEach((product, i) => {
-        var item = {
-          content_id: product.id ? product.id : product.content_id,
-          price: product.item_price ? product.item_price : product.price,
-        };
-        result += "id=" + item.content_id + 'quantity=' + product.quantity + 'price=' + item.price;
-        if (i < data.contents.length - 1) {
-          result += ',';
-        }
-      });
-    }
-    return result;
-  }
-
-  let params = {};
-  params.rn = generateRandom(100000, 999999);
-  params.ver = '2.3';
-  params.p = getUrl();
-  params.r = getReferrerUrl();
-  params.tl = readTitle();
-  params.pagetype = "other";
-  params.items = items();
-  params.prodid = getContentIds();
-  params.search_term = data.search_string;
-  params.transaction_id = data.order_id;
-  params.lg = "en";
-  params.sw = platformSpecs.screen.width;
-  params.sh = platformSpecs.screen.height;
-  params.sc = "";
-  params.spa = "N";
-  params.msclkid = setOrGetMsClickCookie();
-  params.uid = setOrGetMicrosoftCookie('_uetuid', 7776000);
-  params.sid = setOrGetMicrosoftCookie('_uetsid', 86400);
-  params.vid = setOrGetMicrosoftCookie('_uetvid', 33696000);
-  params.page_path = "";
-  params.gc = data.currency;
-  params.gv = data.value;
-
-  if (data.em || data.ph) {
-    params.pid = "";
-    if (data.em) {
-      params.pid += "em=" + hashIfNeeded(data.em);
-    }
-    if (data.ph) {
-      params.pid += (params.pid.length > 0 ? '&' : '') + "ph=" + hashIfNeeded(phoneToE164(data.ph));
-    }
-  }
-
-  return params;
 }
 
 function setupPinterestEventData() {
@@ -2123,54 +1946,15 @@ function fireGooglePixel () {
   });
 }
 
-function fireMicrosoftPixel () {
-
-  if (data.fireMethod === 'both') { // microsoft ads deduplication is superbad
-    triggerSuccess();
-    return;
-  }
-
-  function afterInjection () {
-    const sendPixel = require('sendPixel');
-    const encodeUriComponent = require('encodeUriComponent');
-    let eventName = getEventName("microsoft");
-
-    // Add event_id in case it's set up
-    const event = getPixelEventParameters("microsoft");
-    event.mid = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
-    event.evt = eventName === 'PageView' ? 'pageLoad' : 'custom';
-    if(eventName !== 'PageView') {
-      event.ea = eventName;
-    }
-
-    data.microsoft_pixels.forEach((pixel, i) => {
-      event.ti = pixel.pixelId;
-      let url = 'https://bat.bing.com/action/0?';
-      let all_params = "";
-      if(event){
-        for (var key in event){
-          if (event[key] == undefined || event[key] == null) {
-            continue;
-          }
-          all_params += key + "=" + encodeUriComponent(event[key]) + "&";
-        }
-        url += all_params;
-      }
-
-      sendPixel(url);
-    });
-    triggerSuccess();
-  }
-  injectSDK(afterInjection);
-}
-
 function fireQuoraPixel () {
 
   function isQuoraLoaded() {
     return copyFromWindow('qp');
   }
   function getQp() {
+    const callInWindow = require('callInWindow');
     const createQueue = require('createQueue');
+    const setInWindow = require('setInWindow');
 
     let qp = copyFromWindow('qp');
 
@@ -2402,9 +2186,17 @@ function firePinterestPixel () {
 }
 
 function fireTikTokPixel () {
+  const setInWindow = require('setInWindow');
 
   const eventName = getEventName("tiktok");
   const ttq = getTtq();
+
+  function phoneToE164 (phone) {
+    if (phone.length < 64) { // detect if its hashed
+      return "+" + phone; // tiktok wants phones in E164 format
+    }
+    return phone;
+  }
 
   function handlePixelSuccessfullyFired() {
     triggerSuccess();
@@ -2492,6 +2284,8 @@ function injectProviderSDK (url, id, onSuccess) {
 }
 
 function firePixelEvent() {
+  const setInWindow = require('setInWindow');
+
   const fbq = getFbq();
 
   // Build the fbq() command arguments
@@ -2546,6 +2340,7 @@ function firePixelEvent() {
     'fbPixel');
 
   function getFbq() {
+    const callInWindow = require('callInWindow');
     const aliasInWindow = require('aliasInWindow');
     const createQueue = require('createQueue');
 
@@ -2687,6 +2482,7 @@ function fireCapiEvent() {
   }
 
   function sendPostRequest () {
+    const callInWindow = require('callInWindow');
     const opts = getOpts();
     const groupedPixels = getGroupedPixels();
 
@@ -2694,8 +2490,7 @@ function fireCapiEvent() {
       pixels: groupedPixels,
       ignoreGTMMSR: data.ignoreGTMMSR,
       data: getEventData(groupedPixels),
-      templateVersion: templateVersion.toString(),
-      utms: getStoredUTMs()
+      templateVersion: templateVersion.toString()
     };
     if (opts) {
       body.opts = opts;
@@ -2705,6 +2500,7 @@ function fireCapiEvent() {
       handleCapiSuccessfullyFired();
       return;
     }
+
     callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
 
     handleCapiSuccessfullyFired();
@@ -2820,10 +2616,6 @@ function fireCapiEvent() {
         gclid: getQueryParameters("gclid"), // google tracking param
         wbraid: getQueryParameters("wbraid"), // google tracking param
         gbraid: getQueryParameters("gbraid"), // google tracking param
-        _msclkid: setOrGetMsClickCookie(), // microsoft tracking param
-        _buid: setOrGetMicrosoftCookie('_uetuid', 7776000), // microsoft tracking param
-        _uetsid: setOrGetMicrosoftCookie('_uetsid', 86400), // microsoft tracking param
-        _uetvid: setOrGetMicrosoftCookie('_uetvid', 33696000), // microsoft tracking param
         subscription_id: data.subscription_id,
         lead_id: data.lead_id,
         fb_login_id: data.fb_login_id,
@@ -3027,15 +2819,6 @@ function fireCapiEvent() {
       });
     }
 
-    if (data.microsoft_pixels) {
-      data.microsoft_pixels.forEach(pixel => {
-        pixels.push({
-          id: pixel.pixelId,
-          type: "microsoftads"
-        });
-      });
-    }
-
     return pixels;
   }
 
@@ -3043,6 +2826,31 @@ function fireCapiEvent() {
     if (!data.data_processing_options) return undefined;
     if (data.data_processing_options === 'emptyArray') return [];
     return ['LDU'];
+  }
+
+  function hash(valueToHash) {
+    const makeString = require('makeString');
+
+    const sha256 = copyFromWindow('sha256');
+
+    if (!sha256) return valueToHash;
+
+    switch (getType(valueToHash)) {
+      case 'undefined':
+      case 'null':
+      case 'object':
+      case 'function':
+      case 'boolean':
+        return valueToHash;
+      case 'string':
+        return sha256(valueToHash.toLowerCase().trim());
+      case 'number':
+        return sha256(makeString(valueToHash));
+      case 'array':
+        return valueToHash.map(value => hash(value));
+      default:
+        return sha256(valueToHash);
+    }
   }
 
   function encodeProperty(prop) {
@@ -3084,6 +2892,7 @@ function fireCapiEvent() {
   function generateFbpCookie() {
     // If there's no fbp cookie, we build it
     // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
+    const generateRandom = require('generateRandom');
     const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
 
     setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
@@ -3119,84 +2928,6 @@ function fireCapiEvent() {
     data.gtmOnFailure();
   }
 }
-
-function setOrGetMsClickCookie() {
-  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
-    return undefined;
-  }
-
-  const getQueryParameters = require('getQueryParameters');
-
-  let value = undefined;
-
-  if (getQueryParameters('msclkid', false)) {
-    value = getQueryParameters('msclkid');
-
-    if (getCookieValues('_uetmsclkid').length === 0) {
-      setCookie('_uetmsclkid', value, { 'domain': 'auto', 'max-age': 7776000, 'path': '/' });
-    }
-  } else {
-    let values = getCookieValues('_uetmsclkid');
-    if (values.length > 0 && values[0] !== '') {
-      value = values[0];
-    }
-  }
-
-  return value;
-}
-
-function setOrGetMicrosoftCookie(cookieName, duration) {
-  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
-    return undefined;
-  }
-  let value = undefined;
-
-  if (getCookieValues(cookieName).length === 0) {
-    value = generateUUID();
-    setCookie(cookieName, value, { 'domain': 'auto', 'max-age': duration, 'path': '/' });
-  } else {
-    let values = getCookieValues(cookieName);
-    if (values.length > 0 && values[0] !== '') {
-      value = values[0];
-    }
-  }
-
-  return value;
-}
-
-function phoneToE164 (phone) {
-  if (phone.length < 64) { // detect if its hashed
-    return "+" + phone;
-  }
-  return phone;
-}
-
-function generateUUID() {
-  const Math = require('Math');
-  function cryptoRandom() {
-    return Math.floor(generateRandom(1000000000, 9999999999) * 16);
-  }
-
-  var uuid = '',
-    i,
-    c;
-
-  for (i = 0; i < 36; i++) {
-    if (i === 8 || i === 13 || i === 18 || i === 23) {
-      uuid += '-';
-    } else if (i === 14) {
-      uuid += '4';
-    } else {
-      c = cryptoRandom();
-      if (i === 19) {
-        c = (c & 3) | 8; // Set bits according to UUID v4 standard
-      }
-      uuid += c.toString(16);
-    }
-  }
-  return uuid;
-}
-
 
 
 ___WEB_PERMISSIONS___
@@ -4568,22 +4299,6 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "_gtmeec"
-              },
-              {
-                "type": 1,
-                "string": "_uetuid"
-              },
-              {
-                "type": 1,
-                "string": "_uetmsclkid"
-              },
-              {
-                "type": 1,
-                "string": "_uetsid"
-              },
-              {
-                "type": 1,
-                "string": "_uetvid"
               }
             ]
           }
@@ -4749,194 +4464,6 @@ ___WEB_PERMISSIONS___
                     "string": "any"
                   }
                 ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_uetuid"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_uetmsclkid"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_uetsid"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
-              },
-              {
-                "type": 3,
-                "mapKey": [
-                  {
-                    "type": 1,
-                    "string": "name"
-                  },
-                  {
-                    "type": 1,
-                    "string": "domain"
-                  },
-                  {
-                    "type": 1,
-                    "string": "path"
-                  },
-                  {
-                    "type": 1,
-                    "string": "secure"
-                  },
-                  {
-                    "type": 1,
-                    "string": "session"
-                  }
-                ],
-                "mapValue": [
-                  {
-                    "type": 1,
-                    "string": "_uetvid"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "*"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  },
-                  {
-                    "type": 1,
-                    "string": "any"
-                  }
-                ]
               }
             ]
           }
@@ -5045,4 +4572,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.1
+Version 6.2
