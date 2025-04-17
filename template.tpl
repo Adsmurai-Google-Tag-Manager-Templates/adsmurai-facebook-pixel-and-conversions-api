@@ -1463,7 +1463,8 @@ const JSON = require('JSON');
 const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
-const templateVersion = 6.2;
+const generateRandom = require('generateRandom');
+const templateVersion = 6.3;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1481,7 +1482,35 @@ function removeEntriesWithEmptyPixelId(array) {
   }
   return undefined;
 }
+
+function storeUTMs() {
+  const key = "utms-store";
+  const url = getUrl();
+
+  if (templateStorage.getItem(key) || url.indexOf("utm_") === -1) {
+    return;
+  }
+
+  let utms = {
+    utm_source: getQueryParameters('utm_source', false),
+    utm_campaign: getQueryParameters('utm_campaign', false),
+    utm_medium: getQueryParameters('utm_medium', false),
+    utm_term: getQueryParameters('utm_term', false),
+    utm_content: getQueryParameters('utm_content', false),
+    utm_id: getQueryParameters('utm_id', false),
+  };
+
+  templateStorage.setItem(key, utms);
+}
+
+function getStoredUTMs() {
+  return templateStorage.getItem("utms-store");
+}
+
 function onFire () {
+
+  storeUTMs();
+
   if (data.pixels) {
     data.pixels = removeEntriesWithEmptyPixelId(data.pixels);
   }
@@ -1821,6 +1850,35 @@ function getPixelEventParameters(pixelType) {
 	return eventParameters;
 }
 
+function hashIfNeeded(val) {
+  return data.hashData ? hash(val) : val;
+}
+
+function hash(valueToHash) {
+  const makeString = require('makeString');
+
+  const sha256 = copyFromWindow('sha256');
+
+  if (!sha256) return valueToHash;
+
+  switch (getType(valueToHash)) {
+    case 'undefined':
+    case 'null':
+    case 'object':
+    case 'function':
+    case 'boolean':
+      return valueToHash;
+    case 'string':
+      return sha256(valueToHash.toLowerCase().trim());
+    case 'number':
+      return sha256(makeString(valueToHash));
+    case 'array':
+      return valueToHash.map(value => hash(value));
+    default:
+      return sha256(valueToHash);
+  }
+}
+
 function setupPinterestEventData() {
   let eventData = getCustomData(['value', 'currency', 'order_id'], "pinterest");
 
@@ -1952,9 +2010,7 @@ function fireQuoraPixel () {
     return copyFromWindow('qp');
   }
   function getQp() {
-    const callInWindow = require('callInWindow');
     const createQueue = require('createQueue');
-    const setInWindow = require('setInWindow');
 
     let qp = copyFromWindow('qp');
 
@@ -2186,17 +2242,9 @@ function firePinterestPixel () {
 }
 
 function fireTikTokPixel () {
-  const setInWindow = require('setInWindow');
 
   const eventName = getEventName("tiktok");
   const ttq = getTtq();
-
-  function phoneToE164 (phone) {
-    if (phone.length < 64) { // detect if its hashed
-      return "+" + phone; // tiktok wants phones in E164 format
-    }
-    return phone;
-  }
 
   function handlePixelSuccessfullyFired() {
     triggerSuccess();
@@ -2284,8 +2332,6 @@ function injectProviderSDK (url, id, onSuccess) {
 }
 
 function firePixelEvent() {
-  const setInWindow = require('setInWindow');
-
   const fbq = getFbq();
 
   // Build the fbq() command arguments
@@ -2340,7 +2386,6 @@ function firePixelEvent() {
     'fbPixel');
 
   function getFbq() {
-    const callInWindow = require('callInWindow');
     const aliasInWindow = require('aliasInWindow');
     const createQueue = require('createQueue');
 
@@ -2482,7 +2527,6 @@ function fireCapiEvent() {
   }
 
   function sendPostRequest () {
-    const callInWindow = require('callInWindow');
     const opts = getOpts();
     const groupedPixels = getGroupedPixels();
 
@@ -2490,7 +2534,8 @@ function fireCapiEvent() {
       pixels: groupedPixels,
       ignoreGTMMSR: data.ignoreGTMMSR,
       data: getEventData(groupedPixels),
-      templateVersion: templateVersion.toString()
+      templateVersion: templateVersion.toString(),
+      utms: getStoredUTMs()
     };
     if (opts) {
       body.opts = opts;
@@ -2500,7 +2545,6 @@ function fireCapiEvent() {
       handleCapiSuccessfullyFired();
       return;
     }
-
     callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
 
     handleCapiSuccessfullyFired();
@@ -2616,6 +2660,10 @@ function fireCapiEvent() {
         gclid: getQueryParameters("gclid"), // google tracking param
         wbraid: getQueryParameters("wbraid"), // google tracking param
         gbraid: getQueryParameters("gbraid"), // google tracking param
+        _msclkid: setOrGetMsClickCookie(), // microsoft tracking param
+        _buid: setOrGetMicrosoftCookie('_uetuid', 7776000), // microsoft tracking param
+        _uetsid: setOrGetMicrosoftCookie('_uetsid', 86400), // microsoft tracking param
+        _uetvid: setOrGetMicrosoftCookie('_uetvid', 33696000), // microsoft tracking param
         subscription_id: data.subscription_id,
         lead_id: data.lead_id,
         fb_login_id: data.fb_login_id,
@@ -2819,6 +2867,15 @@ function fireCapiEvent() {
       });
     }
 
+    if (data.microsoft_pixels) {
+      data.microsoft_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "microsoftads"
+        });
+      });
+    }
+
     return pixels;
   }
 
@@ -2826,31 +2883,6 @@ function fireCapiEvent() {
     if (!data.data_processing_options) return undefined;
     if (data.data_processing_options === 'emptyArray') return [];
     return ['LDU'];
-  }
-
-  function hash(valueToHash) {
-    const makeString = require('makeString');
-
-    const sha256 = copyFromWindow('sha256');
-
-    if (!sha256) return valueToHash;
-
-    switch (getType(valueToHash)) {
-      case 'undefined':
-      case 'null':
-      case 'object':
-      case 'function':
-      case 'boolean':
-        return valueToHash;
-      case 'string':
-        return sha256(valueToHash.toLowerCase().trim());
-      case 'number':
-        return sha256(makeString(valueToHash));
-      case 'array':
-        return valueToHash.map(value => hash(value));
-      default:
-        return sha256(valueToHash);
-    }
   }
 
   function encodeProperty(prop) {
@@ -2892,7 +2924,6 @@ function fireCapiEvent() {
   function generateFbpCookie() {
     // If there's no fbp cookie, we build it
     // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
-    const generateRandom = require('generateRandom');
     const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
 
     setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
@@ -2928,6 +2959,84 @@ function fireCapiEvent() {
     data.gtmOnFailure();
   }
 }
+
+function setOrGetMsClickCookie() {
+  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
+    return undefined;
+  }
+
+  const getQueryParameters = require('getQueryParameters');
+
+  let value = undefined;
+
+  if (getQueryParameters('msclkid', false)) {
+    value = getQueryParameters('msclkid');
+
+    if (getCookieValues('_uetmsclkid').length === 0) {
+      setCookie('_uetmsclkid', value, { 'domain': 'auto', 'max-age': 7776000, 'path': '/' });
+    }
+  } else {
+    let values = getCookieValues('_uetmsclkid');
+    if (values.length > 0 && values[0] !== '') {
+      value = values[0];
+    }
+  }
+
+  return value;
+}
+
+function setOrGetMicrosoftCookie(cookieName, duration) {
+  if (!data.microsoft_pixels) { // dont create the cookie if client isnt using microsoft
+    return undefined;
+  }
+  let value = undefined;
+
+  if (getCookieValues(cookieName).length === 0) {
+    value = generateUUID();
+    setCookie(cookieName, value, { 'domain': 'auto', 'max-age': duration, 'path': '/' });
+  } else {
+    let values = getCookieValues(cookieName);
+    if (values.length > 0 && values[0] !== '') {
+      value = values[0];
+    }
+  }
+
+  return value;
+}
+
+function phoneToE164 (phone) {
+  if (phone.length < 64) { // detect if its hashed
+    return "+" + phone;
+  }
+  return phone;
+}
+
+function generateUUID() {
+  const Math = require('Math');
+  function cryptoRandom() {
+    return Math.floor(generateRandom(1000000000, 9999999999) * 16);
+  }
+
+  var uuid = '',
+    i,
+    c;
+
+  for (i = 0; i < 36; i++) {
+    if (i === 8 || i === 13 || i === 18 || i === 23) {
+      uuid += '-';
+    } else if (i === 14) {
+      uuid += '4';
+    } else {
+      c = cryptoRandom();
+      if (i === 19) {
+        c = (c & 3) | 8; // Set bits according to UUID v4 standard
+      }
+      uuid += c.toString(16);
+    }
+  }
+  return uuid;
+}
+
 
 
 ___WEB_PERMISSIONS___
@@ -4299,6 +4408,22 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "_gtmeec"
+              },
+              {
+                "type": 1,
+                "string": "_uetuid"
+              },
+              {
+                "type": 1,
+                "string": "_uetmsclkid"
+              },
+              {
+                "type": 1,
+                "string": "_uetsid"
+              },
+              {
+                "type": 1,
+                "string": "_uetvid"
               }
             ]
           }
@@ -4464,6 +4589,194 @@ ___WEB_PERMISSIONS___
                     "string": "any"
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetuid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetmsclkid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetsid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_uetvid"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
               }
             ]
           }
@@ -4572,4 +4885,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.2
+Version 6.3
