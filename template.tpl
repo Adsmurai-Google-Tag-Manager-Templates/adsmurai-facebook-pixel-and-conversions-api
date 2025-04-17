@@ -24,7 +24,7 @@ ___INFO___
 "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
 },
-"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora & Snapchat via conventional pixel and via their Conversions API.",
+"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora, Snapchat & Microsoft Ads via conventional pixel and via their Conversions API.",
 "containerContexts": [
 "WEB"
 ]
@@ -385,6 +385,46 @@ ___TEMPLATE_PARAMETERS___
             "defaultValue": "",
             "displayName": "Quora Pixel ID",
             "valueHint": "Expected format: 527765582828194|7d3d75f5a34f4a7c9",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "microsoft_pixels",
+        "displayName": "Microsoft Ads Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Microsoft UET Tag ID",
+            "valueHint": "Expected format: 527765582828194",
             "displayValue": "",
             "name": "pixelId",
             "type": "TEXT",
@@ -1464,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 6.3;
+const templateVersion = 6.4;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1535,6 +1575,9 @@ function onFire () {
   if (data.quora_pixels) {
     data.quora_pixels = removeEntriesWithEmptyPixelId(data.quora_pixels);
   }
+  if (data.microsoft_pixels) {
+    data.microsoft_pixels = removeEntriesWithEmptyPixelId(data.microsoft_pixels);
+  }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
@@ -1559,6 +1602,9 @@ function onFire () {
     }
     if (data.quora_pixels) {
       fireQuoraPixel();
+    }
+    if (data.microsoft_pixels) {
+      fireMicrosoftPixel();
     }
   }
 
@@ -1841,6 +1887,9 @@ function getPixelEventParameters(pixelType) {
     case "pinterest":
       eventParameters = setupPinterestEventData();
       break;
+    case "microsoft":
+      eventParameters = setupMicrosoftEventData();
+      break;
     case "quora":
     default:
       eventParameters = {};
@@ -1877,6 +1926,76 @@ function hash(valueToHash) {
     default:
       return sha256(valueToHash);
   }
+}
+
+// https://help.ads.microsoft.com/#apex/ads/en/56955/1-500
+function setupMicrosoftEventData() {
+  const readTitle = require('readTitle');
+  const platformSpecs = callInWindow('adsmuraiSDK.getPlatformSpecs');
+
+  function getContentIds() {
+    if (data.content_ids) {
+      if (getType(data.content_ids) === 'array') {
+        return data.content_ids.join(",");
+      } else {
+        return data.content_ids;
+      }
+    }
+    return "";
+  }
+
+  function items() {
+    let result = "";
+    if (data.contents && getType(data.contents) === 'array') {
+      data.contents.forEach((product, i) => {
+        var item = {
+          content_id: product.id ? product.id : product.content_id,
+          price: product.item_price ? product.item_price : product.price,
+        };
+        result += "id=" + item.content_id + 'quantity=' + product.quantity + 'price=' + item.price;
+        if (i < data.contents.length - 1) {
+          result += ',';
+        }
+      });
+    }
+    return result;
+  }
+
+  let params = {};
+  params.rn = generateRandom(100000, 999999);
+  params.ver = '2.3';
+  params.p = getUrl();
+  params.r = getReferrerUrl();
+  params.tl = readTitle();
+  params.pagetype = "other";
+  params.items = items();
+  params.prodid = getContentIds();
+  params.search_term = data.search_string;
+  params.transaction_id = data.order_id;
+  params.lg = "en";
+  params.sw = platformSpecs.screen.width;
+  params.sh = platformSpecs.screen.height;
+  params.sc = "";
+  params.spa = "N";
+  params.msclkid = setOrGetMsClickCookie();
+  params.uid = setOrGetMicrosoftCookie('_uetuid', 7776000);
+  params.sid = setOrGetMicrosoftCookie('_uetsid', 86400);
+  params.vid = setOrGetMicrosoftCookie('_uetvid', 33696000);
+  params.page_path = "";
+  params.gc = data.currency;
+  params.gv = data.value;
+
+  if (data.em || data.ph) {
+    params.pid = "";
+    if (data.em) {
+      params.pid += "em=" + hashIfNeeded(data.em);
+    }
+    if (data.ph) {
+      params.pid += (params.pid.length > 0 ? '&' : '') + "ph=" + hashIfNeeded(phoneToE164(data.ph));
+    }
+  }
+
+  return params;
 }
 
 function setupPinterestEventData() {
@@ -2002,6 +2121,47 @@ function fireGooglePixel () {
 
     triggerSuccess();
   });
+}
+
+function fireMicrosoftPixel () {
+
+  if (data.fireMethod === 'both') { // microsoft ads deduplication is superbad
+    triggerSuccess();
+    return;
+  }
+
+  function afterInjection () {
+    const sendPixel = require('sendPixel');
+    const encodeUriComponent = require('encodeUriComponent');
+    let eventName = getEventName("microsoft");
+
+    // Add event_id in case it's set up
+    const event = getPixelEventParameters("microsoft");
+    event.mid = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
+    event.evt = eventName === 'PageView' ? 'pageLoad' : 'custom';
+    if(eventName !== 'PageView') {
+      event.ea = eventName;
+    }
+
+    data.microsoft_pixels.forEach((pixel, i) => {
+      event.ti = pixel.pixelId;
+      let url = 'https://bat.bing.com/action/0?';
+      let all_params = "";
+      if(event){
+        for (var key in event){
+          if (event[key] == undefined || event[key] == null) {
+            continue;
+          }
+          all_params += key + "=" + encodeUriComponent(event[key]) + "&";
+        }
+        url += all_params;
+      }
+
+      sendPixel(url);
+    });
+    triggerSuccess();
+  }
+  injectSDK(afterInjection);
 }
 
 function fireQuoraPixel () {
@@ -4885,4 +5045,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.3
+Version 6.4
