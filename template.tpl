@@ -1504,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 6.4;
+const templateVersion = 6.5;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -5006,6 +5006,16 @@ ___WEB_PERMISSIONS___
       "isEditedByUser": true
     },
     "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
+        "publicId": "read_title",
+        "versionId": "1"
+      },
+      "param": []
+    },
+    "isRequired": true
   }
 ]
 
@@ -5045,4 +5055,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.4
+Version 6.5
