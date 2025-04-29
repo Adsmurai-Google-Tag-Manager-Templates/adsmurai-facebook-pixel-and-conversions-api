@@ -1504,7 +1504,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 6.5;
+const templateVersion = 6.6;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1617,7 +1617,8 @@ function onFire () {
       return;
     }
 
-    if (data.hashData) {
+    // linked in needs sha256 when there is no generated email, to hash a fake one
+    if (data.hashData || (data.linkedin_pixels && !data.em)) {
       injectScript('https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js', fireCapiEvent, fireCapiEvent, 'jsSHA');
     } else {
       fireCapiEvent();
@@ -1681,10 +1682,7 @@ function getEventName (pixelType) {
   let eventName = data.event_name !== 'customEvent' ? data.event_name : data.customEventName;
   const nameConventions = {
     tiktok: {
-      "PageView": "Pageview",
-      "Purchase": "CompletePayment",
-      "Lead": "SubmitForm",
-      "SubmitApplication": "SubmitForm"
+      "PageView": "Pageview"
     },
     facebook: {
       "CompletePayment": "Purchase",
@@ -2824,6 +2822,7 @@ function fireCapiEvent() {
         _buid: setOrGetMicrosoftCookie('_uetuid', 7776000), // microsoft tracking param
         _uetsid: setOrGetMicrosoftCookie('_uetsid', 86400), // microsoft tracking param
         _uetvid: setOrGetMicrosoftCookie('_uetvid', 33696000), // microsoft tracking param
+        _le: getLinkedinEmail(), // fake mail as linkedin enforces having it even for visitors...
         subscription_id: data.subscription_id,
         lead_id: data.lead_id,
         fb_login_id: data.fb_login_id,
@@ -3137,6 +3136,26 @@ function setOrGetMsClickCookie() {
     }
   } else {
     let values = getCookieValues('_uetmsclkid');
+    if (values.length > 0 && values[0] !== '') {
+      value = values[0];
+    }
+  }
+
+  return value;
+}
+
+function getLinkedinEmail() {
+  if (!data.linkedin_pixels || data.em) { // dont create the cookie if client isnt using linkedin
+    return undefined;
+  }
+  const cookieName = "_le";
+  let value = undefined;
+
+  if (getCookieValues(cookieName).length === 0) {
+    value = hash(getTimestampMillis() + "@linkedin.com");
+    setCookie(cookieName, value, { 'domain': 'auto', 'max-age': 33696000, 'path': '/' });
+  } else {
+    let values = getCookieValues(cookieName);
     if (values.length > 0 && values[0] !== '') {
       value = values[0];
     }
@@ -4559,6 +4578,10 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
+                "string": "_le"
+              },
+              {
+                "type": 1,
                 "string": "_gcl_au"
               },
               {
@@ -4937,6 +4960,53 @@ ___WEB_PERMISSIONS___
                     "string": "any"
                   }
                 ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "name"
+                  },
+                  {
+                    "type": 1,
+                    "string": "domain"
+                  },
+                  {
+                    "type": 1,
+                    "string": "path"
+                  },
+                  {
+                    "type": 1,
+                    "string": "secure"
+                  },
+                  {
+                    "type": 1,
+                    "string": "session"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_le"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "*"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  },
+                  {
+                    "type": 1,
+                    "string": "any"
+                  }
+                ]
               }
             ]
           }
@@ -5055,4 +5125,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.5
+Version 6.6
