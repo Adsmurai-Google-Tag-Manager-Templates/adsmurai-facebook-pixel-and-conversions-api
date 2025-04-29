@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: e3ecf8427dca37503a0126470d8efeb76308d62a
+    changeNotes: v6.6
+      Update tiktok event naming conventions
+  # Older versions
   - sha: 40b98447483a5ad7f23bca8120dc44dc47b41e33
     changeNotes: v6.5
       Update perms
-  # Older versions
   - sha: dedccd9dee4dd96fe5a17cfecfef560eee5a9c50
     changeNotes: v6.4
       Add a new provider
