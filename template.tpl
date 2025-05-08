@@ -917,6 +917,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "linkedin",
                 "displayValue": "Linkedin"
+              },
+              {
+                "value": "microsoftads",
+                "displayValue": "Microsoft Ads"
               }
             ],
             "simpleValueType": true,
@@ -1504,7 +1508,7 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 6.6;
+const templateVersion = 6.7;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1715,6 +1719,14 @@ function getEventName (pixelType) {
     }
   };
 
+  if (data.customProperties) {
+    for (const property of data.customProperties) {
+      if (property.propertyName === "event_name" && (property.provider === pixelType || property.provider === 'all')) {
+        return property.propertyValue;
+      }
+    }
+  }
+
   if (getType(nameConventions[pixelType]) === "undefined" ||
     getType(nameConventions[pixelType][eventName]) === "undefined"
   ) {
@@ -1885,7 +1897,7 @@ function getPixelEventParameters(pixelType) {
     case "pinterest":
       eventParameters = setupPinterestEventData();
       break;
-    case "microsoft":
+    case "microsoftads":
       eventParameters = setupMicrosoftEventData();
       break;
     case "quora":
@@ -2131,10 +2143,10 @@ function fireMicrosoftPixel () {
   function afterInjection () {
     const sendPixel = require('sendPixel');
     const encodeUriComponent = require('encodeUriComponent');
-    let eventName = getEventName("microsoft");
+    let eventName = getEventName("microsoftads");
 
     // Add event_id in case it's set up
-    const event = getPixelEventParameters("microsoft");
+    const event = getPixelEventParameters("microsoftads");
     event.mid = data.event_id === 'autogenerate' ? event_id : data.ownEventId;
     event.evt = eventName === 'PageView' ? 'pageLoad' : 'custom';
     if(eventName !== 'PageView') {
@@ -5125,4 +5137,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.6
+Version 6.7
