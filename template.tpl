@@ -1508,7 +1508,8 @@ const templateStorage = require('templateStorage');
 const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
-const templateVersion = 6.7;
+const localStorage = require('localStorage');
+const templateVersion = 6.8;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1612,6 +1613,9 @@ function onFire () {
     }
   }
 
+  // get the current list before fireCapiEvent adds a new entry
+  const pendingRequests = getPendingRequests();
+
   if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
     const userForgotOwnServerUrl = data.serverSetup === "ownServer" && !data.serverGtmUrl;
     const userForgotSTApiKey = data.serverSetup === "serverlessTracking" && !data.stApiKey;
@@ -1628,6 +1632,8 @@ function onFire () {
       fireCapiEvent();
     }
   }
+
+  processPendingRequests(pendingRequests);
 }
 
 if (data.useEcommerceData || data.tiktok_pixels) {
@@ -2639,6 +2645,50 @@ function getCustomData (customDataFields, pixelType) {
   return customData;
 }
 
+function getPendingRequests() {
+  const key = "_ot_pending_requests";
+  let pendingRequests = localStorage.getItem(key);
+
+  if (!pendingRequests) {
+    return [];
+  }
+  pendingRequests = JSON.parse(pendingRequests);
+  return pendingRequests;
+}
+
+function processPendingRequests(pendingRequests) {
+  if (!pendingRequests) {
+    return;
+  }
+
+  injectSDK(function() {
+    for(const body of pendingRequests) {
+      callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined, function(response) {
+        removeTrackedRequest(body);
+      }, function(response) {
+        removeTrackedRequest(body);
+      });
+    }
+  });
+}
+
+function removeTrackedRequest(body) {
+  const key = "_ot_pending_requests";
+  let pendingRequests = localStorage.getItem(key);
+  if (!pendingRequests) {
+    return;
+  }
+  pendingRequests = JSON.parse(pendingRequests);
+  const requestKey = JSON.stringify(body);
+  for (let i = 0; i < 9; i++) {
+    if (JSON.stringify(pendingRequests[i]) === requestKey) {
+      pendingRequests.splice(i ,1);
+      localStorage.setItem(key, JSON.stringify(pendingRequests));
+      break;
+    }
+  }
+}
+
 function fireCapiEvent() {
   const sendPixel = require('sendPixel');
 
@@ -2715,9 +2765,34 @@ function fireCapiEvent() {
       handleCapiSuccessfullyFired();
       return;
     }
-    callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined);
+
+    trackRequest(body);
+
+    callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined, function(response) {
+      removeTrackedRequest(body);
+    }, function(response) {
+      removeTrackedRequest(body);
+    });
 
     handleCapiSuccessfullyFired();
+  }
+
+  function trackRequest(body) {
+    const key = "_ot_pending_requests";
+    let pendingRequests = localStorage.getItem(key);
+
+    if (pendingRequests) {
+      pendingRequests = JSON.parse(pendingRequests);
+    } else {
+      pendingRequests = [];
+    }
+    for(const entry of pendingRequests) {
+      if (JSON.stringify(entry) === JSON.stringify(body)) {
+        return;
+      }
+    }
+    pendingRequests.push(body);
+    localStorage.setItem(key, JSON.stringify(pendingRequests));
   }
 
   function fillUserDataFromFB () {
@@ -5071,6 +5146,56 @@ ___WEB_PERMISSIONS___
   {
     "instance": {
       "key": {
+        "publicId": "access_local_storage",
+        "versionId": "1"
+      },
+      "param": [
+        {
+          "key": "keys",
+          "value": {
+            "type": 2,
+            "listItem": [
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_ot_pending_requests"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "isRequired": true
+  },
+  {
+    "instance": {
+      "key": {
         "publicId": "logging",
         "versionId": "1"
       },
@@ -5137,4 +5262,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.7
+Version 6.8
