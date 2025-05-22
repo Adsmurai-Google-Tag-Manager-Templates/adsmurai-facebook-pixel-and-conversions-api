@@ -2661,6 +2661,12 @@ function processPendingRequests(pendingRequests) {
     return;
   }
 
+  const semaphoreKey = "pending-processing";
+  if (templateStorage.getItem(semaphoreKey)) {
+    return;
+  }
+  templateStorage.setItem(semaphoreKey, true);
+
   injectSDK(function() {
     for(const body of pendingRequests) {
       callInWindow('adsmuraiSDK.post', data.stApiKey, body, data.stSubdomain ? data.stSubdomain + "/v1.0/events" : undefined, function(response) {
