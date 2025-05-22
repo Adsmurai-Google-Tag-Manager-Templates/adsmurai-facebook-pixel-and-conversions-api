@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 32080eeafd442df99172ee546dc96be492fb0e3b
+    changeNotes: v6.9
+      Process pending requests only once per page
+  # Older versions
   - sha: c95c25affd74ad732dab52c9f200fccf4c24390c
     changeNotes: v6.8
       Track and send pending requests
-  # Older versions
   - sha: 0c35e40dc7e9bdfa5a070e3625729cb95d042094
     changeNotes: v6.7
       Ability to customize event_name per provider
