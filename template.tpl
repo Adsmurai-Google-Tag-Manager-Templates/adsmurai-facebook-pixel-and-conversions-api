@@ -1509,7 +1509,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 6.9;
+const templateVersion = 7.0;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1552,6 +1552,17 @@ function getStoredUTMs() {
   return templateStorage.getItem("utms-store");
 }
 
+function setOrGetFbpCookie() {
+  if (getCookieValues("_fbp").length > 0) {
+    return getCookieValues("_fbp")[0];
+  }
+  // If there's no fbp cookie, we build it
+  // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
+  const cookieValue = "fb.1." + getTimestampMillis() + "." + generateRandom(1000000000, 9999999999);
+  setCookie("_fbp", cookieValue, { domain: "auto", "max-age": 7776000, path: "/" }); // sets the cookie so we have the same value in the future
+  return cookieValue;
+}
+
 function onFire () {
 
   storeUTMs();
@@ -1586,6 +1597,7 @@ function onFire () {
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
+      setOrGetFbpCookie();
       firePixelEvent();
     }
 
@@ -2903,7 +2915,7 @@ function fireCapiEvent() {
         country: data.country,
         external_id: data.external_id,
         fbc: setOrGetFbcCookie(),
-        fbp: getCookieValues('_fbp').length > 0 ? getCookieValues('_fbp')[0] : generateFbpCookie(),  // fb tracking cookie
+        fbp: setOrGetFbpCookie(),  // fb tracking cookie
         ttp: getCookieValues('_ttp').length > 0 ? getCookieValues('_ttp')[0] : null,  // tiktok tracking cookie
         ggau: getCookieValues('_gcl_au').length > 0 ? getCookieValues('_gcl_au')[0] : null,  // google tracking cookie
         _ga: getCookieValues('_ga').length > 0 ? getCookieValues('_ga')[0] : null,  // google client id
@@ -3016,11 +3028,7 @@ function fireCapiEvent() {
           value = setOrGetFbcCookie();
           break;
         case 'fbp':
-          if (getCookieValues('_fbp').length > 0) {
-            value = getCookieValues('_fbp')[0];
-          } else {
-            value = generateFbpCookie();
-          }
+          value = setOrGetFbpCookie();
           break;
         case 'event_source_url':
           value = getUrl();
@@ -3171,16 +3179,6 @@ function fireCapiEvent() {
     }
 
     return value;
-  }
-
-  function generateFbpCookie() {
-    // If there's no fbp cookie, we build it
-    // See https://developers.facebook.com/docs/marketing-api/conversions-api/parameters/fbp-and-fbc#fbp
-    const cookieValue = 'fb.1.' + getTimestampMillis() + '.' + generateRandom(1000000000, 9999999999);
-
-    setCookie('_fbp', cookieValue, {'domain': 'auto', 'max-age': 7776000, 'path': '/'}); // sets the cookie so we have the same value in the future
-
-    return cookieValue;
   }
 
   function resetCookiesExpiration() {
@@ -5268,4 +5266,4 @@ scenarios:
 
 ___NOTES___
 
-Version 6.9
+Version 7.0
