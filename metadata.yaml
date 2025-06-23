@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 7f1bc7f2063aa21171b791db24f35e4fb657fbf5
+    changeNotes: v7.0
+      Try to improve fbp matching
+  # Older versions
   - sha: 32080eeafd442df99172ee546dc96be492fb0e3b
     changeNotes: v6.9
       Process pending requests only once per page
-  # Older versions
   - sha: c95c25affd74ad732dab52c9f200fccf4c24390c
     changeNotes: v6.8
       Track and send pending requests
