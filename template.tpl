@@ -1509,7 +1509,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.0;
+const templateVersion = 7.1;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2919,6 +2919,7 @@ function fireCapiEvent() {
         ttp: getCookieValues('_ttp').length > 0 ? getCookieValues('_ttp')[0] : null,  // tiktok tracking cookie
         ggau: getCookieValues('_gcl_au').length > 0 ? getCookieValues('_gcl_au')[0] : null,  // google tracking cookie
         _ga: getCookieValues('_ga').length > 0 ? getCookieValues('_ga')[0] : null,  // google client id
+        _epik: getCookieValues('_epik').length > 0 ? getCookieValues('_epik')[0] : getQueryParameters("_epik"),  // pinterest click id
         ttclid: getQueryParameters("ttclid"), // tiktok tracking param
         gclid: getQueryParameters("gclid"), // google tracking param
         wbraid: getQueryParameters("wbraid"), // google tracking param
@@ -4669,6 +4670,10 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
+                "string": "_epik"
+              },
+              {
+                "type": 1,
                 "string": "_le"
               },
               {
@@ -5266,4 +5271,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.0
+Version 7.1
