@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: e9a7ce45a4ba6369a74ee6813e66c54e5eca72e9
+    changeNotes: v7.2
+      Transform string content_ids to array
+  # Older versions
   - sha: c4c79d8ef61d5851f418688c8aeb4b5390430b73
     changeNotes: v7.1
       Track pinterest _epik cookie
-  # Older versions
   - sha: 7f1bc7f2063aa21171b791db24f35e4fb657fbf5
     changeNotes: v7.0
       Try to improve fbp matching
