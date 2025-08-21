@@ -1509,11 +1509,16 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.1;
+const templateVersion = 7.2;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
 let executedProviders = 0;
+
+// fix wrong data inputs
+if (getType(data.content_ids) === "string") {
+  data.content_ids = [data.content_ids];
+}
 
 function removeEntriesWithEmptyPixelId(array) {
   var newArray = [];
@@ -5271,4 +5276,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.1
+Version 7.2
