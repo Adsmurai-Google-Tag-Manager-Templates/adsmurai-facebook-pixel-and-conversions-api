@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 450973f808099e4ce8ad307799b151f5d8d5e54f
+    changeNotes: v7.4
+      Pinterest Pixel - Look for line_items and content_category
+  # Older versions
   - sha: 7d553a646082732ad395708769f9cc56c812c3ad
     changeNotes: v7.3
       Improve readme
-  # Older versions
   - sha: e9a7ce45a4ba6369a74ee6813e66c54e5eca72e9
     changeNotes: v7.2
       Transform string content_ids to array
