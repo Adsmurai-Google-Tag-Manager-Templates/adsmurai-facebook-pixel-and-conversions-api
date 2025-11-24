@@ -1509,7 +1509,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.3;
+const templateVersion = 7.4;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2038,27 +2038,33 @@ function setupPinterestEventData() {
     search_string: "search_query",
   });
 
-  if (getType(data.contents) !== "undefined") {
-    let products = [];
+  if (!eventData.line_items) {
+    if (getType(data.contents) !== "undefined") {
+      let products = [];
 
-    data.contents.forEach((product) => {
-      products.push({
-        product_id: product.id,
-        product_price: product.item_price,
-        product_quantity: product.quantity,
-        product_category: product.category,
+      data.contents.forEach((product) => {
+        products.push({
+          product_id: product.id,
+          product_price: product.item_price,
+          product_quantity: product.quantity,
+          product_category: product.category,
+        });
       });
-    });
-    eventData.line_items = products;
-  } else if (getType(data.content_ids) !== "undefined") {
-    let products = [];
+      eventData.line_items = products;
+    } else if (getType(data.content_ids) !== "undefined") {
+      let products = [];
 
-    data.content_ids.forEach((productId) => {
-      products.push({
-        product_id: productId,
+      data.content_ids.forEach((productId) => {
+        const item = {
+          product_id: productId,
+        };
+        if (data.content_category) {
+          item.product_category = data.content_category;
+        }
+        products.push(item);
       });
-    });
-    eventData.line_items = products;
+      eventData.line_items = products;
+    }
   }
 
   return eventData;
@@ -5276,4 +5282,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.3
+Version 7.4
