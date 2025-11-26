@@ -1509,7 +1509,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.4;
+const templateVersion = 7.5;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2032,10 +2032,11 @@ function setupMicrosoftEventData() {
 }
 
 function setupPinterestEventData() {
-  let eventData = getCustomData(['value', 'currency', 'order_id'], "pinterest");
+  let eventData = getCustomData(['value', 'currency', 'order_id', 'line_items', 'content_category'], "pinterest");
 
   eventData = translateFields(eventData, data, {
     search_string: "search_query",
+    num_items: "order_quantity",
   });
 
   if (!eventData.line_items) {
@@ -2054,13 +2055,23 @@ function setupPinterestEventData() {
     } else if (getType(data.content_ids) !== "undefined") {
       let products = [];
 
-      data.content_ids.forEach((productId) => {
+      data.content_ids.forEach((productId, i) => {
         const item = {
           product_id: productId,
         };
         if (data.content_category) {
           item.product_category = data.content_category;
+        } else if (eventData.content_category) {
+          item.product_category = eventData.content_category;
         }
+
+        if (item.product_category &&
+          item.product_category.indexOf(",") !== -1 &&
+          item.product_category.split(",").length === data.content_ids.length
+        ) {
+          item.product_category = item.product_category.split(",")[i];
+        }
+
         products.push(item);
       });
       eventData.line_items = products;
@@ -2664,6 +2675,14 @@ function getCustomData (customDataFields, pixelType) {
       customData[field] = data[field];
     }
   });
+
+  if (data.customProperties) {
+    data.customProperties.forEach(property => {
+      if (customDataFields.indexOf(property.propertyName) !== -1 && (property.provider === pixelType || property.provider === 'all')) {
+        customData[property.propertyName] = property.propertyValue;
+      }
+    });
+  }
 
   return customData;
 }
@@ -5282,4 +5301,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.4
+Version 7.5
