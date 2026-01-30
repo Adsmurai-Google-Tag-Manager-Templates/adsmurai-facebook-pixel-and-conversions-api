@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: e95dc39fca86390ce4e6f894b7aa60db703f3f76
+    changeNotes: v7.6
+      Support for Spotify
+  # Older versions
   - sha: 3587feca6da0295e057407b361f54af8b86408f5
     changeNotes: v7.5
       Pinterest - Send product quantity too
-  # Older versions
   - sha: 450973f808099e4ce8ad307799b151f5d8d5e54f
     changeNotes: v7.4
       Pinterest Pixel - Look for line_items and content_category
