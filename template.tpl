@@ -24,7 +24,7 @@ ___INFO___
 "displayName": "Adsmurai-Google-Tag-Manager-Templates",
     "thumbnail": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAMAAADVRocKAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAABiVBMVEX////64ebukKLkUG7kT23rf5X40tnyqbfbGUDbGD/sh5vxqLftiZ3yrLrxpLPrgZbwn6/worHshJnqepDwobHdJUrnYn3jTmzmYHrmXHfgOlz3ztbrfJLfNFbkVXHlWnb87vHeKU32ws3gOVr87fDmXXj63+XdJkvqeZDkUW798fPcHELnaIH74+j1wczqe5H0uMTdI0j63uT2xtDcIEb0ucXiRmX86+72xc/1wMrgN1neKk7xprX3ydL1vcjkVHHfMlX+9vf75en75urzsL3hPF375Oj3ytPrgJbjSmj1v8rkUm/iQ2LjTGrukaTzsr/99ffcHUThPl/fMFP2w83xo7L0u8flWXXhPV798/Xoa4Tsh5zlWHTxpLTdJkrhO1zztcH40NjeKE3zs8DwnK3pdIzbGkHfM1byrrz0t8P//P3lW3fnZH787O/409rlV3TrfpT41NzmXnnshprcH0XjTWvjS2nfL1LoaoP//v7qdY3lV3P//f3oboflVnLnZ4H0usbdJEnxp7ajH9kTAAAAAWJLR0QAiAUdSAAAAAd0SU1FB+UHDAspNBsMx4YAAAKiSURBVGje7ddnVxNBFAbgKxCTa9xgIcECiAUbYm8gNhQbsSvGLmLvvTf85W52Zyaz2TJlZ7545v10dzK59+yzyZwEwMXFxcXFRTXzOjq7CvPt9S+WsJkFtvqXkWShnf4esnTY6F9BLt0WfSwpedgWw0oVjMWoUhkTYlDJw8QYU6pgSgwplTE1RpQ8zIgBpUWYmdxKi1GQnErC/ohLLPqEWarf35Ppn+NJF+X6az+HHtn+iAWLPtpKvE+1xsreZaxcviKPUsRnJfSRqh9ggJSrYHC1vlLEZ42/EE5Yuw7ohCG/Wr9BV6nY3h9go19t2hyU/oThLUE1UtVTivhsJYvbELeTcgB3kGqnllLEZxdb7sPde9iEvfvCSkcp4rOfe8FXGmUTxkIuGDmgqjTO9z8YeclXOkTKw3jkaFhN8BMkTu9jCT6D40wJj7N7mCRKJ/gJJ4UDTiX4nMaeltKZmBJ/D1PCAfW4z1m/PtdSOt9SuhCbcFE44BLdevkKWQkPh6vkqhtxmpTXsHGdPOkGfVdJOOAG3XqTLNwi17fJ9Rj96gHcwbvkHu7Rd00KB8zQrfdng+tOdvcPguuHzT8h4feh9gjJhJnHdNMT4YDgTAjzFODZc+6ZN5VehOU00DOp8RLgVYlueS3uD/CGdRyFXv5Di7PAzu237FTth4lhuvpOpj/Ae7r/Q1ekP5Y+srL6iZX1z7T68lVuAHxDrXyXbB9RUoikT5uSfKR9NJUUfLSUlHw0lBR9lJWUfRSVNHyUlLR8FJQ0faSVhvL058/WlNR+5BsAP7P7/8rZHgRP+nf+/gCFDB8T/TM+SwZ8MpWM+GQoGfJJVTLmk6Jk0CdRyahPgpJhn5iScZ82JQs+ESWp34d6+TM1N1f/a6+/i4uLi8t/m3/BYoFDwbDTogAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMS0wNy0xMlQxMTo0MTozOSswMDowMFUZBSYAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjEtMDctMTJUMTE6NDE6MzkrMDA6MDAkRL2aAAAAAElFTkSuQmCC"
 },
-"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora, Snapchat & Microsoft Ads via conventional pixel and via their Conversions API.",
+"description": "This tag helps you to send event data to Facebook, TikTok, Pinterest, Linkedin, Quora, Snapchat, Spotify & Microsoft Ads via conventional pixel and via their Conversions API.",
 "containerContexts": [
 "WEB"
 ]
@@ -425,6 +425,46 @@ ___TEMPLATE_PARAMETERS___
             "defaultValue": "",
             "displayName": "Microsoft UET Tag ID",
             "valueHint": "Expected format: 527765582828194",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": [
+            ]
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
+        "name": "spotify_pixels",
+        "displayName": "Spotify Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "Spotify Pixel ID",
+            "valueHint": "Expected format: 867f406d-330c-49d7-8425-21434f5c778c|6ce8adc55e4d737963aa1a425fb5d618",
             "displayValue": "",
             "name": "pixelId",
             "type": "TEXT",
@@ -921,6 +961,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "microsoftads",
                 "displayValue": "Microsoft Ads"
+              },
+              {
+                "value": "spotify",
+                "displayValue": "Spotify"
               }
             ],
             "simpleValueType": true,
@@ -1509,7 +1553,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.5;
+const templateVersion = 7.6;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1599,6 +1643,9 @@ function onFire () {
   if (data.microsoft_pixels) {
     data.microsoft_pixels = removeEntriesWithEmptyPixelId(data.microsoft_pixels);
   }
+  if (data.spotify_pixels) {
+    data.spotify_pixels = removeEntriesWithEmptyPixelId(data.spotify_pixels);
+  }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
@@ -1627,6 +1674,9 @@ function onFire () {
     }
     if (data.microsoft_pixels) {
       fireMicrosoftPixel();
+    }
+    if (data.spotify_pixels) {
+      fireSpotifyPixel();
     }
   }
 
@@ -1686,6 +1736,9 @@ function countConfiguredProviders () {
     if (data.ga4_pixels) {
       count++;
     }
+    if (data.spotify_pixels) {
+      count++;
+    }
   }
 
   if (data.fireMethod === 'onlyCapi' || data.fireMethod === 'both') {
@@ -1739,6 +1792,15 @@ function getEventName (pixelType) {
     },
     quora: {
       "Lead": "GenerateLead"
+    },
+    spotify: {
+      "AddToCart": "addtocart",
+      "Lead": "lead",
+      "Purchase": "purchase",
+      "SubmitForm": "lead",
+      "CompleteRegistration": "signup",
+      "ViewContent": "product",
+      "InitiateCheckout": "checkout",
     }
   };
 
@@ -1922,6 +1984,12 @@ function getPixelEventParameters(pixelType) {
       break;
     case "microsoftads":
       eventParameters = setupMicrosoftEventData();
+      break;
+    case "spotify":
+      eventParameters = getCustomData([
+          'type', 'category', 'currency', 'value', 'quantity', 'product_id', 'product_name',
+          'product_type', 'product_vendor', 'variant_id', 'variant_name'
+      ], pixelType);
       break;
     case "quora":
     default:
@@ -2449,6 +2517,67 @@ function firePinterestPixel () {
   function getPintrk() {
     return createArgumentsQueue('pintrk', 'pintrk.queue');
   }
+}
+
+function fireSpotifyPixel () {
+
+  const eventName = getEventName("spotify");
+  const spdt = getSpdt();
+
+  function handlePixelSuccessfullyFired() {
+    triggerSuccess();
+
+    const spdt = getSpdt();
+    const initIds = copyFromWindow('_spdt_gtm_ids') || [];
+
+    data.spotify_pixels.forEach((pixel, i) => {
+      // Initialize each ID if not done already
+      if (initIds.indexOf(pixel.pixelId) === -1) {
+        spdt('conf', { key: pixel.pixelId.split("|")[1] });
+        initIds.push(pixel.pixelId);
+        setInWindow('_spdt_gtm_ids', initIds, true);
+      }
+
+      if (data.em || data.ph) {
+        spdt('alias', {
+          email: data.em,
+          phone_number: data.ph && data.ph.indexOf('+') === -1 ? phoneToE164(data.ph) : data.ph,
+        });
+      }
+
+      let eventData = getPixelEventParameters("spotify");
+      eventData.event_id = !data.event_id || data.event_id === 'autogenerate' ? event_id : data.ownEventI;
+      spdt(eventName, eventData);
+    });
+  }
+
+  if (spdt) { // they may already be loading the sdk from elsewhere
+    handlePixelSuccessfullyFired();
+  } else {
+    injectSpotifySDK(function () {
+      handlePixelSuccessfullyFired();
+    });
+  }
+
+  function getSpdt() {
+    return copyFromWindow('spdt');
+  }
+}
+
+function injectSpotifySDK (onSuccess, onError) {
+  function handlePixelUnsuccessfullyFired() {
+    if (data.fireMethod === 'onlyPixel') {
+      data.gtmOnFailure();
+    }
+    if (onError) {
+      onError();
+    }
+  }
+
+  injectScript('https://pixel.byspotify.com/ping.min.js',
+      onSuccess,
+      handlePixelUnsuccessfullyFired,
+      'spotifyPixel');
 }
 
 function fireTikTokPixel () {
@@ -3059,7 +3188,7 @@ function fireCapiEvent() {
           value = setOrGetFbcCookie();
           break;
         case 'fbp':
-          value = setOrGetFbpCookie();
+            value = setOrGetFbpCookie();
           break;
         case 'event_source_url':
           value = getUrl();
@@ -3163,6 +3292,15 @@ function fireCapiEvent() {
         pixels.push({
           id: pixel.pixelId,
           type: "microsoftads"
+        });
+      });
+    }
+
+    if (data.spotify_pixels) {
+      data.spotify_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "spotify"
         });
       });
     }
@@ -3379,6 +3517,45 @@ ___WEB_PERMISSIONS___
                   {
                     "type": 1,
                     "string": "_ttq_gtm_ids"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "spdt"
                   },
                   {
                     "type": 8,
@@ -4134,6 +4311,44 @@ ___WEB_PERMISSIONS___
                     "boolean": false
                   }
                 ]
+              },{
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_spdt_gtm_ids"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
               },
               {
                 "type": 3,
@@ -4655,7 +4870,11 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
-                "string": "https://cdn-st.adsmurai.com/"
+                "string": "https://cdn-st.adsmurai.com/sdk.js"
+              },
+              {
+                "type": 1,
+                "string": "https://pixel.byspotify.com/ping.min.js"
               }
             ]
           }
@@ -5301,4 +5520,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.5
+Version 7.6
