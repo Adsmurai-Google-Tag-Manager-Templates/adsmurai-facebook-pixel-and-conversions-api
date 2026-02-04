@@ -1553,7 +1553,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.6;
+const templateVersion = 7.7;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -4870,7 +4870,7 @@ ___WEB_PERMISSIONS___
               },
               {
                 "type": 1,
-                "string": "https://cdn-st.adsmurai.com/sdk.js"
+                "string": "https://cdn-st.adsmurai.com/"
               },
               {
                 "type": 1,
@@ -5520,4 +5520,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.6
+Version 7.7
