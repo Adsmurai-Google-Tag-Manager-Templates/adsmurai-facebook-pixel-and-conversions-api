@@ -498,6 +498,44 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "SIMPLE_TABLE",
+        "name": "openai_pixels",
+        "displayName": "OpenAI Pixel(s)",
+        "simpleTableColumns": [
+          {
+            "defaultValue": "",
+            "displayName": "OpenAI Pixel ID",
+            "valueHint": "Expected format: SaCX5TeER5RJ9whJWsBz8q",
+            "displayValue": "",
+            "name": "pixelId",
+            "type": "TEXT",
+            "isUnique": true,
+            "valueValidators": []
+          }
+        ],
+        "newRowButtonText": "Add pixel ID",
+        "notSetText": "Please, add at least one pixel ID",
+        "enablingConditions": [
+          {
+            "paramName": "fireMethod",
+            "paramValue": "onlyPixel",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "fireMethod",
+            "paramValue": "both",
+            "type": "EQUALS"
+          },
+          {
+            "paramName": "serverSetup",
+            "paramValue": "serverlessTracking",
+            "type": "EQUALS"
+          }
+        ],
+        "valueValidators": [],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through <a href=\"https://www.adsmurai.com/en/product/serverless-tracking\">Adsmurai One Tag</a>. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+      },
+      {
+        "type": "SIMPLE_TABLE",
         "name": "google_pixels",
         "displayName": "Google Ads Pixel(s) - Discontinued",
         "simpleTableColumns": [
@@ -965,6 +1003,10 @@ ___TEMPLATE_PARAMETERS___
               {
                 "value": "spotify",
                 "displayValue": "Spotify"
+              },
+              {
+                "value": "openai",
+                "displayValue": "OpenAI"
               }
             ],
             "simpleValueType": true,
@@ -1553,7 +1595,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.7;
+const templateVersion = 7.8;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1646,6 +1688,9 @@ function onFire () {
   if (data.spotify_pixels) {
     data.spotify_pixels = removeEntriesWithEmptyPixelId(data.spotify_pixels);
   }
+  if (data.openai_pixels) {
+    data.openai_pixels = removeEntriesWithEmptyPixelId(data.openai_pixels);
+  }
 
   if (data.fireMethod === 'onlyPixel' || data.fireMethod === 'both') {
     if (data.pixels) {
@@ -1677,6 +1722,9 @@ function onFire () {
     }
     if (data.spotify_pixels) {
       fireSpotifyPixel();
+    }
+    if (data.openai_pixels) {
+      fireOpenAiPixel();
     }
   }
 
@@ -1737,6 +1785,9 @@ function countConfiguredProviders () {
       count++;
     }
     if (data.spotify_pixels) {
+      count++;
+    }
+    if (data.openai_pixels) {
       count++;
     }
   }
@@ -1801,6 +1852,22 @@ function getEventName (pixelType) {
       "CompleteRegistration": "signup",
       "ViewContent": "product",
       "InitiateCheckout": "checkout",
+    },
+    openai: {
+      "AddPaymentInfo": "add_payment_info",
+      "AddToCart": "add_to_cart",
+      "AddToWishlist": "add_to_wishlist",
+      "CompleteRegistration": "registration_completed",
+      "Contact": "contact",
+      "InitiateCheckout": "initiate_checkout",
+      "Lead": "lead",
+      "PageView": "page_view",
+      "Purchase": "purchase",
+      "Search": "search",
+      "StartTrial": "start_trial",
+      "Subscribe": "subscribe",
+      "SubmitApplication": "submit_application",
+      "ViewContent": "view_content",
     }
   };
 
@@ -1991,6 +2058,9 @@ function getPixelEventParameters(pixelType) {
           'product_type', 'product_vendor', 'variant_id', 'variant_name'
       ], pixelType);
       break;
+    case "openai":
+      eventParameters = setupOpenAiEventData();
+    break;
     case "quora":
     default:
       eventParameters = {};
@@ -2578,6 +2648,59 @@ function injectSpotifySDK (onSuccess, onError) {
       onSuccess,
       handlePixelUnsuccessfullyFired,
       'spotifyPixel');
+}
+
+function setupOpenAiEventData () {
+  const makeNumber = require('makeNumber');
+  const customData = getCustomData(['customProperties'], "openai");
+
+  let eventData = {
+    type: "customer_action",
+    amount: getType(data.value) !== "undefined" ? makeNumber(data.value) : 0,
+    currency: data.currency || "USD",
+  };
+
+  for (const fieldName of Object.keys(customData)) {
+    eventData[fieldName] = customData[fieldName];
+  }
+
+  return eventData;
+}
+
+function fireOpenAiPixel () {
+  const isLoaded = isOpenAiLoaded();
+
+  function handlePixelSuccessfullyFired() {
+    const eventName = getEventName("openai");
+    const initIds = copyFromWindow('_oaiq_gtm_ids') || [];
+    const oaiq = getOaiq();
+
+    data.openai_pixels.forEach((pixel) => {
+      // Initialize each ID if not done already
+      if (initIds.indexOf(pixel.pixelId) === -1) {
+        oaiq('init', { pixelId: pixel.pixelId });
+        initIds.push(pixel.pixelId);
+        setInWindow('_oaiq_gtm_ids', initIds, true);
+      }
+
+      oaiq('measure', eventName, getPixelEventParameters("openai"));
+    });
+    triggerSuccess();
+  }
+
+  if (isLoaded) {
+    handlePixelSuccessfullyFired();
+  } else {
+    injectProviderSDK("https://bzrcdn.openai.com/sdk/oaiq.min.js", "openai-sdk", handlePixelSuccessfullyFired);
+  }
+
+  function isOpenAiLoaded() {
+    return copyFromWindow('oaiq');
+  }
+
+  function getOaiq() {
+    return copyFromWindow("oaiq");
+  }
 }
 
 function fireTikTokPixel () {
@@ -3301,6 +3424,15 @@ function fireCapiEvent() {
         pixels.push({
           id: pixel.pixelId,
           type: "spotify"
+        });
+      });
+    }
+
+    if (data.openai_pixels) {
+      data.openai_pixels.forEach(pixel => {
+        pixels.push({
+          id: pixel.pixelId,
+          type: "openai"
         });
       });
     }
@@ -4350,6 +4482,123 @@ ___WEB_PERMISSIONS___
                   }
                 ]
               },
+{
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "oaiq"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "oaiq.q"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  }
+                ]
+              },
+              {
+                "type": 3,
+                "mapKey": [
+                  {
+                    "type": 1,
+                    "string": "key"
+                  },
+                  {
+                    "type": 1,
+                    "string": "read"
+                  },
+                  {
+                    "type": 1,
+                    "string": "write"
+                  },
+                  {
+                    "type": 1,
+                    "string": "execute"
+                  }
+                ],
+                "mapValue": [
+                  {
+                    "type": 1,
+                    "string": "_oaiq_gtm_ids"
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": true
+                  },
+                  {
+                    "type": 8,
+                    "boolean": false
+                  }
+                ]
+              },
               {
                 "type": 3,
                 "mapKey": [
@@ -4875,6 +5124,10 @@ ___WEB_PERMISSIONS___
               {
                 "type": 1,
                 "string": "https://pixel.byspotify.com/ping.min.js"
+              },
+              {
+                "type": 1,
+                "string": "https://bzrcdn.openai.com/sdk/oaiq.min.js"
               }
             ]
           }
@@ -5520,4 +5773,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.7
+Version 7.8
