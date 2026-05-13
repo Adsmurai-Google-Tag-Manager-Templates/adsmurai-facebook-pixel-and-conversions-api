@@ -2616,7 +2616,7 @@ function fireSpotifyPixel () {
       }
 
       let eventData = getPixelEventParameters("spotify");
-      eventData.event_id = !data.event_id || data.event_id === 'autogenerate' ? event_id : data.ownEventI;
+      eventData.event_id = !data.event_id || data.event_id === 'autogenerate' ? event_id : data.ownEventId;
       spdt(eventName, eventData);
     });
   }
