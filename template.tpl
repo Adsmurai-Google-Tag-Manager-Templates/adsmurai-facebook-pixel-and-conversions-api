@@ -1595,7 +1595,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.9;
+const templateVersion = 7.91;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -5773,4 +5773,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.9
+Version 7.91
