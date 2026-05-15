@@ -505,11 +505,11 @@ ___TEMPLATE_PARAMETERS___
             "defaultValue": "",
             "displayName": "OpenAI Pixel ID",
             "valueHint": "Expected format: SaCX5TeER5RJ9whJWsBz8q",
-            "displayValue": "",
             "name": "pixelId",
             "type": "TEXT",
             "isUnique": true,
-            "valueValidators": []
+            "valueValidators": [
+            ]
           }
         ],
         "newRowButtonText": "Add pixel ID",
@@ -531,8 +531,9 @@ ___TEMPLATE_PARAMETERS___
             "type": "EQUALS"
           }
         ],
-        "valueValidators": [],
-        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through <a href=\"https://www.adsmurai.com/en/product/serverless-tracking\">Adsmurai One Tag</a>. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
+        "valueValidators": [
+        ],
+        "help": "Add the pixel IDs which you want to fire this event for. This field applies for the pixel (web) events and server events when set up through \u003ca href\u003d\"https://www.adsmurai.com/en/product/serverless-tracking\"\u003eAdsmurai One Tag\u003c/a\u003e. If you use a custom server. the pixel IDs to be fired for this event when using Conversions API must be set server-side."
       },
       {
         "type": "SIMPLE_TABLE",
@@ -1595,7 +1596,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.91;
+const templateVersion = 7.92;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2060,7 +2061,7 @@ function getPixelEventParameters(pixelType) {
       break;
     case "openai":
       eventParameters = setupOpenAiEventData();
-    break;
+      break;
     case "quora":
     default:
       eventParameters = {};
@@ -4482,7 +4483,7 @@ ___WEB_PERMISSIONS___
                   }
                 ]
               },
-{
+              {
                 "type": 3,
                 "mapKey": [
                   {
@@ -5773,4 +5774,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.91
+Version 7.92
