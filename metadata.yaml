@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: c358576fcbdc9cf3778467d9ba1e53b139c48062
+    changeNotes: v7.93
+      Attempt to understand GTM generic Input Error message
+  # Older versions
   - sha: 7ba86b32ff3c31a7154eb16d1d4b0fe049ffcdee
     changeNotes: v7.92
       Small code refactor
-  # Older versions
   - sha: 5c1910e01910bdd8fcfae0140399be1db7129b67
     changeNotes: v7.91
       Spotify - Fix event id fallback
