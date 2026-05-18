@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: 0cc657f2486fa0d0528696778c4354440d56fc90
+    changeNotes: v7.94
+      Readd some OpenAI parts
+  # Older versions
   - sha: c358576fcbdc9cf3778467d9ba1e53b139c48062
     changeNotes: v7.93
       Attempt to understand GTM generic Input Error message
-  # Older versions
   - sha: 7ba86b32ff3c31a7154eb16d1d4b0fe049ffcdee
     changeNotes: v7.92
       Small code refactor
