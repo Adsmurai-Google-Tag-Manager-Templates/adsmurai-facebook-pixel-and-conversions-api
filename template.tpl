@@ -2669,7 +2669,7 @@ function setupOpenAiEventData () {
 }
 
 function fireOpenAiPixel () {
-  const isLoaded = isOpenAiLoaded();
+  const isLoaded = getOaiq();
 
   function handlePixelSuccessfullyFired() {
     const eventName = getEventName("openai");
@@ -2693,10 +2693,6 @@ function fireOpenAiPixel () {
     handlePixelSuccessfullyFired();
   } else {
     injectProviderSDK("https://bzrcdn.openai.com/sdk/oaiq.min.js", "openai-sdk", handlePixelSuccessfullyFired);
-  }
-
-  function isOpenAiLoaded() {
-    return copyFromWindow('oaiq');
   }
 
   function getOaiq() {
