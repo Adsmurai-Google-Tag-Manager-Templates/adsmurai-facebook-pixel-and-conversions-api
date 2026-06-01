@@ -1597,7 +1597,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.95;
+const templateVersion = 7.96;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -2679,7 +2679,11 @@ function fireOpenAiPixel () {
     data.openai_pixels.forEach((pixel) => {
       // Initialize each ID if not done already
       if (initIds.indexOf(pixel.pixelId) === -1) {
-        oaiq('init', { pixelId: pixel.pixelId });
+        const pixelSettings = { pixelId: pixel.pixelId };
+        if (data.test_event_code) {
+          pixelSettings.debug = true;
+        }
+        oaiq("init", pixelSettings);
         initIds.push(pixel.pixelId);
         setInWindow('_oaiq_gtm_ids', initIds, true);
       }
@@ -5770,4 +5774,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.95
+Version 7.96
