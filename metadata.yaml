@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: f74cc18fe6a92dd288619fb654408f977bbb4d02
+    changeNotes: v7.97
+      Ignore empty custom events
+  # Older versions
   - sha: fdc7b86d7cd52351743da2b086acc7e7ab7071ab
     changeNotes: v7.96
       Ability to debug OpenAI pixel
-  # Older versions
   - sha: 6ed56fe527f31d055cb4911080f49c9aad2b0a94
     changeNotes: v7.95
       Recover full support for OpenAI
