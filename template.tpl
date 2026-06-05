@@ -1572,7 +1572,7 @@ ___TEMPLATE_PARAMETERS___
 
 ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
-if (!data.event_name) {
+if (!data.event_name || (data.event_name === 'customEvent' && !data.customEventName)) {
   data.gtmOnSuccess();
   return;
 }
@@ -1597,7 +1597,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.96;
+const templateVersion = 7.97;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -5774,4 +5774,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.96
+Version 7.97
