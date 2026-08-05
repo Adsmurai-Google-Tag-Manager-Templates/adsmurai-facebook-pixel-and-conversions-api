@@ -1597,7 +1597,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.97;
+const templateVersion = 7.98;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1884,6 +1884,9 @@ function getEventName (pixelType) {
   if (getType(nameConventions[pixelType]) === "undefined" ||
     getType(nameConventions[pixelType][eventName]) === "undefined"
   ) {
+    if (pixelType === 'openai') { // custom events are lower case forced
+      return eventName.toLowerCase();
+    }
     return eventName;
   }
 
@@ -5774,4 +5777,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.97
+Version 7.98
