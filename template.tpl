@@ -1597,7 +1597,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 7.98;
+const templateVersion = 7.99;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -1856,20 +1856,16 @@ function getEventName (pixelType) {
       "InitiateCheckout": "checkout",
     },
     openai: {
-      "AddPaymentInfo": "add_payment_info",
-      "AddToCart": "add_to_cart",
-      "AddToWishlist": "add_to_wishlist",
-      "CompleteRegistration": "registration_completed",
-      "Contact": "contact",
-      "InitiateCheckout": "initiate_checkout",
-      "Lead": "lead",
-      "PageView": "page_view",
-      "Purchase": "purchase",
-      "Search": "search",
-      "StartTrial": "start_trial",
-      "Subscribe": "subscribe",
-      "SubmitApplication": "submit_application",
-      "ViewContent": "view_content",
+      PageView: "page_viewed",
+			ViewContent: "contents_viewed",
+			AddToCart: "items_added",
+			InitiateCheckout: "checkout_started",
+			Purchase: "order_created",
+			Lead: "lead_created",
+			CompleteRegistration: "registration_completed",
+			Schedule: "appointment_scheduled",
+			StartTrial: "trial_started",
+			Subscribe: "subscription_created",
     }
   };
 
@@ -5777,4 +5773,4 @@ scenarios:
 
 ___NOTES___
 
-Version 7.98
+Version 7.99
