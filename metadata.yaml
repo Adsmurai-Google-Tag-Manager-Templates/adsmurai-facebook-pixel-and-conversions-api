@@ -16,10 +16,13 @@ homepage: "https://www.adsmurai.com"
 documentation: "https://github.com/Adsmurai-Google-Tag-Manager-Templates/adsmurai-facebook-pixel-and-conversions-api"
 versions:
   # Latest version
+  - sha: ea7bdd6a669fac3408c0983db3a33034d27f5b39
+    changeNotes: v8.00
+      OpenAI - Follow latest format changes
+  # Older versions
   - sha: bc7d29a4461312a98c45633b64bac043d1456831
     changeNotes: v7.99
       OpenAI - Fix event names
-  # Older versions
   - sha: 3eb5b66c8a2fa303c67455abbb424a69cf1039e7
     changeNotes: v7.98
       OpenAI - Lowercase custom even names
