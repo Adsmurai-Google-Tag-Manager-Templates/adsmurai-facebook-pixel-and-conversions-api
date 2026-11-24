@@ -1597,7 +1597,7 @@ const getUrl = require('getUrl');
 const callLater = require('callLater');
 const generateRandom = require('generateRandom');
 const localStorage = require('localStorage');
-const templateVersion = 8.00;
+const templateVersion = 8.01;
 
 const event_id = getTimestampMillis().toString();
 let providersToRun = countConfiguredProviders();
@@ -5920,22 +5920,22 @@ scenarios:
     assertApi('callInWindow').wasCalledWith('fbq.queue.push', [\"trackSingle\", \"\
     11111\", \"PageView\", {},{\"eventID\":1135}]);\n"
 - name: Tiktok Pixel
-code: "const mockData = {\n  event_name: \"PageView\",\n  fireMethod: \"onlyPixel\"\
+  code: "const mockData = {\n  event_name: \"PageView\",\n  fireMethod: \"onlyPixel\"\
     ,\n  event_id: 1135,\n  ownEventId: 1135,\n  tiktok_pixels: [{\n    pixelId: \"\
     11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('ttq');\n\
     \n"
 - name: Pinterest Pixel
-code: "const mockData = {\n  event_name: \"pagevisit\",\n  fireMethod: \"onlyPixel\"\
+  code: "const mockData = {\n  event_name: \"pagevisit\",\n  fireMethod: \"onlyPixel\"\
     ,\n  event_id: 1135,\n  ownEventId: 1135,\n  pinterest_pixels: [{\n    pixelId:\
 \ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('pintrk');\n\
     assertApi('createArgumentsQueue').wasCalledWith('pintrk', 'pintrk.queue');\n\n"
 - name: Linkedin Pixel
-code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
+  code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
     ,\n  event_id: 1135,\n  ownEventId: 1135,\n  linkedin_pixels: [{\n    pixelId:\
 \ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('lintrk');\n\
     \n"
 - name: Snapchat Pixel
-code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
+  code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixel\"\
     ,\n  event_id: 1135,\n  ownEventId: 1135,\n  snapchat_pixels: [{\n    pixelId:\
 \ \"11111\"\n  }]\n  \n};\n\nrunCode(mockData);\n\nassertApi('copyFromWindow').wasCalledWith('snaptr');\n\
     assertApi('createArgumentsQueue').wasCalledWith('snaptr', 'snaptr.queue');\n\n"
@@ -5943,4 +5943,4 @@ code: "const mockData = {\n  event_name: \"Purchase\",\n  fireMethod: \"onlyPixe
 
 ___NOTES___
 
-Version 8.00
+Version 8.01
